@@ -1387,14 +1387,14 @@ metadata:
   argocd-redis-demo
   namespace: redis
   labels:
-    argocd-redis-demo
+    name: argocd-redis-demo
 spec:
   type: ClusterIP
   ports:
     - port: 6379        # 服务访问端口
       targetPort: 6379  # 容器端口
   selector:
-    argocd-redis-demo
+    name: argocd-redis-demo
 
 
 
