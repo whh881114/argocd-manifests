@@ -8,10 +8,10 @@ local vars = import './vars.libsonnet';
       name: "%s-%s" % [vars['type'], instance['name']],
       namespace: vars['namespace'],
     },
-    subjects: [{kind: ServiceAccount, name: name, namespace: vars['namespace']}],
+    subjects: [{kind: "ServiceAccount", name: "%s-%s" % [vars['type'], instance['name']], namespace: vars['namespace']}],
     roleRef: {
       kind: "ClusterRole",
-      name: name,
+      name: "%s-%s" % [vars['type'], instance['name']],
       apiGroup: "rbac.authorization.k8s.io"
     }
   }
