@@ -73,7 +73,7 @@ local args = args_partial + args_retry_join + args_retry_join_wan;
              },
            },
            volumeMounts: [{
-             name: "consul-server-data",
+             name: "data",
              mountPath: "/consul/data",
            }],
            readinessProbe: {
@@ -101,7 +101,7 @@ local args = args_partial + args_retry_join + args_retry_join_wan;
      },
      volumeClaimTemplates: [{
      metadata: {
-       name: "consul-server-data",
+       name: "data",
        annotations: {"volume.beta.kubernetes.io/storage-class": vars['server_storage_class']}
      },
      spec: {
