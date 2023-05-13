@@ -29,7 +29,7 @@
     server_requests_memory: "64Mi",
     server_limits_cpu: "500m",
     server_limits_memory: "256Mi",
-    server_storage_class: "storageclass-nfs-infra",
+    server_storage_class: "nfs-infra",
     server_data_capcity: "10G",
 
     server_ingress: "consul-ui.k8s.bj.freedom.org",
