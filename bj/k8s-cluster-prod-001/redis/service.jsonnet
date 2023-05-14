@@ -47,7 +47,7 @@ local cluster_services = [
     metadata: {
       name: if service_type == "ClusterIP" then "%s-cluster-%d" % [instance['name'], num] else "%s-cluster-%s-%d" % [instance['name'], std.asciiLower(service_type), num],
       namespace: vars['namespace'],
-      labels: {app: "%s-%d" % [instance['name'], num]},
+      labels: {app: "%s-cluster-%d" % [instance['name'], num]},
     },
     spec: {
       selector: {app: "%s-cluster-%d" % [instance['name'], num]},
