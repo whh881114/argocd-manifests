@@ -57,6 +57,8 @@ local init_containers = [
                   memory: if 'limits_memory' in instance then instance[ 'limits_memory' ] else vars[ 'limits_memory' ],
                 },
               },
+              command: ["redis-server"],
+              args: ["/usr/local/etc/redis/redis.conf"],
               volumeMounts: [
                 { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                 { name: "data", mountPath: "/data" },
@@ -112,6 +114,8 @@ local init_containers = [
                       memory: if 'limits_memory' in instance then instance[ 'limits_memory' ] else vars[ 'limits_memory' ],
                     },
                   },
+                  command: ["redis-server"],
+                  args: ["/usr/local/etc/redis/redis.conf"],
                   volumeMounts: [
                     { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                     { name: "data", mountPath: "/data" },
