@@ -56,6 +56,7 @@ local ports_cluster = [
       }
     }
   else
+    local num = 1;
     if 'mode' in instance && std.asciiLower(instance['mode']) == 'cluster' then
 //      [
         {
