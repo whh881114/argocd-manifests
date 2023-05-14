@@ -7,7 +7,7 @@ local mysqld_exporter_container = {
   env: [
     { name: "DATA_SOURCE_NAME", valueFrom: { configMapKeyRef: { name: "mysqld_exporter", key: "DATA_SOURCE_NAME" } } }
   ],
-  port: [
+  ports: [
     { name: "metrics", containerPort: 9104 }
   ]
 };
