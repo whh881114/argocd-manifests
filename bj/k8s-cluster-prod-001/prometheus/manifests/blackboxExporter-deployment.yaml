@@ -51,7 +51,8 @@ spec:
       - args:
         - --webhook-url=http://localhost:19115/-/reload
         - --volume-dir=/etc/blackbox_exporter/
-        image: jimmidyson/configmap-reload:v0.5.0
+        # image: jimmidyson/configmap-reload:v0.5.0
+        image: harbor.freedom.org/jimmidyson/configmap-reload:v0.5.0
         name: module-configmap-reloader
         resources:
           limits:
