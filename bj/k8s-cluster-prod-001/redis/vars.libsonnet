@@ -42,15 +42,15 @@ local other_conf = |||
     {name: "public", password: "x-Pvvkw2cytxfusWedkgxztxqdhp5ocs"},
 
     // cluster实例
-    {
-      name: "password-bank",
-      mode: "cluster",
-      replicas: 6,
-      memory: "4096Mi",
-      limits_memory: self.memory,
-      password: "uuglwtvYitnod@yevuqrDkr6xrlk3ach",
-      disable: true
-    },
+    // {
+    //   name: "password-bank",
+    //   mode: "cluster",
+    //   replicas: 6,
+    //   memory: "4096Mi",
+    //   limits_memory: self.memory,
+    //   password: "uuglwtvYitnod@yevuqrDkr6xrlk3ach",
+    //   disable: true
+    // },
 
   ],
 
