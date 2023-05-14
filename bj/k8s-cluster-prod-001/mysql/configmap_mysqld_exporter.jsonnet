@@ -6,7 +6,7 @@ local data_source_name = "exporter:pJwtdho13jLipiyquxldnqialgrpkvl~@(localhost:3
     apiVersion: "v1",
     kind: "ConfigMap",
     metadata: {
-      name: "mysqld_exporter",
+      name: "mysqld-exporter",
       namespace: vars['namespace'],
     },
     data: {

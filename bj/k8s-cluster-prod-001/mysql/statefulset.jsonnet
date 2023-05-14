@@ -5,7 +5,7 @@ local mysqld_exporter_container = {
   image: "harbor.freedom.org/prometheus-operator/mysqld-exporter:v0.14.0",
   imagePullPolicy: "IfNotPresent",
   env: [
-    { name: "DATA_SOURCE_NAME", valueFrom: { configMapKeyRef: { name: "mysqld_exporter", key: "DATA_SOURCE_NAME" } } }
+    { name: "DATA_SOURCE_NAME", valueFrom: { configMapKeyRef: { name: "mysqld-exporter", key: "DATA_SOURCE_NAME" } } }
   ],
   ports: [
     { name: "metrics", containerPort: 9104 }
@@ -58,7 +58,7 @@ local mysqld_exporter_container = {
             },
           ],
           volumes: [
-            { name: "mysqld_exporter", configMap: { name: "mysqld_exporter" } },
+            { name: "mysqld-exporter", configMap: { name: "mysqld-exporter" } },
             { name: "conf", configMap: { name: instance[ 'name' ] } },
             { name: "data", persistentVolumeClaim: { claimName: "data-%s" % instance[ 'name' ] } },
           ]
