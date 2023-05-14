@@ -48,7 +48,7 @@ local standalones =[
               env: [
                 { name: "TZ", value: "Asia/Shanghai" },
               ],
-              ports: vars['container_ports'],
+              ports: standalone_instances['container_ports'],
               resources: {
                 requests: {
                   cpu: if 'requests_cpu' in instance then instance[ 'requests_cpu' ] else vars[ 'requests_cpu' ],
@@ -93,7 +93,7 @@ local clusters =[
     },
     spec: {
       serviceName: "%s-cluster-%d" % [instance['name'], num],
-      replicas: if 'replicas' in instance then instance[ 'replicas' ] else vars[ 'replicas' ],
+      replicas: if 'disable' in instance && instance['disable'] then 0 else 1,
       selector: { matchLabels: { app: "%s-cluster-%d" % [instance['name'], num] } },
       template: {
         metadata: {
@@ -109,7 +109,7 @@ local clusters =[
               env: [
                 { name: "TZ", value: "Asia/Shanghai" },
               ],
-              ports: vars['container_ports'],
+              ports: cluster_instances['container_ports'],
               resources: {
                 requests: {
                   cpu: if 'requests_cpu' in instance then instance[ 'requests_cpu' ] else vars[ 'requests_cpu' ],

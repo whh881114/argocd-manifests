@@ -24,7 +24,7 @@ local other_conf = |||
       memory: "4096Mi",
       limits_memory: self.memory,
       password: "uuglwtvYitnod@yevuqrDkr6xrlk3ach",
-      disable: true
+      // disable: true  // 考虑到停服，增加一个开关。
     },
   ],
 
