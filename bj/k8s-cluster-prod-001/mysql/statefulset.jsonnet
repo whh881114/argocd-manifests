@@ -58,6 +58,7 @@ local mysqld_exporter_container = {
             },
           ],
           volumes: [
+            { name: "mysqld_exporter", configMap: { name: "mysqld_exporter" } },
             { name: "conf", configMap: { name: instance[ 'name' ] } },
             { name: "data", presistentVolumeClaim: { claimName: "data-%s" % instance[ 'name' ] } },
           ]
