@@ -19,7 +19,7 @@ local other_conf = |||
 
   instances: [
     {
-      name: "password-bank",
+      name: "public",
       replicas: 6,
       memory: "4096Mi",
       limits_memory: self.memory,
