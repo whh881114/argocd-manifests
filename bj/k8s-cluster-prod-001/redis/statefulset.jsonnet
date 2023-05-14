@@ -6,13 +6,13 @@ local init_containers = [
     image: "harbor.freedom.org/docker.io/busybox:1.31.1",
     command: ["sysctl"],
     args: ["-w", "net.core.somaxconn=65535"],
-    securityContext: {privileged: "true"},
+    securityContext: {privileged: true},
   },
   {
     name: "disable-transparent-hugepage",
     image: "harbor.freedom.org/docker.io/busybox:1.31.1",
     command: ["sh", "-c", "echo never > /host-sys/kernel/mm/transparent_hugepage/enabled"],
-    securityContext: {privileged: "true"},
+    securityContext: {privileged: true},
     volumeMounts: [{name: "host-sys", mountPath: "/host-sys"}]
   },
 ];
