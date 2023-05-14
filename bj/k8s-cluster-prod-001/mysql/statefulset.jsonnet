@@ -59,22 +59,9 @@ local mysqld_exporter_container = {
           ],
           volumes: [
             { name: "conf", configMap: { name: instance[ 'name' ] } },
+            { name: "data", presistentVolumeClaim: { claimName: "data-%s" % instance[ 'name' ] } },
           ]
-        },
-        volumeClaimTemplates: [
-          {
-            metadata: {
-              name: "data",
-              annotations: {
-                "volume.beta.kubernetes.io/storage-class": if 'storage_class' in instance then instance[ 'storage_class' ] else vars[ 'storage_class' ]
-              },
-            },
-            spec: {
-              accessModes: [ "ReadWriteOnce" ],
-              resources: { requests: { storage: if 'storage_class_capacity' in instance then instance[ 'storage_class_capacity' ] else vars[ 'storage_class_capacity' ] } }
-            }
-          }
-        ]
+        }
       }
     }
   }
