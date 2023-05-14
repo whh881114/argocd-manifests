@@ -50,7 +50,7 @@ local cluster_services = [
       labels: {app: "%s-%d" % [instance['name'], num]},
     },
     spec: {
-      selector: {app: "%s-%d" % [instance['name'], num]},
+      selector: {app: "%s-cluster-%d" % [instance['name'], num]},
       type: "%s" % service_type,
       ports: ports_cluster
     }
