@@ -41,23 +41,21 @@ local other_conf = |||
     pidfile redis.pid
     appendfilename appendonly.aof
     protected-mode yes
-    ' '
+    #
     maxmemory [indiviual_redis_memory]
     maxmemory-policy volatile-ttl
-    ' '
+    #
     requirepass [indiviual_redis_password]
     masterauth  [indiviual_redis_password]
-    ' '
+    #
     timeout 60
     tcp-keepalive 300
     loglevel notice
-    ' '
     appendfsync everysec
     no-appendfsync-on-rewrite no
     auto-aof-rewrite-percentage 100
     auto-aof-rewrite-min-size 64mb
     aof-load-truncated yes
-    ' '
     lua-time-limit 5000
     slowlog-log-slower-than 10000
     slowlog-max-len 128
