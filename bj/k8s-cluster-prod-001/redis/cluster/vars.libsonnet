@@ -20,15 +20,14 @@ local other_conf = |||
   instances: [
     {
       name: "password-bank",
-      mode: "cluster",
       replicas: 6,
       memory: "4096Mi",
       limits_memory: self.memory,
       password: "uuglwtvYitnod@yevuqrDkr6xrlk3ach",
       disable: true
     },
-
   ],
+
 
   default_conf: |||
     dir /data
