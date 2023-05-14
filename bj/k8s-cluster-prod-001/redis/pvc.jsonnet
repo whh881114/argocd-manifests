@@ -19,26 +19,32 @@ local cluster_instances = import './cluster/vars.libsonnet';
     }
   }
 
-  for instance in standalone_instances
-] + [
+  for instance in standalone_instances['instances']
+]
 
-  {
-    apiVersion: "v1",
-    kind: "PersistentVolumeClaim",
-    metadata: {
-      name: "data-%s-%d" % [instance['name'], num],
-      namespace: vars['namespace'],
-    },
-    spec: {
-      accessModes: ["ReadWriteOnce"],
-      resources: {
-        requests: { storage: if 'storage_class_capacity' in instance then instance['storage_class_capacity'] else vars['storage_class_capacity'] }
++
+
+[
+
+  [
+    {
+      apiVersion: "v1",
+      kind: "PersistentVolumeClaim",
+      metadata: {
+        name: "data-%s-%d" % [instance['name'], num],
+        namespace: vars['namespace'],
       },
-      storageClassName: if 'storage_class' in instance then instance[ 'storage_class' ] else vars[ 'storage_class' ],
+      spec: {
+        accessModes: ["ReadWriteOnce"],
+        resources: {
+          requests: { storage: if 'storage_class_capacity' in instance then instance['storage_class_capacity'] else vars['storage_class_capacity'] }
+        },
+        storageClassName: if 'storage_class' in instance then instance[ 'storage_class' ] else vars[ 'storage_class' ],
+      }
     }
-  }
+    for num in std.range(1, instance['replicas'])
+  ]
 
-  for instance in cluster_instances
-  for num in instance['replicas']
+  for instance in cluster_instances['instances']
 
 ]
