@@ -52,7 +52,7 @@ local mysqld_exporter_container = {
                 },
               },
               volumeMounts: [
-                { name: "conf", mountPath: "/etc/mysql/conf.d", readOnly: "true" },
+                { name: "conf", mountPath: "/etc/mysql/conf.d", readOnly: true },
                 { name: "data", mountPath: "/var/lib/mysql" },
               ],
             },
