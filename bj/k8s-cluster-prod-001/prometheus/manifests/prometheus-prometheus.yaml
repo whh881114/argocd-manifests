@@ -50,16 +50,22 @@ spec:
   enableAdminAPI: true
   # 保存数据时间
   retention: 90d
+  # 在私有云中部署prometheus-operator时，其prometheus部署实例只为一个，所以挂载pvc。
+  # 如果监控对象过多，这将会改变部署架构，私有云不作讨论。
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: prometheus
   # 持久化，存储类型：storageclass
-  storage:
-    volumeClaimTemplate:
-      spec:
-        storageClassName: nfs-infra
-        accessModes:
-          - ReadWriteOnce
-        resources:
-          requests:
-            storage: 200Gi
+  # storage:
+  #   volumeClaimTemplate:
+  #     spec:
+  #       storageClassName: nfs-infra
+  #       accessModes:
+  #         - ReadWriteOnce
+  #       resources:
+  #         requests:
+  #           storage: 200Gi
   # 增加调度
   # affinity:
   #   nodeAffinity:
