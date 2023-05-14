@@ -113,7 +113,7 @@ local init_containers = [
                     },
                   },
                   volumeMounts: [
-                    { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: "true" },
+                    { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                     { name: "data", mountPath: "/data" },
                   ],
                 },
