@@ -74,7 +74,7 @@ local ports_cluster = [
             type: "%s" % service_type,
             ports: ports_cluster,
           }
-        },
+        }
 //        for num in std.range(1, instance['replicas'])
 //      ]
     else {} // else产生的空对象会被argocd忽略。
