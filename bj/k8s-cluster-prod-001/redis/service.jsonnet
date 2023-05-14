@@ -57,7 +57,7 @@ local ports_cluster = [
     }
   else
     if 'mode' in instance && std.asciiLower(instance['mode']) == 'cluster' then
-      [
+//      [
         {
           apiVersion: "v1",
           kind: "Service",
@@ -75,8 +75,8 @@ local ports_cluster = [
             ports: ports_cluster,
           }
         },
-        for num in std.range(1, instance['replicas'])
-      ]
+//        for num in std.range(1, instance['replicas'])
+//      ]
     else {} // else产生的空对象会被argocd忽略。
 
   for instance in vars['instances']
