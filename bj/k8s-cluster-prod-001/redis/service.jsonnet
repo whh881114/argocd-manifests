@@ -30,13 +30,11 @@ local ports_cluster = [
       protocol: p.protocol
     }
     else
-    [
-      {
-        name: p.name,
-        port: p.containerPort,
-        targetPort: p.containerPort,
-      }
-    ]
+    {
+      name: p.name,
+      port: p.containerPort,
+      targetPort: p.containerPort,
+    }
 
     for p in cluster_instances['container_ports']
 ];
@@ -49,10 +47,10 @@ local cluster_services = [
     metadata: {
       name: if service_type == "ClusterIP" then "%s-%d" % [instance['name'], num] else "%s-%s-%d" % [instance['name'], std.asciiLower(service_type), num],
       namespace: vars['namespace'],
-      labels: {app: instance['name']},
+      labels: {app: "%s-%d" % [instance['name'], num]},
     },
     spec: {
-      selector: {app: instance['name']},
+      selector: {app: "%s-%d" % [instance['name'], num]},
       type: "%s" % service_type,
       ports: ports_cluster
     }
