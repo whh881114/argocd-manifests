@@ -75,6 +75,7 @@ local init_containers = [
     }
   }
   else
+    local num = 1;
     if 'mode' in instance && std.asciiLower(instance['mode']) == 'cluster' then
     [
       {
@@ -131,7 +132,7 @@ local init_containers = [
           }
         }
       }
-      for num in std.range(1, instance['replicas'])
+//      for num in std.range(1, 1)
     ]
     else {}
 
