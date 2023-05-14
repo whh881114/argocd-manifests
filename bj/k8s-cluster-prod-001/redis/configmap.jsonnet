@@ -1,4 +1,7 @@
 local vars = import './vars.libsonnet';
+local standalone_instances = import './standalone/vars.libsonnet';
+local cluster_instances = import './cluster/vars.libsonnet';
+
 
 
 [
