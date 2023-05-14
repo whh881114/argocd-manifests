@@ -9,7 +9,7 @@ local cluster_pvcs = [
     apiVersion: "v1",
     kind: "PersistentVolumeClaim",
     metadata: {
-      name: "data-%s-%d" % [instance['name'], num],
+      name: "data-%s-cluster-%d" % [instance['name'], num],
       namespace: vars['namespace'],
     },
     spec: {
