@@ -45,12 +45,12 @@ local cluster_services = [
     apiVersion: "v1",
     kind: "Service",
     metadata: {
-      name: if service_type == "ClusterIP" then "%s-cluster-%d" % [instance['name'], num] else "%s-cluster-%s-%d" % [instance['name'], std.asciiLower(service_type), num],
+      name: if service_type == "ClusterIP" then "%s-cluster" % instance['name'] else "%s-cluster-%s" % [instance['name'], std.asciiLower(service_type)],
       namespace: vars['namespace'],
-      labels: {app: "%s-cluster-%d" % [instance['name'], num]},
+      labels: {app: "%s-cluster" % instance['name']},
     },
     spec: {
-      selector: {app: "%s-cluster-%d" % [instance['name'], num]},
+      selector: {app: "%s-cluster" % instance['name']},
       type: "%s" % service_type,
       ports: ports_cluster
     }
@@ -58,7 +58,6 @@ local cluster_services = [
 
   for service_type in ["ClusterIP", "NodePort"]
   for instance in cluster_instances['instances']
-  for num in std.range(1, instance['replicas'])
 ];
 
 
