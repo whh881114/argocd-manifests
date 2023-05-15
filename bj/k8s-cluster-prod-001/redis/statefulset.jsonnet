@@ -87,23 +87,23 @@ local clusters =[
     apiVersion: "apps/v1",
     kind: "StatefulSet",
     metadata: {
-      name: "%s-cluster-%d" % [ instance['name'], num],
+      name: "%s-cluster" % instance['name'],
       namespace: vars[ 'namespace' ],
-      labels: { app: "%s-cluster-%d" % [instance['name'], num] },
+      labels: { app: "%s-cluster" % instance['name'] },
     },
     spec: {
-      serviceName: "%s-cluster-%d" % [instance['name'], num],
-      replicas: if 'disable' in instance && instance['disable'] then 0 else 1,
-      selector: { matchLabels: { app: "%s-cluster-%d" % [instance['name'], num] } },
+      serviceName: "%s-cluster" % instance['name'],
+      replicas: instance['replicas'],
+      selector: { matchLabels: { app: "%s-cluster" % instance['name'] } },
       template: {
         metadata: {
-          labels: { app: "%s-cluster-%d" % [instance['name'], num] },
+          labels: { app: "%s-cluster" % instance['name'] },
         },
         spec: {
           initContainers: init_containers,
           containers: [
             {
-              name: "%s-cluster" % instance['name'],
+              name: instance['name'],
               image: if 'image' in instance && 'image_tag' in instance then "%s:%s" % [ instance[ 'image' ], instance[ 'image_tag' ] ]
                        else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
@@ -131,15 +131,27 @@ local clusters =[
           volumes: [
             { name: "conf", configMap: { name: "%s-cluster" % instance['name'] } },
             { name: "host-sys", hostPath: { path: "/sys" }},
-            { name: "data", persistentVolumeClaim: { claimName: "data-%s-cluster-%d" % [instance['name'], num] } },
           ]
         },
+        volumeClaimTemplates: [
+          {
+            metadata: {
+              name: "data",
+              annotations: {
+                "volume.beta.kubernetes.io/storage-class": if 'storage_class' in instance then instance[ 'storage_class' ] else vars[ 'storage_class' ]
+              },
+            },
+            spec: {
+              accessModes: [ "ReadWriteOnce" ],
+              resources: { requests: { storage: if 'storage_class_capacity' in instance then instance[ 'storage_class_capacity' ] else vars[ 'storage_class_capacity' ] } }
+            }
+          }
+        ]
       }
     }
   }
 
   for instance in cluster_instances['instances']
-  for num in std.range(1, instance['replicas'])
 ];
 
 
