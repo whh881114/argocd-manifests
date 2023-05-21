@@ -1,7 +1,7 @@
 local vars = import './vars.libsonnet';
 
 // 改写command参数，启动服务前生成myid文件。
-local command = ["sh", "-c", "/root/myid.sh && zkServer.sh start-foreground"];
+local command = ["sh", "-c", "/bin/myid.sh && zkServer.sh start-foreground"];
 
 [
   {
@@ -43,14 +43,16 @@ local command = ["sh", "-c", "/root/myid.sh && zkServer.sh start-foreground"];
               },
               volumeMounts: [
                 { name: "conf", mountPath: "/conf", readOnly: "true" },
+                { name: "myid", mountPath: "/bin/myid.sh", subPath: "myid.sh", readOnly: true },
                 { name: "data", mountPath: "/data" },
-                { name: "script", mountPath: "/root" },
+                { name: "data", mountPath: "/data/datalog", subPath: "datalog" },
+                { name: "data", mountPath: "/data/logs", subPath: "logs" },
               ],
             },
           ],
           volumes: [
             { name: "conf", configMap: { name: instance[ 'name' ] } },
-            { name: "script", configMap: { name: "myid" } },
+            { name: "myid", configMap: { name: "myid", items: [{key: "myid.sh", path: "myid.sh", mode: 493}] } },
           ]
         },
         volumeClaimTemplates: [

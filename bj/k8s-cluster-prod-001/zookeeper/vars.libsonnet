@@ -14,7 +14,7 @@ local other_conf = |||
 {
   namespace: "zookeeper",
   image: "harbor.freedom.org/docker.io/zookeeper",
-  image_tag: "3.4.14",
+  image_tag: "3.8.1",
   image_pull_policy: "IfNotPresent",
 
   replicas: 3,
