@@ -47,6 +47,7 @@ local standalones =[
                        else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
                 { name: "TZ", value: "Asia/Shanghai" },
+                { name: "POD_IP", valueFrom: { fieldRef: { fieldPath: "status.podIP"}}},
               ],
               ports: standalone_instances['container_ports'],
               resources: {
