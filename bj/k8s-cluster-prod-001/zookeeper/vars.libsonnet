@@ -44,6 +44,7 @@ local other_conf = |||
     dataDir=/data
     dataLogDir=/datalog
     clientPort=2181
+    admin.enableServer=true
     server.1=[instance_name]-0.[instance_name].[namespace].svc.cluster.local:2888:3888
     server.2=[instance_name]-1.[instance_name].[namespace].svc.cluster.local:2888:3888
     server.3=[instance_name]-2.[instance_name].[namespace].svc.cluster.local:2888:3888
