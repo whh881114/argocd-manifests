@@ -125,13 +125,13 @@ local clusters =[
               volumeMounts: [
                 { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                 { name: "data", mountPath: "/data" },
-                { name: "update-nodes-conf", mountPath: "/bin/update_node.sh", subPath: "update_node.sh", readOnly: true, mode: "0755" },
+                { name: "update-nodes-conf", mountPath: "/bin/update_node.sh", subPath: "update_node.sh", readOnly: true },
               ],
             },
           ],
           volumes: [
             { name: "conf", configMap: { name: "%s-cluster" % instance['name'] } },
-            { name: "update-nodes-conf", configMap: { name: "update-nodes-conf" } },
+            { name: "update-nodes-conf", configMap: { name: "update-nodes-conf", items: [{key: "update_node.sh", path: "update_node.sh", mode: "0755"}] } },
             { name: "host-sys", hostPath: { path: "/sys" }},
           ]
         },
