@@ -33,7 +33,7 @@ local mysqld_exporter_container = {
         spec: {
           containers: [ mysqld_exporter_container,
             {
-              name: mysql,
+              name: "mysql",
               image: if 'image' in instance && 'image_tag' in instance then "%s:%s" % [ instance[ 'image' ], instance[ 'image_tag' ] ]
                        else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
