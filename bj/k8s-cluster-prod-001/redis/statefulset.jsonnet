@@ -125,7 +125,7 @@ local clusters =[
               volumeMounts: [
                 { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                 { name: "data", mountPath: "/data" },
-                { name: "update-nodes-conf", mountPath: "/bin/update_node.sh", subPath: "update_node.sh", readOnly: true },
+                { name: "update-nodes-conf", mountPath: "/bin/update_node.sh", subPath: "update_node.sh", readOnly: true, mode: "0755" },
               ],
             },
           ],
