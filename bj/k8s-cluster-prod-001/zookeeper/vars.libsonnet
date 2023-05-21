@@ -35,7 +35,6 @@ local other_conf = |||
 
   instances: [
       {name: "public", },
-      {name: "demo", conf: other_conf},
   ],
 
   default_conf: |||
