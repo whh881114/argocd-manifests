@@ -1,7 +1,8 @@
 {
   namespace: "jenkins",
-  image: "jenkins/jenkins",
-  image_tag: "2.403-jdk11",
+  image: "harbor.freedom.org/freedom/jenkins",
+  image_tag: "2.405-centos7",
+  image_pull_policy: "IfNotPresent",
 
   replicas: 1,
   requests_cpu: "100m",
@@ -11,7 +12,14 @@
 
   container_ports: [
     {name: "http", containerPort: 8080},
-    {name: "agent", containerPort: 5000},
+    {name: "agent", containerPort: 50000},
     {name: "metrics", containerPort: 60030},
   ],
+
+  storage_class: "nfs-infra",
+  storage_class_capacity: "50Gi",
+
+  instances: [
+    {name: "public"},
+  ]
 }

@@ -1,4 +1,4 @@
-local vars = import 'vars.libsonnet';
+local vars = import './vars.libsonnet';
 
 {
     apiVersion: "v1",
