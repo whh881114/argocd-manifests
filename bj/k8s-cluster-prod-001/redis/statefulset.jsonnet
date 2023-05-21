@@ -120,13 +120,13 @@ local clusters =[
                   memory: if 'limits_memory' in instance then instance[ 'limits_memory' ] else vars[ 'limits_memory' ],
                 },
               },
-              // command: ["/bin/update_node.sh", "redis-server"],
-              // args: ["/usr/local/etc/redis/redis.conf"],
+              command: ["/bin/update_nodes_conf.sh", "redis-server"],
+              args: ["/usr/local/etc/redis/redis.conf"],
 
               // 进入交互式shell
-              command: ["/bin/bash"],
-              args: ["-i"],
-              tty: true,
+              // command: ["/bin/bash"],
+              // args: ["-i"],
+              // tty: true,
               volumeMounts: [
                 { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                 { name: "data", mountPath: "/data" },
