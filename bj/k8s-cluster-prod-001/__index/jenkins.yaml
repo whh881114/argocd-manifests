@@ -2,10 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: jenkins
+  namespace: argocd
 spec:
   destination:
-    name: 'jenkins'
-    namespace: 'jenkins'
+    name: ''
+    namespace: ''
     server: 'https://kubernetes.default.svc'
   source:
     path: bj/k8s-cluster-prod-001/jenkins
