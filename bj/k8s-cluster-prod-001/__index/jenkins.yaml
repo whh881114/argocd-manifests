@@ -4,8 +4,8 @@ metadata:
   name: jenkins
 spec:
   destination:
-    name: ''
-    namespace: ''
+    name: 'jenkins'
+    namespace: 'jenkins'
     server: 'https://kubernetes.default.svc'
   source:
     path: bj/k8s-cluster-prod-001/jenkins
