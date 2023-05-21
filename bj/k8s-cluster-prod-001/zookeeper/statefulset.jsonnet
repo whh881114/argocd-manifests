@@ -55,7 +55,8 @@ local command = ["sh", "-c", "/bin/myid.sh && zkServer.sh start-foreground"];
             { name: "myid", configMap: { name: "myid", items: [{key: "myid.sh", path: "myid.sh", mode: 493}] } },
           ]
         },
-        volumeClaimTemplates: [
+      },
+    volumeClaimTemplates: [
           {
             metadata: {
               name: "data",
@@ -69,7 +70,6 @@ local command = ["sh", "-c", "/bin/myid.sh && zkServer.sh start-foreground"];
             }
           }
         ]
-      }
     }
   }
 
