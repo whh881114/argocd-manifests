@@ -25,8 +25,8 @@ local vars = import './vars.libsonnet';
                      else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
             env: [
               { name: "TZ", value: "Asia/Shanghai" },
+              { name: "JAVA_OPTS", value: "-javaagent:/lib/jmx_prometheus_javaagent.jar=60030:/etc/jmx-cfg.yml"},
             ],
-//            args: ["-javaagent:/lib/jmx_prometheus_javaagent.jar=60030:/etc/jmx-cfg.yml"],
             ports: vars['container_ports'],
             resources: {
               requests: {
