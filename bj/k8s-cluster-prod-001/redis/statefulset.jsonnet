@@ -133,7 +133,8 @@ local clusters =[
             { name: "host-sys", hostPath: { path: "/sys" }},
           ]
         },
-        volumeClaimTemplates: [
+      },
+    volumeClaimTemplates: [
           {
             metadata: {
               name: "data",
@@ -147,7 +148,6 @@ local clusters =[
             }
           }
         ]
-      }
     }
   }
 
