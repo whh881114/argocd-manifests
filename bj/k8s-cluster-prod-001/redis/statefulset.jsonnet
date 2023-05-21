@@ -42,7 +42,7 @@ local standalones =[
           initContainers: init_containers,
           containers: [
             {
-              name: instance[ 'name' ],
+              name: redis,
               image: if 'image' in instance && 'image_tag' in instance then "%s:%s" % [ instance[ 'image' ], instance[ 'image_tag' ] ]
                        else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
@@ -103,7 +103,7 @@ local clusters =[
           initContainers: init_containers,
           containers: [
             {
-              name: instance['name'],
+              name: redis,
               image: if 'image' in instance && 'image_tag' in instance then "%s:%s" % [ instance[ 'image' ], instance[ 'image_tag' ] ]
                        else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
