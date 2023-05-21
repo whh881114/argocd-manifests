@@ -120,16 +120,18 @@ local clusters =[
                   memory: if 'limits_memory' in instance then instance[ 'limits_memory' ] else vars[ 'limits_memory' ],
                 },
               },
-              command: ["redis-server"],
+              command: ["/bin/update_node.sh", "redis-server"],
               args: ["/usr/local/etc/redis/redis.conf"],
               volumeMounts: [
                 { name: "conf", mountPath: "/usr/local/etc/redis/", readOnly: true },
                 { name: "data", mountPath: "/data" },
+                { name: "update-nodes-conf", mountPath: "/bin/update_node.sh", subPath: "update_node.sh", readOnly: true },
               ],
             },
           ],
           volumes: [
             { name: "conf", configMap: { name: "%s-cluster" % instance['name'] } },
+            { name: "update-nodes-conf", configMap: { name: "update-nodes-conf" } },
             { name: "host-sys", hostPath: { path: "/sys" }},
           ]
         },
