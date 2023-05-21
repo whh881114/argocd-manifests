@@ -42,7 +42,7 @@ local command = ["sh", "-c", "/bin/myid.sh && zkServer.sh start-foreground"];
                 },
               },
               volumeMounts: [
-                { name: "conf", mountPath: "/conf", readOnly: "true" },
+                { name: "conf", mountPath: "/conf", readOnly: true },
                 { name: "myid", mountPath: "/bin/myid.sh", subPath: "myid.sh", readOnly: true },
                 { name: "data", mountPath: "/data" },
                 { name: "data", mountPath: "/data/datalog", subPath: "datalog" },
