@@ -17,7 +17,7 @@ local http_port_number = 8080;
     },
     spec: {
       rules: [{
-        host: if 'ingress' in instance then instance['ingress'] else "%s.%s.%s" % [instance['name'], vars['namespace'], global_vars['domain_name']],
+        host: if 'ingress' in instance then instance['ingress'] else "%s-%s.%s" % [instance['name'], vars['namespace'], global_vars['domain_name']],
         http: {
           paths: [{
             path: "/",
