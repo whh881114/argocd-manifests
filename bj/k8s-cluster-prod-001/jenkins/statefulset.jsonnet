@@ -26,7 +26,7 @@ local vars = import './vars.libsonnet';
             env: [
               { name: "TZ", value: "Asia/Shanghai" },
             ],
-            args: ["-javaagent:/lib/jmx_prometheus_javaagent.jar=60030:/etc/jmx-cfg.yml"],
+//            args: ["-javaagent:/lib/jmx_prometheus_javaagent.jar=60030:/etc/jmx-cfg.yml"],
             ports: vars['container_ports'],
             resources: {
               requests: {
