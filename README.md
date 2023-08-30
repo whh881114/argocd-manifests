@@ -49,4 +49,5 @@
     - 中间件类的服务使用jsonnet实现，毕竟这一类的服务就涉及到部署多套，如果jenkins服务，不同的用户使用不同的jenkins。
 
 - 目录说明
-  - `__yaml`目录，存放plain yaml文件，不用于jsonnet渲染。
+  - `__yaml`，存放plain yaml文件，不用于jsonnet渲染。
+  - `out-of-the-box`，开箱即用

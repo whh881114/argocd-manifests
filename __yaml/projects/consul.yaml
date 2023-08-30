@@ -1,7 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: AppProject
-metadata:
-  name: consul
-  namespace: argocd
-spec:
-  description: consul
