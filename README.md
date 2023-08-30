@@ -50,4 +50,4 @@
 
 - 目录说明
   - `__yaml`，存放plain yaml文件，不用于jsonnet渲染。
-  - `out-of-the-box`，开箱即用
+  - `out-of-the-box`，开箱即用模板，如mysql。
