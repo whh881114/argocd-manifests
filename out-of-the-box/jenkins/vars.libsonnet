@@ -18,8 +18,4 @@
 
   storage_class: "nfs-infra",
   storage_class_capacity: "50Gi",
-
-  instances: [
-    {name: "public"},
-  ]
 }
