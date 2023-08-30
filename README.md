@@ -37,6 +37,7 @@
   ```
 
   - 现分支模式
+    - master
     - bj-k8s-cluster-prod-001
     - gd-k8s-cluster-prod-001
     - hk-k8s-cluster-prod-001
@@ -46,3 +47,6 @@
 - 语法格式
     - 基础建设类的就使用plain yaml文件实现，这一类的服务部署一套就可以了，如prometheus-operator。
     - 中间件类的服务使用jsonnet实现，毕竟这一类的服务就涉及到部署多套，如果jenkins服务，不同的用户使用不同的jenkins。
+
+- 目录说明
+  - `__yaml`目录，存放plain yaml文件，不用于jsonnet渲染。
