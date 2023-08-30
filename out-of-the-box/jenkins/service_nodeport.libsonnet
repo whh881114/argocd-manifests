@@ -20,22 +20,19 @@ local ports = [
 
 
 function(instance)
-  local item = [
-    {
-      apiVersion: "v1",
-      kind: "Service",
-      metadata: {
-        name: instance.name,
-        namespace: vars.namespace,
-        labels: {app: instance.name},
-      },
-      spec: {
-        selector: {app: instance.name},
-        type: "NodePort",
-        ports: ports
-      }
+  local item = {
+    apiVersion: "v1",
+    kind: "Service",
+    metadata: {
+      name: '%s-nodeport' % instance.name,
+      namespace: vars.namespace,
+      labels: {app: '%s-nodeport' % instance.name},
     },
-  for instance in vars['instances']
-  ];
+    spec: {
+      selector: {app: instance.name},
+      type: "NodePort",
+      ports: ports
+    }
+  };
 
   item

@@ -16,6 +16,6 @@
     {name: "metrics", containerPort: 60030},
   ],
 
-  storage_class: "nfs-infra",
-  storage_class_capacity: "50Gi",
+  storageclass_name: "nfs-infra",
+  storageclass_capacity: "50Gi",
 }
