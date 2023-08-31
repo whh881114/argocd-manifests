@@ -6,6 +6,7 @@ local service_nodeport = import './service_nodeport.libsonnet';
 local pvc = import './pvc.libsonnet';
 local statefulset = import './statefulset.libsonnet';
 local ingress = import './ingress.libsonnet';
+local service_monitor = import './service_monitor.libsonnet';
 
 function(instance)
     local namespace_item = namespace(instance);
@@ -14,5 +15,6 @@ function(instance)
     local pvc_item = pvc(instance);
     local statefulset_item = statefulset(instance);
     local ingress_item = ingress(instance);
+    local service_monitor_item = service_monitor(instance);
 
-    [namespace_item, service_clusterip_item, service_nodeport_item, pvc_item, statefulset_item, ingress_item]
+    [namespace_item, service_clusterip_item, service_nodeport_item, pvc_item, statefulset_item, ingress_item, service_monitor_item]
