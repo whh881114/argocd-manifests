@@ -1,28 +1,27 @@
-local vars = import '../vars.libsonnet';
+local vars = import './vars.libsonnet';
 
 {
-  apiVersion: "v1",
-  kind: "ConfigMap",
+  apiVersion: 'v1',
+  kind: 'ConfigMap',
   metadata: {
-    name: "consul-agent-config",
-    namespace: vars['namespace'],
+    name: vars.config_name,
   },
   data: {
-    "agent.json": |||
+    'agent.json': |||
       {
-        "services": [
+        'services': [
           {
-              "name": "consul-agent",
-              "port": 8500,
-              "tags": [
-                  "consul-agent"
+              'name': 'consul-agent',
+              'port': 8500,
+              'tags': [
+                  'consul-agent'
               ]
           },
           {
-              "name": "node-exporter",
-              "port": 9100,
-              "tags": [
-                  "node-exporter"
+              'name': 'node-exporter',
+              'port': 9100,
+              'tags': [
+                  'node-exporter'
               ]
           }
         ]
