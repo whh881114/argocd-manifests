@@ -1,4 +1,4 @@
-local global_vars = import '../global_vars.libsonnet';
+local global_vars = import '../../global_vars.libsonnet';
 local vars = import 'vars.libsonnet';
 
 

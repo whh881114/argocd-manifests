@@ -1,4 +1,4 @@
-local vars = import '../vars.libsonnet';
+local vars = import './vars.libsonnet';
 
 local env = [{name: "TZ", value: "Asia/Shanghai"},
              {name: "HOSTIP", valueFrom: {fieldRef: {fieldPath: "status.hostIP"}}},

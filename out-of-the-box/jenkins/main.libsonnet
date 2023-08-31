@@ -1,5 +1,3 @@
-local global_vars = import '../global_vars.libsonnet';
-
 local namespace = import 'namespace.libsonnet';
 local service_clusterip = import './service_clusterip.libsonnet';
 local service_nodeport = import './service_nodeport.libsonnet';
