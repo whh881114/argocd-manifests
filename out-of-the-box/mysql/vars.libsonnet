@@ -4,9 +4,7 @@ local other_conf = |||
 
 {
   namespace: "mysql",
-  image: "harbor.freedom.org/docker.io/mysql",
-  image_tag: "5.7.29",
-  image_pull_policy: "IfNotPresent",
+  image: "harbor.freedom.org/docker.io/mysql:5.7.29",
 
   replicas: 1,
   requests_cpu: "100m",
@@ -19,8 +17,10 @@ local other_conf = |||
     {name: "metrics", containerPort: 9104},
   ],
 
-  storage_class: "nfs-infra",
-  storage_class_capacity: "50Gi",
+  storageclass_name: "nfs-infra",
+  storageclass_capacity: "50Gi",
+
+  root_password: "occdrWqeu=vhb8vkrrgbfiqzazkz6kNb",
 
   // mysql的root密码必须要每个实例都定义。
   instances: [{name: "zabbix", root_password: "kz2zv&eoynpneQbyeowebyu0beGxkgvy"}],
@@ -28,7 +28,7 @@ local other_conf = |||
 
   // windows下，当使用|||声明跨行内容时，如果碰上空行，需要补充空格。
   // 但是，保存后就默认去掉了空格，所以方便点的方法，使用#来对齐。
-  default_conf: |||
+  conf: |||
     # For advice on how to change settings please see
     # http://dev.mysql.com/doc/refman/5.7/en/server-configuration-defaults.html
     #
@@ -80,4 +80,9 @@ local other_conf = |||
     [client]
     default_character_set = utf8
   |||,
+
+
+  // mysqld_exporter相关配置
+  mysqld_exporter_data_source_name: "exporter:pJwtdho13jLipiyquxldnqialgrpkvl~@(localhost:3306)/",
+  mysqld_exporter_image: "harbor.freedom.org/prometheus-operator/mysqld-exporter:v0.14.0",
 }
