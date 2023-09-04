@@ -1,9 +1,11 @@
+local func_vars = import './vars.libsonnet';
 local global_vars = import '../../global_vars.libsonnet';
-local vars = import 'vars.libsonnet';
 
 
 function(instance)
+  local vars = func_vars(instance);
   local http_port_number = 8080;
+
   local item = {
     apiVersion: 'networking.k8s.io/v1',
     kind: 'Ingress',

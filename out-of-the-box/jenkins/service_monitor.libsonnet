@@ -1,6 +1,9 @@
-local vars = import './vars.libsonnet';
+local func_vars = import './vars.libsonnet';
+
 
 function(instance)
+  local vars = func_vars(instance);
+
   local item = {
     apiVersion: 'monitoring.coreos.com/v1',
     kind: 'ServiceMonitor',

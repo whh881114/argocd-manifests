@@ -1,7 +1,9 @@
-local vars = import './vars.libsonnet';
+local func_vars = import './vars.libsonnet';
 
 
 function(instance)
+  local vars = func_vars(instance);
+
   local item = {
     apiVersion: 'apps/v1',
     kind: 'StatefulSet',
@@ -12,7 +14,7 @@ function(instance)
     },
     spec: {
       serviceName: instance.name,
-      replicas: if 'replicas' in instance then instance[ 'replicas' ] else vars[ 'replicas' ],
+      replicas: vars.replicas,
       selector: { matchLabels: { app: instance.name } },
       template: {
         metadata: {
@@ -21,8 +23,8 @@ function(instance)
         spec: {
           containers: [{
             name: 'jenkins',
-            image: if 'image' in instance && 'image_tag' in instance then '%s:%s' % [ instance.image, instance.image_tag ]
-                     else '%s:%s' % [ vars.image, vars.image_tag ],
+            image: vars.image,
+            imagePullPolicy: vars.image_pull_policy,
             env: [
               { name: 'TZ', value: 'Asia/Shanghai' },
               { name: 'JAVA_OPTS', value: '-javaagent:/lib/jmx_prometheus_javaagent.jar=60030:/etc/jmx-cfg.yml'},
@@ -30,12 +32,12 @@ function(instance)
             ports: vars.container_ports,
             resources: {
               requests: {
-                cpu: if 'requests_cpu' in instance then instance.requests_cpu else vars.requests_cpu,
-                memory: if 'requests_memory' in instance then instance.requests_memory else vars.requests_memory,
+                cpu: vars.requests_cpu,
+                memory: vars.requests_memory,
               },
               limits: {
-                cpu: if 'limits_cpu' in instance then instance.limits_cpu else vars.limits_cpu,
-                memory: if 'limits_memory' in instance then instance.limits_memory else vars.limits_memory,
+                cpu: vars.limits_cpu,
+                memory: vars.limits_memory,
               },
             },
             volumeMounts: [
