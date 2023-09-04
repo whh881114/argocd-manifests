@@ -1,21 +1,21 @@
-{
-  namespace: "jenkins",
-  image: "harbor.freedom.org/freedom/jenkins",
-  image_tag: "2.405-centos7",
-  image_pull_policy: "IfNotPresent",
+local default_vars = import './default_vars.libsonnet';
 
-  replicas: 1,
-  requests_cpu: "100m",
-  requests_memory: "128Mi",
-  limits_cpu: "4000m",
-  limits_memory: "8192Mi",
+function(instance)
+  local item = {
+    namespace: if 'namespace' in instance then instance.namespace else default_vars.namespace,
+    image: if 'image' in instance then instance.image else default_vars.image,
+    image_pull_policy: if 'image_pull_policy' in instance then instance.image_pull_policy else default_vars.image_pull_policy,
 
-  container_ports: [
-    {name: "http", containerPort: 8080},
-    {name: "agent", containerPort: 50000},
-    {name: "metrics", containerPort: 60030},
-  ],
+    replicas: if 'replicas' in instance then instance.replicas else default_vars.replicas,
+    requests_cpu: if 'requests_cpu' in instance then instance.requests_cpu else default_vars.requests_cpu,
+    requests_memory: if 'requests_memory' in instance then instance.requests_memory else default_vars.requests_memory,
+    limits_cpu: if 'limits_cpu' in instance then instance.limits_cpu else default_vars.limits_cpu,
+    limits_memory: if 'limits_memory' in instance then instance.limits_memory else default_vars.limits_memory,
 
-  storageclass_name: "nfs-infra",
-  storageclass_capacity: "50Gi",
-}
+    container_ports: if 'container_ports' in instance then instance.container_ports else default_vars.container_ports,
+
+    storageclass_name: if 'storageclass_name' in instance then instance.storageclass_name else default_vars.storageclass_name,
+    storageclass_capacity: if 'storageclass_capacity' in instance then instance.storageclass_capacity else default_vars.storageclass_capacity,
+  };
+
+  item

@@ -1,44 +1,49 @@
+local global_vars = import '../../global_vars.libsonnet';
 local vars = import './vars.libsonnet';
 
-local mysqld_exporter_container = {
-  name: "mysqld-exporter",
-  image: "harbor.freedom.org/prometheus-operator/mysqld-exporter:v0.14.0",
-  imagePullPolicy: "IfNotPresent",
-  env: [
-    { name: "DATA_SOURCE_NAME", valueFrom: { configMapKeyRef: { name: "mysqld-exporter", key: "DATA_SOURCE_NAME" } } }
-  ],
-  ports: [
-    { name: "metrics", containerPort: 9104 }
-  ]
-};
 
+function(instance)
+  local namespace = if 'namespace' in instance then instance.namespace else vars.namespace;
+  local mysql_root_password = if 'root_password' in instance then instance.root_password else vars.root_password;
+  local mysql_conf = if 'conf' in instance then instance.conf else vars.conf;
+  local mysqld_exporter_data_source_name = if 'mysqld_exporter_data_source_name' in instance then instance.mysqld_exporter_data_source_name else vars.mysqld_exporter_data_source_name;
 
-[
-  {
-    apiVersion: "apps/v1",
-    kind: "StatefulSet",
+  local item = {
+    apiVersion: 'apps/v1',
+    kind: 'StatefulSet',
     metadata: {
-      name: instance[ 'name' ],
-      namespace: vars[ 'namespace' ],
-      labels: { app: instance[ 'name' ] },
+      name: instance.name,
+      namespace: namespace,
+      labels: { app: instance.name },
     },
     spec: {
-      serviceName: instance[ 'name' ],
-      replicas: if 'replicas' in instance then instance[ 'replicas' ] else vars[ 'replicas' ],
-      selector: { matchLabels: { app: instance[ 'name' ] } },
+      serviceName: instance.name,
+      replicas: if 'replicas' in instance then instance.replicas else vars.replicas,
+      selector: { matchLabels: { app: instance.name } },
       template: {
         metadata: {
-          labels: { app: instance[ 'name' ] },
+          labels: { app: instance.name },
         },
         spec: {
-          containers: [ mysqld_exporter_container,
+          containers: [
             {
-              name: "mysql",
-              image: if 'image' in instance && 'image_tag' in instance then "%s:%s" % [ instance[ 'image' ], instance[ 'image_tag' ] ]
-                       else "%s:%s" % [ vars[ 'image' ], vars[ 'image_tag' ] ],
+              name: 'mysqld-exporter',
+              image: vars.mysqld_exporter_image,
+              imagePullPolicy: global_vars.image_pull_policy,
+            env: [
+    { name: 'DATA_SOURCE_NAME', valueFrom: { configMapKeyRef: { name: instance.name, key: 'DATA_SOURCE_NAME' } } }
+  ],
+  ports: [
+    { name: 'metrics', containerPort: 9104 }
+  ]
+},
+            {
+              name: 'mysql',
+              image: if 'image' in instance && 'image_tag' in instance then '%s:%s' % [ instance[ 'image' ], instance[ 'image_tag' ] ]
+                       else '%s:%s' % [ vars[ 'image' ], vars[ 'image_tag' ] ],
               env: [
-                { name: "TZ", value: "Asia/Shanghai" },
-                { name: "MYSQL_ROOT_PASSWORD", valueFrom: { configMapKeyRef: { name: instance[ 'name' ], key: "MYSQL_ROOT_PASSWORD" } } },
+                { name: 'TZ', value: 'Asia/Shanghai' },
+                { name: 'MYSQL_ROOT_PASSWORD', valueFrom: { configMapKeyRef: { name: instance[ 'name' ], key: 'MYSQL_ROOT_PASSWORD' } } },
               ],
               ports: vars['container_ports'],
               resources: {
@@ -52,20 +57,19 @@ local mysqld_exporter_container = {
                 },
               },
               volumeMounts: [
-                { name: "conf", mountPath: "/etc/mysql/conf.d", readOnly: true },
-                { name: "data", mountPath: "/var/lib/mysql" },
+                { name: 'conf', mountPath: '/etc/mysql/conf.d', readOnly: true },
+                { name: 'data', mountPath: '/var/lib/mysql' },
               ],
             },
           ],
           volumes: [
-            { name: "mysqld-exporter", configMap: { name: "mysqld-exporter" } },
-            { name: "conf", configMap: { name: instance[ 'name' ] } },
-            { name: "data", persistentVolumeClaim: { claimName: "data-%s" % instance[ 'name' ] } },
+            { name: 'mysqld-exporter', configMap: { name: 'mysqld-exporter' } },
+            { name: 'conf', configMap: { name: instance[ 'name' ] } },
+            { name: 'data', persistentVolumeClaim: { claimName: 'data-%s' % instance[ 'name' ] } },
           ]
         }
       }
     }
-  }
+  };
 
-  for instance in vars['instances']
-]
+  item

@@ -1,14 +1,14 @@
-local vars = import './vars.libsonnet';
+local func_vars = import './vars.libsonnet';
 
 
 function(instance)
-  local namespace = if 'namespace' in instance then instance.namespace else vars.namespace;
+  local vars = func_vars(instance);
 
   local item = {
     apiVersion: "v1",
      kind: "Namespace",
      metadata: {
-        name: namespace,
+        name: vars.namespace,
      },
   };
 
