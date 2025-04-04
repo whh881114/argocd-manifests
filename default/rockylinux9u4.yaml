@@ -1,0 +1,71 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: data-rockylinux9u4
+  labels:
+    app: data-rockylinux9u4
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: infra
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: rockylinux9u4
+  name: rockylinux9u4
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 443
+    - name: http8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: rockylinux9u4
+
+---
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: rockylinux9u4
+  labels:
+    app: rockylinux9u4
+spec:
+  serviceName: rockylinux9u4
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rockylinux9u4
+  template:
+    metadata:
+      labels:
+        app: rockylinux9u4
+    spec:
+      imagePullSecrets:
+        - name: docker-credential-harbor-idc-roywong-work
+      containers:
+        - name: rockylinux9u4
+          image: harbor.idc.roywong.work/library/rockylinux:9.4
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: data-rockylinux9u4
