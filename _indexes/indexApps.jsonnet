@@ -18,7 +18,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       },
       project: app.project,
       source: {
-        path: clusterParams.appRootDir + '/' + app.path,
+        path: clusterParams.appRootDir + app.path,
         directory: {
           jsonnet: {},
           recurse: true,

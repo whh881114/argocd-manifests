@@ -8,7 +8,7 @@
   ingressNginxLanClassName: 'ingress-nginx-lan',
   ingressNginxWanClassName: 'ingress-nginx-wan',
 
-  appRootDir: 'argocd-manifests',
+  appRootDir: '/',
 
   repo: {
     url: 'git@github.com:whh881114/argocd-manifests.git',
