@@ -11,7 +11,7 @@
   appRootDir: 'argocd-manifests',
 
   repo: {
-    url: 'git@github.com:whh881114/learning.git',
+    url: 'git@github.com:whh881114/argocd-manifests.git',
     branch: 'master',
   },
 
