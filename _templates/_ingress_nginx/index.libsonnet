@@ -8,11 +8,12 @@ function(app)
       annotations: {
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
-        // 'nginx.ingress.kubernetes.io/auth-type': 'basic',
-        // 'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
-        // 'nginx.ingress.kubernetes.io/auth-realm': 'Authentication Required',
         'cert-manager.io/cluster-issuer': clusterParams.tls.clusterIssuerName,
-      },
+        } + if app.ingress.basicAuth then {
+          'nginx.ingress.kubernetes.io/auth-type': 'basic',
+          'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
+          'nginx.ingress.kubernetes.io/auth-realm': 'Authentication Required',
+        } else {},
       labels: {app: app.name},
       name: app.name,
     },
@@ -38,7 +39,7 @@ function(app)
             ],
           },
         },
-        for ingress in app.ingress
+        for ingress in app.ingress.hosts
       ],
       tls: [
         {

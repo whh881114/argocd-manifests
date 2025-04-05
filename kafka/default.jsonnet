@@ -7,9 +7,10 @@ local appName = 'default';
 local instanceVars = {
   name: appName,
   clusterID: '4L6g3nShT-eMCtK--X86sw',
-  ingress: [
-    {host: 'kafka-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},
-  ],
+  ingress: {
+    basicAuth: true,
+    hosts: [{host: 'kafka-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
+  }
 };
 
 local app = std.mergePatch(defaultVars, instanceVars);
