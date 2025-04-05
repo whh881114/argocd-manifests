@@ -8,9 +8,9 @@ function(app)
       annotations: {
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
-        'nginx.ingress.kubernetes.io/auth-type': 'basic',
-        'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
-        'nginx.ingress.kubernetes.io/auth-realm': 'Authentication Required',
+        // 'nginx.ingress.kubernetes.io/auth-type': 'basic',
+        // 'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
+        // 'nginx.ingress.kubernetes.io/auth-realm': 'Authentication Required',
         'cert-manager.io/cluster-issuer': clusterParams.tls.clusterIssuerName,
       },
       labels: {app: app.name},
