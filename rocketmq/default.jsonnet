@@ -6,10 +6,12 @@ local appName = 'default';
 
 local instanceVars = {
   name: appName,
-  ingress: [
-    {host: 'rocketmq-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},
-  ],
+  ingress: {
+    basicAuth: true,
+    hosts: [{host: 'rocketmq-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
+  },
 };
+
 
 local app = std.mergePatch(defaultVars, instanceVars);
 
