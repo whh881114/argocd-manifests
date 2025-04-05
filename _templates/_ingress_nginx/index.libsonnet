@@ -20,29 +20,30 @@ function(app)
       ingressClassName: app.ingressClassName,
       rules: [
         {
-          host: '%s-%s%s' % [app.name, app.namespace, clusterParams.ingressNginxLanDomainName],
+          host: ingress.host,
           http: {
             paths: [
               {
                 backend: {
                   service: {
-                    name: app.name + '-console',
+                    name: ingress.serviceName,
                     port: {
-                      number: 8080,
+                      number: ingress.servicePortNumber,
                     },
                   },
                 },
-                path: '/',
+                path: ingress.path,
                 pathType: 'ImplementationSpecific',
               },
             ],
           },
         },
+        for ingress in app.ingress
       ],
       tls: [
         {
           hosts: [
-            '%s-%s%s' % [app.name, app.namespace, clusterParams.ingressNginxLanDomainName],
+            '*%s' % [clusterParams.ingressNginxLanDomainName],
           ],
           'secretName': clusterParams.tls.certificateSecret,
         }
