@@ -23,8 +23,8 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: system-ops-logging
-  namespace: logging
+  name: system-ops-argocd
+  namespace: argocd
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
