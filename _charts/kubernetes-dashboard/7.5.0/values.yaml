@@ -356,7 +356,7 @@ kong:
   replicaCount: 3
   image:
     repository: harbor.idc.roywong.work/docker.io/library/kong
-    tag: 3.6
+    tag: "3.6"
   ## Configuration reference: https://docs.konghq.com/gateway/3.6.x/reference/configuration
   env:
     dns_order: LAST,A,CNAME,AAAA,SRV
