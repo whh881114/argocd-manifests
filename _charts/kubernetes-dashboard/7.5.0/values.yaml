@@ -128,7 +128,6 @@ app:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
-      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
   # Use the following toleration if Dashboard can be deployed on a tainted control-plane nodes
   # - key: node-role.kubernetes.io/control-plane
   #   effect: NoSchedule
@@ -372,7 +371,7 @@ kong:
   proxy:
     type: ClusterIP
     http:
-      enabled: false
+      enabled: true
     tls:
       servicePort: 80
 
