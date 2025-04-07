@@ -14,5 +14,4 @@
 
     {name: 'monitoring',           namespace: self.name,      path: self.name, project: 'monitoring'},
     {name: 'thanos-ruler-rules',   namespace: 'monitoring',   path: self.name, project: 'monitoring'},
-
 ]
