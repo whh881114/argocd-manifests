@@ -371,7 +371,7 @@ kong:
   proxy:
     type: ClusterIP
     http:
-      enabled: true
+      enabled: false
     tls:
       servicePort: 80
 
