@@ -46,7 +46,7 @@ spec:
   {{- if not .Values.app.ingress.useDefaultIngressClass }}
   ingressClassName: {{ .Values.app.ingress.ingressClassName }}
   {{- end }}
-  {{- if and .Values.app.ingress.tls.enabled .Values.app.ingress.tls.enabled }}
+  {{- if and .Values.app.ingress.tls.enabled .Values.app.ingress.tls.hosts }}
   tls:
     - hosts:
       {{- toYaml .Values.app.ingress.tls.hosts | nindent 6 }}
