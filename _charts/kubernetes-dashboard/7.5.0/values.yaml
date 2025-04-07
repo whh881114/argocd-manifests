@@ -96,6 +96,7 @@ app:
     hosts:
       # Keep 'localhost' host only if you want to access Dashboard using 'kubectl port-forward ...' on:
       # https://localhost:8443
+      - "*.idc-ingress-nginx-lan.roywong.work"
       - kubernetes-dashboard.idc-ingress-nginx-lan.roywong.work
     # - kubernetes.dashboard.domain.com
     ingressClassName: ingress-nginx-lan
@@ -107,7 +108,7 @@ app:
     #    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     #    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
     #    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    useDefaultAnnotations: true
+    useDefaultAnnotations: false
     pathType: ImplementationSpecific
     # If path is not the default (/), rewrite-target annotation will be added to the Ingress.
     # It allows serving Kubernetes Dashboard on a sub-path. Make sure that the configured path
