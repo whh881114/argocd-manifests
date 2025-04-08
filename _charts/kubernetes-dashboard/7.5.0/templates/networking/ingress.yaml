@@ -46,10 +46,10 @@ spec:
   {{- if not .Values.app.ingress.useDefaultIngressClass }}
   ingressClassName: {{ .Values.app.ingress.ingressClassName }}
   {{- end }}
-  {{- if and .Values.app.ingress.tls.enabled .Values.app.ingress.tls.hosts }}
+  {{- if and .Values.app.ingress.hosts .Values.app.ingress.tls.enabled }}
   tls:
     - hosts:
-      {{- toYaml .Values.app.ingress.tls.hosts | nindent 6 }}
+      {{- toYaml .Values.app.ingress.hosts | nindent 6 }}
       {{- if .Values.app.ingress.tls.secretName }}
       secretName: {{ .Values.app.ingress.tls.secretName }}
       {{- else }}
