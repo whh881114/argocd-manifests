@@ -18,8 +18,8 @@ local clusterParams = import '../clusterParams.libsonnet';
       },
       project: secret.project,
       source: {
-        repoURL: clusterParams.repoSecrets.url,
-        targetRevision: clusterParams.repoSecrets.branch,
+        repoURL: clusterParams.repo.secret.url,
+        targetRevision: clusterParams.repo.secret.branch,
         path: secret.path,
         directory: {
           jsonnet: {},

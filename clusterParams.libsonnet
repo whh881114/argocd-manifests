@@ -1,5 +1,6 @@
 {
   registry: 'harbor.idc.roywong.work',
+
   ingressNginxLanDomainName: '.idc-ingress-nginx-lan.roywong.work',
   ingressNginxWanDomainName: '.idc-ingress-nginx-wan.roywong.work',
   istiogatewayLanDomainName: '.idc-istio-gateway-lan.roywong.work',
@@ -8,21 +9,21 @@
   ingressNginxLanClassName: 'ingress-nginx-lan',
   ingressNginxWanClassName: 'ingress-nginx-wan',
 
-  repo: {
-    url: 'git@github.com:whh881114/argocd-manifests.git',
-    branch: 'master',
-  },
-
   argocdNamespace: 'argocd',
 
   imagePullSecrets: [
     {name: "docker-credential-harbor-idc-roywong-work"},
   ],
 
-  // cert-manager相关变量
-  repoSecrets: {
-    url: 'git@github.com:whh881114/argocd-manifests-secrets.git',
-    branch: 'master',
+  repo: {
+    app: {
+      url: 'git@github.com:whh881114/argocd-manifests.git',
+      branch: 'master',
+    },
+    secret: {
+      url: 'git@github.com:whh881114/argocd-manifests-secrets.git',
+      branch: 'master',
+    },
   },
 
   tls: {

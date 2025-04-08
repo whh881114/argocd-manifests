@@ -18,8 +18,8 @@ local clusterParams = import '../clusterParams.libsonnet';
       },
       project: chart.project,
       source: {
-        repoURL: clusterParams.repo.url,
-        targetRevision: clusterParams.repo.branch,
+        repoURL: clusterParams.repo.app.url,
+        targetRevision: clusterParams.repo.app.branch,
         path: chart.path,
         helm: {
           valueFiles: chart.valueFiles
