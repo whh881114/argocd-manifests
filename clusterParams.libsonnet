@@ -34,10 +34,10 @@
     certificateName: self.name + '-certificate',
     certificateSecret: self.name + '-cert',
     dnsZones: [
-      '*.idc-ingress-nginx-lan.roywong.work',
-      '*.idc-ingress-nginx-wan.roywong.work',
-      '*.idc-istio-gateway-lan.roywong.work',
-      '*.idc-istio-gateway-wan.roywong.work',
+      'idc-ingress-nginx-lan.roywong.work',
+      'idc-ingress-nginx-wan.roywong.work',
+      'idc-istio-gateway-lan.roywong.work',
+      'idc-istio-gateway-wan.roywong.work',
     ],
   },
 }
