@@ -9,7 +9,7 @@ local instanceVars = {
   clusterID: '4L6g3nShT-eMCtK--X86sw',
   ingress: {
     basicAuth: true,
-    hosts: [{hostname: 'kafka-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
+    rules: [{hostname: 'kafka-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
   }
 };
 

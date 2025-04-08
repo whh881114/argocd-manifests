@@ -8,7 +8,7 @@ function(app)
       annotations: {
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
-        'cert-manager.io/cluster-issuer': clusterParams.tls.cloudflare.clusterIssuerName,
+        'cert-manager.io/cluster-issuer': clusterParams.tls.cloudflare.clusterIssuer,
         } + if app.ingress.basicAuth then {
           'nginx.ingress.kubernetes.io/auth-type': 'basic',
           'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
@@ -21,25 +21,25 @@ function(app)
       ingressClassName: app.ingressClassName,
       rules: [
         {
-          host: host.hostname,
+          host: rule.hostname,
           http: {
             paths: [
               {
                 backend: {
                   service: {
-                    name: host.serviceName,
+                    name: rule.serviceName,
                     port: {
-                      number: host.servicePortNumber,
+                      number: rule.servicePortNumber,
                     },
                   },
                 },
-                path: ingress.path,
+                path: rule.path,
                 pathType: 'ImplementationSpecific',
               },
             ],
           },
         },
-        for host in app.ingress.hosts
+        for rule in app.ingress.rules
       ],
       tls: [
         {
