@@ -24,7 +24,7 @@ local clusterParams = import '../clusterParams.libsonnet';
           dns01: {
             cloudflare: {
               apiTokenSecretRef: {
-                name: 'kubernetes-dashboard-cloudflare-api-token-secret',
+                name: 'cloudflare-api-token-secret',
                 key: 'api-token'      # 使用cloudflare时，api-token对应着cloudflare-api-token-secret中的stringData中的'api-token'。
               }
             }
