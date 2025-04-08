@@ -9,7 +9,7 @@ function(app)
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
         'cert-manager.io/cluster-issuer': clusterParams.tls.cloudflare.clusterIssuer,
-        } + if app.ingress.basicAuth then {
+        } + if std.objectHas(app.ingress, 'basicAuth') && app.ingress.basicAuth then {
           'nginx.ingress.kubernetes.io/auth-type': 'basic',
           'nginx.ingress.kubernetes.io/auth-secret': 'baisc-auth-' + app.name,
           'nginx.ingress.kubernetes.io/auth-realm': 'Authentication Required',
