@@ -46,7 +46,7 @@ function(app)
           hosts: [
             '*%s' % [clusterParams.ingressNginxLanDomainName],
           ],
-          'secretName': app.name + '-tls-certificate-secret',
+          'secretName': 'tls-certificate-secret-' + app.name,
         }
       ]
     },
