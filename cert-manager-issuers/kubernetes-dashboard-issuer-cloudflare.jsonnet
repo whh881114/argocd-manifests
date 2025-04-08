@@ -12,7 +12,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       server: 'https://acme-v02.api.letsencrypt.org/directory',
       email: 'whh881114@gmail.com',
       privateKeySecretRef: {
-        name: 'kubernetes-dashboard-issuer-key'
+        name: 'kubernetes-dashboard-key'
       },
       solvers: [
         {
