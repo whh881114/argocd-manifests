@@ -8,7 +8,7 @@ local instanceVars = {
   name: appName,
   ingress: {
     basicAuth: true,
-    hosts: [{host: 'rocketmq-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
+    hosts: [{hostname: 'rocketmq-console' + clusterParams.ingressNginxLanDomainName, serviceName: appName + '-console', servicePortNumber: 8080, path: '/'},],
   },
 };
 
