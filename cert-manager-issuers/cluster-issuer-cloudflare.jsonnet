@@ -9,9 +9,9 @@ local clusterParams = import '../clusterParams.libsonnet';
   },
   spec: {
     acme: {
-      // server: 'https://acme-v02.api.letsencrypt.org/directory',
-      // 触发限速，改为非生产域名。
-      server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
+      // 触发限速，改为非生产域名，而非生产域名会导致浏览器报HSTS错误。
+      // server: 'https://acme-staging-v02.api.letsencrypt.org/directory',
+      server: 'https://acme-v02.api.letsencrypt.org/directory',
       email: 'whh881114@gmail.com',
       privateKeySecretRef: {
         name: clusterParams.tls.cloudflare.clusterIssuerPrivateKeySecret,
