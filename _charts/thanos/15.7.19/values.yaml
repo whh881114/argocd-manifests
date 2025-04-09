@@ -1439,7 +1439,7 @@ queryFrontend:
     extraTls:
       - hosts:
           - "thanos-query-frontend.idc-ingress-nginx-lan.roywong.work"
-        secretName: roywong-work-tls-cert
+        secretName: tls-certificate-secret-thanos-query-frontend
     ## @param queryFrontend.ingress.secrets If you're providing your own certificates, please use this to add the certificates as secrets
     ## key and certificate should start with -----BEGIN CERTIFICATE----- or
     ## -----BEGIN RSA PRIVATE KEY-----
