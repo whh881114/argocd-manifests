@@ -425,9 +425,9 @@ alertmanager:
     ## Secret must be manually created in the namespace
     ##
     tls:
-      - secretName: roywong-work-tls-cert
+      - secretName: tls-certificate-secret-alertmanager
         hosts:
-          - "*.idc-ingress-nginx-lan.roywong.work"
+          - "alertmanager.idc-ingress-nginx-lan.roywong.work"
 
 
   ## Configuration for Alertmanager secret
@@ -1028,9 +1028,9 @@ grafana:
     ## Secret must be manually created in the namespace
     ##
     tls:
-      - secretName: roywong-work-tls-cert
+      - secretName: tls-certificate-secret-grafana
         hosts:
-          - "*.idc-ingress-nginx-lan.roywong.work"
+          - "grafana.idc-ingress-nginx-lan.roywong.work"
 
   # # To make Grafana persistent (Using Statefulset)
   # #
