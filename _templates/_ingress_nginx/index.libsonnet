@@ -44,7 +44,8 @@ function(app)
       tls: [
         {
           hosts: [
-            '*%s' % [clusterParams.ingressNginxLanDomainName],
+            rule.hostname,
+            for rule in app.ingress.rules
           ],
           'secretName': 'tls-certificate-secret-' + app.name,
         }
