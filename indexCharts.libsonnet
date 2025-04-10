@@ -22,7 +22,7 @@
 		  version: '61.8.0',
 		  path:'_charts/kube-prometheus-stack/' + self.version,
 		  namespace: 'monitoring',
-		  valueFiles: ['git@github.com:whh881114/argocd-manifests-secrets.git:/charts/kube-prometheus-stack/values.yaml'],
+		  valueFiles: ['git@github.com:whh881114/argocd-manifests-secrets.git:charts/kube-prometheus-stack/values.yaml'],
 		  project: 'monitoring'
 		},
 ]
