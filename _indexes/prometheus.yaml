@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  destination:
+    namespace: monitoring
+    server: 'https://kubernetes.default.svc'
+  project: monitoring
+  source:
+    - repoURL: 'git@github.com:whh881114/argocd-manifests.git'
+      path: _charts/kube-prometheus-stack/61.8.0
+      targetRevision: master
+      helm:
+        valueFiles:
+          - $values/charts/kube-prometheus-stack/values.yaml
+    - repoURL: 'git@github.com:whh881114/argocd-manifests-secrets.git'
+      targetRevision: master
+      ref: values
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
