@@ -729,59 +729,8 @@ alertmanager:
     ## AlermanagerConfig to be used as top level configuration
     ##
     alertmanagerConfiguration:
-      global:
-        resolve_timeout: 5m
-      inhibit_rules:
-        - source_matchers:
-            - 'severity = critical'
-          target_matchers:
-            - 'severity =~ warning|info'
-          equal:
-            - 'namespace'
-            - 'alertname'
-        - source_matchers:
-            - 'severity = warning'
-          target_matchers:
-            - 'severity = info'
-          equal:
-            - 'namespace'
-            - 'alertname'
-        - source_matchers:
-            - 'alertname = InfoInhibitor'
-          target_matchers:
-            - 'severity = info'
-          equal:
-            - 'namespace'
-        - target_matchers:
-            - 'alertname = InfoInhibitor'
-      route:
-        group_by: ['namespace']
-        group_wait: 30s
-        group_interval: 5m
-        repeat_interval: 12h
-        receiver: 'null'
-        routes:
-          - receiver: 'null'
-            matchers:
-              - alertname = "Watchdog"
-      receivers:
-        - name: 'wecom-bot'
-          webhook_configs:
-            - url: 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=029a5941-6b05-4a11-8af8-b47679e4c527'
-              send_resolved: true
-              http_config:
-                headers:
-                  Content-Type: application/json
-              # 自定义模板（可选）
-              message: |
-                {
-                  "msgtype": "markdown",
-                  "markdown": {
-                    "content": "**告警:** {{ .CommonLabels.alertname }}\n**级别:** {{ .CommonLabels.severity }}\n**描述:** {{ .CommonAnnotations.description }}\n**时间:** {{ .CommonAnnotations.startsAt }}"
-                  }
-                }
-      templates:
-        - '/etc/alertmanager/config/*.tmpl'
+      name: global-alertmanager-Configuration
+
     ## Example with select a global alertmanagerconfig
     # alertmanagerConfiguration:
     #   name: global-alertmanager-Configuration
