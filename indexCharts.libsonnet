@@ -15,6 +15,14 @@
 
     {name: 'kubernetes-dashboard', version: '7.5.0', path:'_charts/kubernetes-dashboard/' + self.version, namespace: 'kubernetes-dashboard', valueFiles: ['values.yaml' ], project: 'system'},
 
-		{name: 'prometheus', version: '61.8.0',  path:'_charts/kube-prometheus-stack/' + self.version, namespace: 'monitoring', valueFiles: ['values.yaml'], project: 'monitoring'},
 		{name: 'thanos',     version: '15.7.19', path:'_charts/' + self.name + '/' + self.version,     namespace: 'monitoring', valueFiles: ['values.yaml'], project: 'monitoring'},
+
+		{
+		  name: 'prometheus',
+		  version: '61.8.0',
+		  path:'_charts/kube-prometheus-stack/' + self.version,
+		  namespace: 'monitoring',
+		  valueFiles: ['git@github.com:whh881114/argocd-manifests-secrets.git:/charts/kube-prometheus-stack/values.yaml'],
+		  project: 'monitoring'
+		},
 ]
