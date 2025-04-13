@@ -670,8 +670,7 @@ alertmanager:
     ## Secrets is a list of Secrets in the same namespace as the Alertmanager object, which shall be mounted into the
     ## Alertmanager Pods. The Secrets are mounted into /etc/alertmanager/secrets/.
     ##
-    secrets:
-      - email-password
+    secrets: []
 
     ## If false then the user will opt out of automounting API credentials.
     ##
@@ -731,10 +730,10 @@ alertmanager:
 
     ## AlermanagerConfig to be used as top level configuration
     ##
-    alertmanagerConfiguration: {}   # 默认的资源名称为global-alertmanager-Configuration。
+    # alertmanagerConfiguration: {}
     ## Example with select a global alertmanagerconfig
-    # alertmanagerConfiguration:
-    #   name: global-alertmanager-Configuration
+    alertmanagerConfiguration:
+      name: global-alertmanager-Configuration
 
     ## Example with select a global alertmanagerconfig
     # alertmanagerConfiguration:
