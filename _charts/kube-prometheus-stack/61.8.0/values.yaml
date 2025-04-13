@@ -684,8 +684,8 @@ alertmanager:
     ## ConfigSecret is the name of a Kubernetes Secret in the same namespace as the Alertmanager object, which contains configuration for
     ## this Alertmanager instance. Defaults to 'alertmanager-' The secret is mounted into /etc/alertmanager/config.
     ##
-    configSecret: ''
-    # 不使用alertManager官方方式的配置文件，使用alertmanagerConfiguration资源替代。
+    # configSecret:
+    # 使用alertManager官方方式的配置文件，使用alertmanagerConfiguration资源替代，目前在版本中alertmanagerConfiguration已经是成熟功能。
     # configSecret: alertmanager-configuration-customized
 
     ## WebTLSConfig defines the TLS parameters for HTTPS
@@ -731,6 +731,8 @@ alertmanager:
     ## AlermanagerConfig to be used as top level configuration
     ##
     alertmanagerConfiguration: {}   # 默认的资源名称为global-alertmanager-Configuration。
+    ## Example with select a global alertmanagerconfig
+    # alertmanagerConfiguration:
     #   name: global-alertmanager-Configuration
 
     ## Example with select a global alertmanagerconfig
