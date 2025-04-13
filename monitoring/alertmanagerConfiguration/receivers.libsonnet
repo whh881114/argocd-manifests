@@ -1,5 +1,0 @@
-{
-  receivers: [
-    {name: 'null'},
-  ]
-}
