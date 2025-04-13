@@ -733,7 +733,7 @@ alertmanager:
     # alertmanagerConfiguration: {}
     ## Example with select a global alertmanagerconfig
     alertmanagerConfiguration:
-      name: global-alertmanager-Configuration
+      name: global-alertmanager-configuration
 
     ## Example with select a global alertmanagerconfig
     # alertmanagerConfiguration:
