@@ -14,12 +14,5 @@ spec:
     - name: email-notify
       emailConfigs:
         - to: 'roy_wong_20210324@163.com'
-          from: 'roy_wong_20210324@163.com'
-          authUsername: 'roy_wong_20210324@163.com'
-          authPassword:
-            name: email-password
-            key: password
           authIdentity: 'roy_wong_20210324@163.com'
-          requireTLS: true
-          sendResolved: true
-          smarthost: 'smtp.163.com'
+

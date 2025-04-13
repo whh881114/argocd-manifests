@@ -303,6 +303,13 @@ alertmanager:
   config:
     global:
       resolve_timeout: 5m
+      smtp_smarthost: 'smtp.163.com'
+      smtp_from: 'roy_wong_20210324@163.com'
+      smtp_auth_username: 'roy_wong_20210324@163.com'
+      smtp_auth_password:
+        name: email-password
+        key: password
+      smtp_require_tls: true
     inhibit_rules:
       - source_matchers:
           - 'severity = critical'
