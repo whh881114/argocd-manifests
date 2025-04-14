@@ -117,8 +117,8 @@ controller:
       cpu: "50m"
       memory: "256Mi"
     limits:
-      cpu: "2000m"
-      memory: "4096Mi"
+      cpu: "4000m"
+      memory: "8192Mi"
 
   # Share process namespace to allow sidecar containers to interact with processes in other containers in the same pod
   shareProcessNamespace: false
@@ -505,7 +505,7 @@ controller:
   # etc. Best reference is https://<jenkins_url>/configuration-as-code/reference. The example below creates a welcome message:
   JCasC:
     # -- Enables default Jenkins configuration via configuration as code plugin
-    defaultConfig: true
+    defaultConfig: false
 
     # If true, the init container deletes all the plugin config files and Jenkins Config as Code overwrites any existing configuration
     # -- Whether Jenkins Config as Code should overwrite any existing configuration
@@ -688,7 +688,7 @@ controller:
 
   ingress:
     # -- Enables ingress
-    enabled: false
+    enabled: true
 
     # Override for the default paths that map requests to the backend
     # -- Override for the default Ingress paths
@@ -705,11 +705,14 @@ controller:
     # For Kubernetes v1.14+, use 'networking.k8s.io/v1beta1'
     # For Kubernetes v1.19+, use 'networking.k8s.io/v1'
     # -- Ingress API version
-    apiVersion: "extensions/v1beta1"
+    apiVersion: "networking.k8s.io/v1"
     # -- Ingress labels
     labels: {}
     # -- Ingress annotations
-    annotations: {}
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      cert-manager.io/cluster-issuer: roywong-work-tls-cluster-issuer
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
@@ -718,18 +721,18 @@ controller:
 
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # -- Ingress path
-    path:
+    path: /
 
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
-    hostName:
+    hostName: jenkins.idc-ingress-nginx-lan.roywong.work
     # -- Hostname to serve assets from
-    resourceRootUrl:
+    resourceRootUrl: jenkins.idc-ingress-nginx-lan.roywong.work
     # -- Ingress TLS configuration
-    tls: []
-    # - secretName: jenkins.cluster.local
-    #   hosts:
-    #     - jenkins.cluster.local
+    tls:
+      - secretName: tls-certificate-secret-jenkins
+        hosts:
+          - jenkins.idc-ingress-nginx-lan.roywong.work
 
   # often you want to have your controller all locked down and private,
   # but you still want to get webhooks from your SCM
