@@ -13,7 +13,7 @@ nameOverride:
 fullnameOverride:
 # -- Override the deployment namespace
 # @default -- `Release.Namespace`
-namespaceOverride:
+namespaceOverride: jenkins
 
 # For FQDN resolving of the controller service. Change this value to match your existing configuration.
 # ref: https://github.com/kubernetes/dns/blob/master/docs/specification.md
@@ -34,17 +34,17 @@ controller:
   componentName: "jenkins-controller"
   image:
     # -- Controller image registry
-    registry: "docker.io"
+    registry: "harbor.idc.roywong.work"
     # -- Controller image repository
     repository: "jenkins/jenkins"
 
     # -- Controller image tag override; i.e., tag: "2.440.1-jdk21"
-    tag:
+    tag: 2.505-jdk21
 
     # -- Controller image tag label
     tagLabel: jdk21
     # -- Controller image pull policy
-    pullPolicy: "Always"
+    pullPolicy: "IfNotPresent"
   # -- Controller image pull secret
   imagePullSecretName:
   # -- Lifecycle specification for controller-container
@@ -88,7 +88,7 @@ controller:
     # The default configuration uses this secret to configure an admin user
     # If you don't need that user or use a different security realm, then you can disable it
     # -- Create secret for admin user
-    createSecret: true
+    createSecret: false
 
     # -- The name of an existing secret containing the admin credentials
     existingSecret: ""
