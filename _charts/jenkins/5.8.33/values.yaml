@@ -915,7 +915,7 @@ controller:
 
 agent:
   # -- Enable Kubernetes plugin jnlp-agent podTemplate
-  enabled: false
+  enabled: true
   # -- The name of the pod template to use for providing default values
   defaultsProviderTemplate: ""
 
