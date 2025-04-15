@@ -96,7 +96,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       tls: [
         {
           hosts: clusterParams.tls.dnsZones,
-          secretName: clusterParams.tls.certificateSecret
+          secretName: 'tls-certificate-secret-www-lan'
         }
       ]
     }
@@ -138,7 +138,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       tls: [
         {
           hosts: clusterParams.tls.dnsZones,
-          secretName: clusterParams.tls.certificateSecret
+          secretName: 'tls-certificate-secret-www-wan'
         }
       ]
     }
