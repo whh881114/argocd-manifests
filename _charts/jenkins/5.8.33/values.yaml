@@ -7,10 +7,10 @@
 # See templates/_helpers.tpl
 # -- Override the resource name prefix
 # @default -- `Chart.Name`
-nameOverride:
+nameOverride: jenkins
 # -- Override the full resource names
 # @default -- `jenkins-(release-name)` or `jenkins` if the release-name is `jenkins`
-fullnameOverride:
+fullnameOverride: jenkins
 # -- Override the deployment namespace
 # @default -- `Release.Namespace`
 namespaceOverride: jenkins
@@ -91,7 +91,7 @@ controller:
     createSecret: false
 
     # -- The name of an existing secret containing the admin credentials
-    existingSecret: ""
+    existingSecret: "jenkins"
   # -- Email address for the administrator of the Jenkins instance
   jenkinsAdminEmail:
 
