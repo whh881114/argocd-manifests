@@ -36,13 +36,13 @@ controller:
     # -- Controller image registry
     registry: "harbor.idc.roywong.work"
     # -- Controller image repository
-    repository: "jenkins/jenkins"
+    repository: "docker.io/jenkins/jenkins"
 
     # -- Controller image tag override; i.e., tag: "2.440.1-jdk21"
     tag: 2.505-jdk21
 
     # -- Controller image tag label
-    tagLabel: jdk21
+    tagLabel: 2.505-jdk21
     # -- Controller image pull policy
     pullPolicy: "IfNotPresent"
   # -- Controller image pull secret
@@ -114,7 +114,7 @@ controller:
   # -- Resource allocation (Requests and Limits)
   resources:
     requests:
-      cpu: "50m"
+      cpu: "200m"
       memory: "256Mi"
     limits:
       cpu: "4000m"
@@ -325,7 +325,7 @@ controller:
     maxUnavailable: "0"
 
   # -- Create Agent listener service
-  agentListenerEnabled: true
+  agentListenerEnabled: false
   # -- Listening port for agents
   agentListenerPort: 50000
   # -- Host port to listen for agents
@@ -564,9 +564,9 @@ controller:
       enabled: true
       image:
         # -- Registry for the image that triggers the reload
-        registry: docker.io
+        registry: harbor.idc.roywong.work
         # -- Repository of the image that triggers the reload
-        repository: kiwigrid/k8s-sidecar
+        repository: docker.io/kiwigrid/k8s-sidecar
         # -- Tag for the image that triggers the reload
         tag: 1.30.3
       imagePullPolicy: IfNotPresent
