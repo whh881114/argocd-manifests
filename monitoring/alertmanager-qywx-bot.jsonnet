@@ -1,4 +1,6 @@
 local clusterParams = import '../clusterParams.libsonnet';
+local dockerCredential = import '../_templates/_docker_credentials/index.libsonnet';
+
 local app = {
   name: 'alertmanager-qywx-bot',
   replicas: 3,
@@ -28,6 +30,7 @@ local app = {
           }
         },
         spec: {
+          imagePullSecrets: clusterParams.imagePullSecrets,
           containers: [
             {
               name: app.name,
@@ -95,4 +98,4 @@ local app = {
       ]
     }
   },
-]
+] + dockerCredential
