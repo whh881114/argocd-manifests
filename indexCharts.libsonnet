@@ -17,4 +17,6 @@
 
 		{name: 'prometheus', version: '61.8.0',  path:'_charts/kube-prometheus-stack/' + self.version, namespace: 'monitoring', valueFiles: ['values.yaml'], project: 'monitoring'},
 		{name: 'thanos',     version: '15.7.19', path:'_charts/' + self.name + '/' + self.version,     namespace: 'monitoring', valueFiles: ['values.yaml'], project: 'monitoring'},
+
+		{name: 'jenkins',     version: '5.8.33', path:'_charts/' + self.name + '/' + self.version,     namespace: 'jenkins', valueFiles: ['values.yaml'], project: 'middleware'},
 ]
