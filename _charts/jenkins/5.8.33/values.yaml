@@ -717,7 +717,7 @@ controller:
       # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    # ingressClassName: nginx
+    ingressClassName: ingress-nginx-lan
 
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # -- Ingress path
@@ -727,7 +727,7 @@ controller:
     # -- Ingress hostname
     hostName: jenkins.idc-ingress-nginx-lan.roywong.work
     # -- Hostname to serve assets from
-    resourceRootUrl: jenkins.idc-ingress-nginx-lan.roywong.work
+    resourceRootUrl:
     # -- Ingress TLS configuration
     tls:
       - secretName: tls-certificate-secret-jenkins
