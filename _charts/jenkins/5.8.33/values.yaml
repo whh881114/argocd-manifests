@@ -915,7 +915,7 @@ controller:
 
 agent:
   # -- Enable Kubernetes plugin jnlp-agent podTemplate
-  enabled: false
+  enabled: true
   # -- The name of the pod template to use for providing default values
   defaultsProviderTemplate: ""
 
@@ -956,7 +956,7 @@ agent:
   jnlpregistry:
   image:
     # -- Repository to pull the agent jnlp image from
-    repository: "jenkins/inbound-agent"
+    repository: "harbor.idc.roywong.work/docker.io/jenkins/inbound-agent"
     # -- Tag of the image to pull
     tag: "3301.v4363ddcca_4e7-3"
   # -- Configure working directory for default agent
@@ -985,8 +985,8 @@ agent:
       memory: "512Mi"
       # ephemeralStorage:
     limits:
-      cpu: "512m"
-      memory: "512Mi"
+      cpu: "4000m"
+      memory: "8192Mi"
       # ephemeralStorage:
   livenessProbe: {}
   #  execArgs: "cat /tmp/healthy"
