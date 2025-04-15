@@ -7,6 +7,16 @@ local app = {
   image: 'harbor.idc.roywong.work/library/alertmanager-qywx-bot:latest',
   containerPort: 8080,
   servicePort: 80,
+  resources: {
+    requests: {
+      cpu: '100m',
+      memory: '128Mi',
+    },
+    limits: {
+      cpu: '1000m',
+      memory: '1Gi',
+    }
+  },
 };
 
 [
@@ -36,6 +46,7 @@ local app = {
               name: app.name,
               image: app.image,
               imagePullPolicy: 'Always',
+              resources: app.resources,
               ports: [
                 {
                   containerPort: app.containerPort
