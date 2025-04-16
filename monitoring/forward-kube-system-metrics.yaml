@@ -40,3 +40,7 @@ spec:
           - TCP:127.0.0.1:2381
       restartPolicy: Always
       dnsPolicy: ClusterFirstWithHostNet
+      tolerations:
+        - key: "node-role.kubernetes.io/control-plane"
+          operator: "Exists"
+          effect: "NoSchedule"
