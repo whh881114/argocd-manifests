@@ -2,9 +2,10 @@
     {name: 'default',           namespace: self.name, path: self.name,   project: 'default'},
     {name: '002-project-index', namespace: 'argocd',  path: '_projects', project: 'default'},
 
+    {name: 'mysql',      namespace: self.name, path: self.name, project: 'database'},
+    {name: 'redis',      namespace: self.name, path: self.name, project: 'database'},
+
     {name: 'kafka',      namespace: self.name, path: self.name, project: 'middleware'},
-    {name: 'mysql',      namespace: self.name, path: self.name, project: 'middleware'},
-    {name: 'redis',      namespace: self.name, path: self.name, project: 'middleware'},
     {name: 'rocketmq',   namespace: self.name, path: self.name, project: 'middleware'},
     {name: 'zookeeper',  namespace: self.name, path: self.name, project: 'middleware'},
 
