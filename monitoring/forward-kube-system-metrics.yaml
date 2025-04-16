@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: forward-kube-system-metrics
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: forward-kube-system-metrics
+  template:
+    metadata:
+      labels:
+        app: forward-kube-system-metrics
+    spec:
+      hostNetwork: true
+      containers:
+        - name: forward-kube-proxy
+          image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
+          imagePullPolicy: IfNotPresent
+          args:
+          - TCP-LISTEN:10249,fork,reuseaddr
+          - TCP:127.0.0.1:10249
+        - name: forward-kube-controller-manager
+          image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
+          imagePullPolicy: IfNotPresent
+          args:
+          - TCP-LISTEN:10257,fork,reuseaddr
+          - TCP:127.0.0.1:10257
+        - name: forward-kube-scheduler
+          image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
+          imagePullPolicy: IfNotPresent
+          args:
+          - TCP-LISTEN:10259,fork,reuseaddr
+          - TCP:127.0.0.1:10259
+        - name: forward-kube-etcd
+          image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
+          imagePullPolicy: IfNotPresent
+          args:
+          - TCP-LISTEN:2381,fork,reuseaddr
+          - TCP:127.0.0.1:2381
+      restartPolicy: Always
+      dnsPolicy: ClusterFirstWithHostNet
