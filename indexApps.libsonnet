@@ -12,7 +12,6 @@
     {name: 'argocd-ingress',       namespace: 'argocd',                 path: 'argocd',  project: 'system'},
 
     {name: 'monitoring',           namespace: self.name,      path: self.name, project: 'monitoring'},
-    {name: 'thanos-ruler-rules',   namespace: 'monitoring',   path: self.name, project: 'monitoring'},
 
     {name: 'jenkins-pvcs',   namespace: 'jenkins',   path: self.name, project: 'middleware'},
 ]
