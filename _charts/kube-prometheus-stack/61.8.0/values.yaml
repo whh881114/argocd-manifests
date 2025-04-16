@@ -2037,7 +2037,10 @@ kubeProxy:
     ## RelabelConfigs to apply to samples before scraping
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
     ##
-    relabelings: []
+    relabelings:
+      - sourceLabels: [ __meta_kubernetes_pod_ip ]
+        targetLabel: __address__
+        replacement: "$1:10249"
     # - action: keep
     #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
     #   sourceLabels: [__name__]
