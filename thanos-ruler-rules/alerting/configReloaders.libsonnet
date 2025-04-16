@@ -1,3 +1,5 @@
+local categroy = "config-reloaders";
+
 [
   {
     "name": "config-reloaders",
@@ -12,7 +14,8 @@
         "expr": "max_over_time(reloader_last_reload_successful{namespace=~\".+\"}[5m]) == 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]

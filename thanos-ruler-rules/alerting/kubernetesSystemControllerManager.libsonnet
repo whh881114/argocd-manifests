@@ -1,3 +1,5 @@
+local categroy = "kubernetes-system-controller-manager";
+
 [
   {
     "name": "kubernetes-system-controller-manager",
@@ -12,7 +14,8 @@
         "expr": "absent(up{job=\"kube-controller-manager\"} == 1)",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

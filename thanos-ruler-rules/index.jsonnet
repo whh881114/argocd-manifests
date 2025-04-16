@@ -15,7 +15,7 @@ local allAlerting = [
   import 'alerting/kubernetesSystemKubeProxy.libsonnet',
   import 'alerting/kubernetesSystemScheduler.libsonnet',
   import 'alerting/kubeStateMetrics.libsonnet',
-  import 'alerting/minioBucketCapacity.libsonnet',
+  import 'alerting/minio.libsonnet',
   import 'alerting/nodeExporter.libsonnet',
   import 'alerting/nodeNetwork.libsonnet',
   import 'alerting/prometheus.libsonnet',

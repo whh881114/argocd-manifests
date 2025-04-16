@@ -1,3 +1,5 @@
+local categroy = "kubernetes-system-scheduler";
+
 [
   {
     "name": "kubernetes-system-scheduler",
@@ -12,7 +14,8 @@
         "expr": "absent(up{job=\"kube-scheduler\"} == 1)",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

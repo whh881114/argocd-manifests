@@ -1,3 +1,5 @@
+local categroy = "kube-apiserver-slos";
+
 [
   {
     "name": "kube-apiserver-slos",
@@ -14,6 +16,7 @@
         "labels": {
           "long": "1h",
           "severity": "critical",
+          "category": categroy,
           "short": "5m"
         }
       },
@@ -29,6 +32,7 @@
         "labels": {
           "long": "6h",
           "severity": "critical",
+          "category": categroy,
           "short": "30m"
         }
       },
@@ -44,6 +48,7 @@
         "labels": {
           "long": "1d",
           "severity": "warning",
+          "category": categroy,
           "short": "2h"
         }
       },
@@ -59,6 +64,7 @@
         "labels": {
           "long": "3d",
           "severity": "warning",
+          "category": categroy,
           "short": "6h"
         }
       }

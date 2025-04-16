@@ -1,3 +1,5 @@
+local categroy = "node-network";
+
 [
   {
     "name": "node-network",
@@ -12,7 +14,8 @@
         "expr": "changes(node_network_up{job=\"node-exporter\",device!~\"veth.+\"}[2m]) > 2",
         "for": "2m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]

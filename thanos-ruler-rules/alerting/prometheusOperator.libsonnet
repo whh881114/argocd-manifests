@@ -1,3 +1,5 @@
+local categroy = "prometheus-operator";
+
 [
   {
     "name": "prometheus-operator",
@@ -12,7 +14,8 @@
         "expr": "(sum by (cluster,controller,namespace) (rate(prometheus_operator_list_operations_failed_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[10m])) / sum by (cluster,controller,namespace) (rate(prometheus_operator_list_operations_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[10m]))) > 0.4",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(sum by (cluster,controller,namespace) (rate(prometheus_operator_watch_operations_failed_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m])) / sum by (cluster,controller,namespace) (rate(prometheus_operator_watch_operations_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]))) > 0.4",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "min_over_time(prometheus_operator_syncs{status=\"failed\",job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "(sum by (cluster,controller,namespace) (rate(prometheus_operator_reconcile_errors_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]))) / (sum by (cluster,controller,namespace) (rate(prometheus_operator_reconcile_operations_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]))) > 0.1",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "(sum by (cluster,controller,namespace) (rate(prometheus_operator_status_update_errors_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]))) / (sum by (cluster,controller,namespace) (rate(prometheus_operator_status_update_operations_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]))) > 0.1",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "rate(prometheus_operator_node_address_lookup_errors_total{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]) > 0.1",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "min by (cluster,controller,namespace) (max_over_time(prometheus_operator_ready{job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]) == 0)",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "min_over_time(prometheus_operator_managed_resources{state=\"rejected\",job=\"prometheus-kube-prometheus-operator\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]

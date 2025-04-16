@@ -1,3 +1,5 @@
+local categroy = "kubernetes-resources";
+
 [
   {
     "name": "kubernetes-resources",
@@ -12,7 +14,8 @@
         "expr": "sum(namespace_cpu:kube_pod_container_resource_requests:sum{job=\"kube-state-metrics\",}) by (cluster) - (sum(kube_node_status_allocatable{job=\"kube-state-metrics\",resource=\"cpu\"}) by (cluster) - max(kube_node_status_allocatable{job=\"kube-state-metrics\",resource=\"cpu\"}) by (cluster)) > 0\nand\n(sum(kube_node_status_allocatable{job=\"kube-state-metrics\",resource=\"cpu\"}) by (cluster) - max(kube_node_status_allocatable{job=\"kube-state-metrics\",resource=\"cpu\"}) by (cluster)) > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "sum(namespace_memory:kube_pod_container_resource_requests:sum{}) by (cluster) - (sum(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"}) by (cluster) - max(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"}) by (cluster)) > 0\nand\n(sum(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"}) by (cluster) - max(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"}) by (cluster)) > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "sum(min without(resource) (kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\", resource=~\"(cpu|requests.cpu)\"})) by (cluster)\n  /\nsum(kube_node_status_allocatable{resource=\"cpu\", job=\"kube-state-metrics\"}) by (cluster)\n  > 1.5",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "sum(min without(resource) (kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\", resource=~\"(memory|requests.memory)\"})) by (cluster)\n  /\nsum(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"}) by (cluster)\n  > 1.5",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "kube_resourcequota{job=\"kube-state-metrics\", type=\"used\"}\n  / ignoring(instance, job, type)\n(kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\"} > 0)\n  > 0.9 < 1",
         "for": "15m",
         "labels": {
-          "severity": "info"
+          "severity": "info",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "kube_resourcequota{job=\"kube-state-metrics\", type=\"used\"}\n  / ignoring(instance, job, type)\n(kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\"} > 0)\n  == 1",
         "for": "15m",
         "labels": {
-          "severity": "info"
+          "severity": "info",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "kube_resourcequota{job=\"kube-state-metrics\", type=\"used\"}\n  / ignoring(instance, job, type)\n(kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\"} > 0)\n  > 1",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "sum(increase(container_cpu_cfs_throttled_periods_total{container!=\"\", }[5m])) by (cluster, container, pod, namespace)\n  /\nsum(increase(container_cpu_cfs_periods_total{}[5m])) by (cluster, container, pod, namespace)\n  > ( 25 / 100 )",
         "for": "15m",
         "labels": {
-          "severity": "info"
+          "severity": "info",
+          "category": categroy,
         }
       }
     ]

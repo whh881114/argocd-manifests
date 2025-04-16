@@ -1,3 +1,5 @@
+local categroy = "alertmanager";
+
 [
   {
     "name": "alertmanager.rules",
@@ -12,7 +14,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\nmax_over_time(alertmanager_config_last_reload_successful{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m]) == 0",
         "for": "10m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\n  max_over_time(alertmanager_cluster_members{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m])\n< on (namespace,service,cluster) group_left\n  count by (namespace,service,cluster) (max_over_time(alertmanager_cluster_members{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m]))",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "(\n  rate(alertmanager_notifications_failed_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m])\n/\n  ignoring (reason) group_left rate(alertmanager_notifications_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m])\n)\n> 0.01",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "min by (namespace,service, integration) (\n  rate(alertmanager_notifications_failed_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\", integration=~`.*`}[5m])\n/\n  ignoring (reason) group_left rate(alertmanager_notifications_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\", integration=~`.*`}[5m])\n)\n> 0.01",
         "for": "5m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "min by (namespace,service, integration) (\n  rate(alertmanager_notifications_failed_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\", integration!~`.*`}[5m])\n/\n  ignoring (reason) group_left rate(alertmanager_notifications_total{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\", integration!~`.*`}[5m])\n)\n> 0.01",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "count by (namespace,service,cluster) (\n  count_values by (namespace,service,cluster) (\"config_hash\", alertmanager_config_hash{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"})\n)\n!= 1",
         "for": "20m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "(\n  count by (namespace,service,cluster) (\n    avg_over_time(up{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[5m]) < 0.5\n  )\n/\n  count by (namespace,service,cluster) (\n    up{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}\n  )\n)\n>= 0.5",
         "for": "5m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "(\n  count by (namespace,service,cluster) (\n    changes(process_start_time_seconds{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}[10m]) > 4\n  )\n/\n  count by (namespace,service,cluster) (\n    up{job=\"prometheus-kube-prometheus-alertmanager\",namespace=\"monitoring\"}\n  )\n)\n>= 0.5",
         "for": "5m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

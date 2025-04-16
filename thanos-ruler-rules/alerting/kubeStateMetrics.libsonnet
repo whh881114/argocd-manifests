@@ -1,3 +1,5 @@
+local categroy = "kube-state-metrics";
+
 [
   {
     "name": "kube-state-metrics",
@@ -12,7 +14,8 @@
         "expr": "(sum(rate(kube_state_metrics_list_total{job=\"kube-state-metrics\",result=\"error\"}[5m])) by (cluster)\n  /\nsum(rate(kube_state_metrics_list_total{job=\"kube-state-metrics\"}[5m])) by (cluster))\n> 0.01",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(sum(rate(kube_state_metrics_watch_total{job=\"kube-state-metrics\",result=\"error\"}[5m])) by (cluster)\n  /\nsum(rate(kube_state_metrics_watch_total{job=\"kube-state-metrics\"}[5m])) by (cluster))\n> 0.01",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "stdvar (kube_state_metrics_total_shards{job=\"kube-state-metrics\"}) by (cluster) != 0",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "2^max(kube_state_metrics_total_shards{job=\"kube-state-metrics\"}) by (cluster) - 1\n  -\nsum( 2 ^ max by (cluster, shard_ordinal) (kube_state_metrics_shard_ordinal{job=\"kube-state-metrics\"}) ) by (cluster)\n!= 0",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

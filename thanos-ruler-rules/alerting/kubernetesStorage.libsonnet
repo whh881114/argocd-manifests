@@ -1,3 +1,5 @@
+local categroy = "kubernetes-storage";
+
 [
   {
     "name": "kubernetes-storage",
@@ -12,7 +14,8 @@
         "expr": "(\n  kubelet_volume_stats_available_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n    /\n  kubelet_volume_stats_capacity_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n) < 0.03\nand\nkubelet_volume_stats_used_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"} > 0\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_access_mode{ access_mode=\"ReadOnlyMany\"} == 1\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_labels{label_excluded_from_alerts=\"true\"} == 1",
         "for": "1m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(\n  kubelet_volume_stats_available_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n    /\n  kubelet_volume_stats_capacity_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n) < 0.15\nand\nkubelet_volume_stats_used_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"} > 0\nand\npredict_linear(kubelet_volume_stats_available_bytes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}[6h], 4 * 24 * 3600) < 0\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_access_mode{ access_mode=\"ReadOnlyMany\"} == 1\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_labels{label_excluded_from_alerts=\"true\"} == 1",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "(\n  kubelet_volume_stats_inodes_free{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n    /\n  kubelet_volume_stats_inodes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n) < 0.03\nand\nkubelet_volume_stats_inodes_used{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"} > 0\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_access_mode{ access_mode=\"ReadOnlyMany\"} == 1\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_labels{label_excluded_from_alerts=\"true\"} == 1",
         "for": "1m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "(\n  kubelet_volume_stats_inodes_free{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n    /\n  kubelet_volume_stats_inodes{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}\n) < 0.15\nand\nkubelet_volume_stats_inodes_used{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"} > 0\nand\npredict_linear(kubelet_volume_stats_inodes_free{job=\"kubelet\", namespace=~\".*\", metrics_path=\"/metrics\"}[6h], 4 * 24 * 3600) < 0\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_access_mode{ access_mode=\"ReadOnlyMany\"} == 1\nunless on (cluster, namespace, persistentvolumeclaim)\nkube_persistentvolumeclaim_labels{label_excluded_from_alerts=\"true\"} == 1",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "kube_persistentvolume_status_phase{phase=~\"Failed|Pending\",job=\"kube-state-metrics\"} > 0",
         "for": "5m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

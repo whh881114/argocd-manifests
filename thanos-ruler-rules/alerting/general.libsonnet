@@ -1,3 +1,5 @@
+local categroy = "general";
+
 [
   {
     "name": "general.rules",
@@ -12,7 +14,8 @@
         "expr": "100 * (count(up == 0) BY (cluster, job, namespace, service) / count(up) BY (cluster, job, namespace, service)) > 10",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -24,7 +27,8 @@
         },
         "expr": "vector(1)",
         "labels": {
-          "severity": "none"
+          "severity": "none",
+          "category": categroy,
         }
       },
       {
@@ -36,7 +40,8 @@
         },
         "expr": "ALERTS{severity = \"info\"} == 1 unless on (namespace) ALERTS{alertname != \"InfoInhibitor\", severity =~ \"warning|critical\", alertstate=\"firing\"} == 1",
         "labels": {
-          "severity": "none"
+          "severity": "none",
+          "category": categroy,
         }
       }
     ]

@@ -1,3 +1,5 @@
+local categroy = "kubernetes-system-kubelet";
+
 [
   {
     "name": "kubernetes-system-kubelet",
@@ -12,7 +14,8 @@
         "expr": "kube_node_status_condition{job=\"kube-state-metrics\",condition=\"Ready\",status=\"true\"} == 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(kube_node_spec_taint{job=\"kube-state-metrics\",key=\"node.kubernetes.io/unreachable\",effect=\"NoSchedule\"} unless ignoring(key,value) kube_node_spec_taint{job=\"kube-state-metrics\",key=~\"ToBeDeletedByClusterAutoscaler|cloud.google.com/impending-node-termination|aws-node-termination-handler/spot-itn\"}) == 1",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "count by (cluster, node) (\n  (kube_pod_status_phase{job=\"kube-state-metrics\",phase=\"Running\"} == 1) * on (instance,pod,namespace,cluster) group_left(node) topk by (instance,pod,namespace,cluster) (1, kube_pod_info{job=\"kube-state-metrics\"})\n)\n/\nmax by (cluster, node) (\n  kube_node_status_capacity{job=\"kube-state-metrics\",resource=\"pods\"} != 1\n) > 0.95",
         "for": "15m",
         "labels": {
-          "severity": "info"
+          "severity": "info",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "sum(changes(kube_node_status_condition{job=\"kube-state-metrics\",status=\"true\",condition=\"Ready\"}[15m])) by (cluster, node) > 2",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "node_quantile:kubelet_pleg_relist_duration_seconds:histogram_quantile{quantile=\"0.99\"} >= 10",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "histogram_quantile(0.99, sum(rate(kubelet_pod_worker_duration_seconds_bucket{job=\"kubelet\", metrics_path=\"/metrics\"}[5m])) by (cluster, instance, le)) * on (cluster, instance) group_left(node) kubelet_node_name{job=\"kubelet\", metrics_path=\"/metrics\"} > 60",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -89,7 +97,8 @@
         },
         "expr": "kubelet_certificate_manager_client_ttl_seconds < 604800",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -101,7 +110,8 @@
         },
         "expr": "kubelet_certificate_manager_client_ttl_seconds < 86400",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -113,7 +123,8 @@
         },
         "expr": "kubelet_certificate_manager_server_ttl_seconds < 604800",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -125,7 +136,8 @@
         },
         "expr": "kubelet_certificate_manager_server_ttl_seconds < 86400",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -138,7 +150,8 @@
         "expr": "increase(kubelet_certificate_manager_client_expiration_renew_errors[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -151,7 +164,8 @@
         "expr": "increase(kubelet_server_expiration_renew_errors[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -164,7 +178,8 @@
         "expr": "absent(up{job=\"kubelet\", metrics_path=\"/metrics\"} == 1)",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

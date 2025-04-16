@@ -1,3 +1,5 @@
+local categroy = "node-exporter";
+
 [
   {
     "name": "node-exporter",
@@ -12,7 +14,8 @@
         "expr": "(\n  node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_size_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 15\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(\n  node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_size_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 10\nand\n  predict_linear(node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "(\n  node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_size_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "30m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "(\n  node_filesystem_avail_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_size_bytes{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "30m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "(\n  node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_files{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 40\nand\n  predict_linear(node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"}[6h], 24*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "(\n  node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_files{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 20\nand\n  predict_linear(node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"}[6h], 4*60*60) < 0\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "(\n  node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_files{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 5\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "(\n  node_filesystem_files_free{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} / node_filesystem_files{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} * 100 < 3\nand\n  node_filesystem_readonly{job=\"node-exporter\",fstype!=\"\",mountpoint!=\"\"} == 0\n)",
         "for": "1h",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -116,7 +126,8 @@
         "expr": "rate(node_network_receive_errs_total{job=\"node-exporter\"}[2m]) / rate(node_network_receive_packets_total{job=\"node-exporter\"}[2m]) > 0.01",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -129,7 +140,8 @@
         "expr": "rate(node_network_transmit_errs_total{job=\"node-exporter\"}[2m]) / rate(node_network_transmit_packets_total{job=\"node-exporter\"}[2m]) > 0.01",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -141,7 +153,8 @@
         },
         "expr": "(node_nf_conntrack_entries{job=\"node-exporter\"} / node_nf_conntrack_entries_limit) > 0.75",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -153,7 +166,8 @@
         },
         "expr": "node_textfile_scrape_error{job=\"node-exporter\"} == 1",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -166,7 +180,8 @@
         "expr": "(\n  node_timex_offset_seconds{job=\"node-exporter\"} > 0.05\nand\n  deriv(node_timex_offset_seconds{job=\"node-exporter\"}[5m]) >= 0\n)\nor\n(\n  node_timex_offset_seconds{job=\"node-exporter\"} < -0.05\nand\n  deriv(node_timex_offset_seconds{job=\"node-exporter\"}[5m]) <= 0\n)",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -179,7 +194,8 @@
         "expr": "min_over_time(node_timex_sync_status{job=\"node-exporter\"}[5m]) == 0\nand\nnode_timex_maxerror_seconds{job=\"node-exporter\"} >= 16",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -192,7 +208,8 @@
         "expr": "node_md_disks_required{job=\"node-exporter\",device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"} - ignoring (state) (node_md_disks{state=\"active\",job=\"node-exporter\",device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"}) > 0",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -204,7 +221,8 @@
         },
         "expr": "node_md_disks{state=\"failed\",job=\"node-exporter\",device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"} > 0",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -217,7 +235,8 @@
         "expr": "(\n  node_filefd_allocated{job=\"node-exporter\"} * 100 / node_filefd_maximum{job=\"node-exporter\"} > 70\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -230,7 +249,8 @@
         "expr": "(\n  node_filefd_allocated{job=\"node-exporter\"} * 100 / node_filefd_maximum{job=\"node-exporter\"} > 90\n)",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -243,7 +263,8 @@
         "expr": "sum without(mode) (avg without (cpu) (rate(node_cpu_seconds_total{job=\"node-exporter\", mode!=\"idle\"}[2m]))) * 100 > 90",
         "for": "15m",
         "labels": {
-          "severity": "info"
+          "severity": "info",
+          "category": categroy,
         }
       },
       {
@@ -256,7 +277,8 @@
         "expr": "node_load1{job=\"node-exporter\"}\n/ count without (cpu, mode) (node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\"}) > 2",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -269,7 +291,8 @@
         "expr": "rate(node_vmstat_pgmajfault{job=\"node-exporter\"}[5m]) > 500",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -282,7 +305,8 @@
         "expr": "100 - (node_memory_MemAvailable_bytes{job=\"node-exporter\"} / node_memory_MemTotal_bytes{job=\"node-exporter\"} * 100) > 90",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -295,7 +319,8 @@
         "expr": "rate(node_disk_io_time_weighted_seconds_total{job=\"node-exporter\", device=~\"(/dev/)?(mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|md.+|dasd.+)\"}[5m]) > 10",
         "for": "30m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -308,7 +333,8 @@
         "expr": "node_systemd_unit_state{job=\"node-exporter\", state=\"failed\"} == 1",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -321,7 +347,8 @@
         "expr": "(node_bonding_slaves - node_bonding_active) != 0",
         "for": "5m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]

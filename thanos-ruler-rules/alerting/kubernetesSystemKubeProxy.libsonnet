@@ -1,3 +1,5 @@
+local categroy = "kubernetes-system-kube-proxy";
+
 [
   {
     "name": "kubernetes-system-kube-proxy",
@@ -12,7 +14,8 @@
         "expr": "absent(up{job=\"kube-proxy\"} == 1)",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

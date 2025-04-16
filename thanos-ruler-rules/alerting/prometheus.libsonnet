@@ -1,3 +1,5 @@
+local categroy = "prometheus";
+
 [
   {
     "name": "prometheus",
@@ -12,7 +14,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\nmax_over_time(prometheus_config_last_reload_successful{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) == 0",
         "for": "10m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "increase(prometheus_sd_refresh_failures_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[10m]) > 0",
         "for": "20m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "increase(prometheus_sd_kubernetes_failures_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "# Without min_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\n(\n  predict_linear(prometheus_notifications_queue_length{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m], 60 * 30)\n>\n  min_over_time(prometheus_notifications_queue_capacity{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "(\n  rate(prometheus_notifications_errors_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n/\n  rate(prometheus_notifications_sent_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n)\n* 100\n> 1",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\nmax_over_time(prometheus_notifications_alertmanagers_discovered{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) < 1",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "increase(prometheus_tsdb_reloads_failures_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[3h]) > 0",
         "for": "4h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "increase(prometheus_tsdb_compactions_failed_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[3h]) > 0",
         "for": "4h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -116,7 +126,8 @@
         "expr": "(\n  sum without(type) (rate(prometheus_tsdb_head_samples_appended_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])) <= 0\nand\n  (\n    sum without(scrape_job) (prometheus_target_metadata_cache_entries{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}) > 0\n  or\n    sum without(rule_group) (prometheus_rule_group_rules{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}) > 0\n  )\n)",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -129,7 +140,8 @@
         "expr": "rate(prometheus_target_scrapes_sample_duplicate_timestamp_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -142,7 +154,8 @@
         "expr": "rate(prometheus_target_scrapes_sample_out_of_order_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -155,7 +168,8 @@
         "expr": "(\n  (rate(prometheus_remote_storage_failed_samples_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) or rate(prometheus_remote_storage_samples_failed_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]))\n/\n  (\n    (rate(prometheus_remote_storage_failed_samples_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) or rate(prometheus_remote_storage_samples_failed_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]))\n  +\n    (rate(prometheus_remote_storage_succeeded_samples_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) or rate(prometheus_remote_storage_samples_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]))\n  )\n)\n* 100\n> 1",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -168,7 +182,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\n(\n  max_over_time(prometheus_remote_storage_highest_timestamp_in_seconds{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n- ignoring(remote_name, url) group_right\n  max_over_time(prometheus_remote_storage_queue_highest_sent_timestamp_seconds{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n)\n> 120",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -181,7 +196,8 @@
         "expr": "# Without max_over_time, failed scrapes could create false negatives, see\n# https://www.robustperception.io/alerting-on-gauges-in-prometheus-2-0 for details.\n(\n  max_over_time(prometheus_remote_storage_shards_desired{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n>\n  max_over_time(prometheus_remote_storage_shards_max{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m])\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -194,7 +210,8 @@
         "expr": "increase(prometheus_rule_evaluation_failures_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -207,7 +224,8 @@
         "expr": "increase(prometheus_rule_group_iterations_missed_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -220,7 +238,8 @@
         "expr": "increase(prometheus_target_scrape_pool_exceeded_target_limit_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -233,7 +252,8 @@
         "expr": "increase(prometheus_target_scrape_pool_exceeded_label_limits_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -246,7 +266,8 @@
         "expr": "increase(prometheus_target_scrapes_exceeded_body_size_limit_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -259,7 +280,8 @@
         "expr": "increase(prometheus_target_scrapes_exceeded_sample_limit_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -272,7 +294,8 @@
         "expr": "increase(prometheus_target_sync_failed_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[30m]) > 0",
         "for": "5m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       },
       {
@@ -285,7 +308,8 @@
         "expr": "avg_over_time(prometheus_engine_queries{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) / max_over_time(prometheus_engine_queries_concurrent_max{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\"}[5m]) > 0.8",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -298,7 +322,8 @@
         "expr": "min without (alertmanager) (\n  rate(prometheus_notifications_errors_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\",alertmanager!~``}[5m])\n/\n  rate(prometheus_notifications_sent_total{job=\"prometheus-kube-prometheus-prometheus\",namespace=\"monitoring\",alertmanager!~``}[5m])\n)\n* 100\n> 3",
         "for": "15m",
         "labels": {
-          "severity": "critical"
+          "severity": "critical",
+          "category": categroy,
         }
       }
     ]

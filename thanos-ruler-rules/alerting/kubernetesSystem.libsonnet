@@ -1,3 +1,5 @@
+local categroy = "kubernetes-system";
+
 [
   {
     "name": "kubernetes-system",
@@ -12,7 +14,8 @@
         "expr": "count by (cluster) (count by (git_version, cluster) (label_replace(kubernetes_build_info{job!~\"kube-dns|coredns\"},\"git_version\",\"$1\",\"git_version\",\"(v[0-9]*.[0-9]*).*\"))) > 1",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "(sum(rate(rest_client_requests_total{job=\"apiserver\",code=~\"5..\"}[5m])) by (cluster, instance, job, namespace)\n  /\nsum(rate(rest_client_requests_total{job=\"apiserver\"}[5m])) by (cluster, instance, job, namespace))\n> 0.01",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]

@@ -1,3 +1,5 @@
+local categroy = "kubernetes-apps";
+
 [
   {
     "name": "kubernetes-apps",
@@ -12,7 +14,8 @@
         "expr": "max_over_time(kube_pod_container_status_waiting_reason{reason=\"CrashLoopBackOff\", job=\"kube-state-metrics\", namespace=~\".*\"}[5m]) >= 1",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -25,7 +28,8 @@
         "expr": "sum by (namespace, pod, cluster) (\n  max by (namespace, pod, cluster) (\n    kube_pod_status_phase{job=\"kube-state-metrics\", namespace=~\".*\", phase=~\"Pending|Unknown|Failed\"}\n  ) * on (namespace, pod, cluster) group_left(owner_kind) topk by (namespace, pod, cluster) (\n    1, max by (namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!=\"Job\"})\n  )\n) > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -38,7 +42,8 @@
         "expr": "kube_deployment_status_observed_generation{job=\"kube-state-metrics\", namespace=~\".*\"}\n  !=\nkube_deployment_metadata_generation{job=\"kube-state-metrics\", namespace=~\".*\"}",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -51,7 +56,8 @@
         "expr": "(\n  kube_deployment_spec_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n    >\n  kube_deployment_status_replicas_available{job=\"kube-state-metrics\", namespace=~\".*\"}\n) and (\n  changes(kube_deployment_status_replicas_updated{job=\"kube-state-metrics\", namespace=~\".*\"}[10m])\n    ==\n  0\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -64,7 +70,8 @@
         "expr": "kube_deployment_status_condition{condition=\"Progressing\", status=\"false\",job=\"kube-state-metrics\", namespace=~\".*\"}\n!= 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -77,7 +84,8 @@
         "expr": "(\n  kube_statefulset_status_replicas_ready{job=\"kube-state-metrics\", namespace=~\".*\"}\n    !=\n  kube_statefulset_status_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n) and (\n  changes(kube_statefulset_status_replicas_updated{job=\"kube-state-metrics\", namespace=~\".*\"}[10m])\n    ==\n  0\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -90,7 +98,8 @@
         "expr": "kube_statefulset_status_observed_generation{job=\"kube-state-metrics\", namespace=~\".*\"}\n  !=\nkube_statefulset_metadata_generation{job=\"kube-state-metrics\", namespace=~\".*\"}",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -103,7 +112,8 @@
         "expr": "(\n  max without (revision) (\n    kube_statefulset_status_current_revision{job=\"kube-state-metrics\", namespace=~\".*\"}\n      unless\n    kube_statefulset_status_update_revision{job=\"kube-state-metrics\", namespace=~\".*\"}\n  )\n    *\n  (\n    kube_statefulset_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n      !=\n    kube_statefulset_status_replicas_updated{job=\"kube-state-metrics\", namespace=~\".*\"}\n  )\n)  and (\n  changes(kube_statefulset_status_replicas_updated{job=\"kube-state-metrics\", namespace=~\".*\"}[5m])\n    ==\n  0\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -116,7 +126,8 @@
         "expr": "(\n  (\n    kube_daemonset_status_current_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n     !=\n    kube_daemonset_status_desired_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n  ) or (\n    kube_daemonset_status_number_misscheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n     !=\n    0\n  ) or (\n    kube_daemonset_status_updated_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n     !=\n    kube_daemonset_status_desired_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n  ) or (\n    kube_daemonset_status_number_available{job=\"kube-state-metrics\", namespace=~\".*\"}\n     !=\n    kube_daemonset_status_desired_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n  )\n) and (\n  changes(kube_daemonset_status_updated_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}[5m])\n    ==\n  0\n)",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -129,7 +140,8 @@
         "expr": "sum by (namespace, pod, container, cluster) (kube_pod_container_status_waiting_reason{job=\"kube-state-metrics\", namespace=~\".*\"}) > 0",
         "for": "1h",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -142,7 +154,8 @@
         "expr": "kube_daemonset_status_desired_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"}\n  -\nkube_daemonset_status_current_number_scheduled{job=\"kube-state-metrics\", namespace=~\".*\"} > 0",
         "for": "10m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -155,7 +168,8 @@
         "expr": "kube_daemonset_status_number_misscheduled{job=\"kube-state-metrics\", namespace=~\".*\"} > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -167,7 +181,8 @@
         },
         "expr": "time() - max by (namespace, job_name, cluster) (kube_job_status_start_time{job=\"kube-state-metrics\", namespace=~\".*\"}\n  and\nkube_job_status_active{job=\"kube-state-metrics\", namespace=~\".*\"} > 0) > 43200",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -180,7 +195,8 @@
         "expr": "kube_job_failed{job=\"kube-state-metrics\", namespace=~\".*\"}  > 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -193,7 +209,8 @@
         "expr": "(kube_horizontalpodautoscaler_status_desired_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n  !=\nkube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", namespace=~\".*\"})\n  and\n(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n  >\nkube_horizontalpodautoscaler_spec_min_replicas{job=\"kube-state-metrics\", namespace=~\".*\"})\n  and\n(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n  <\nkube_horizontalpodautoscaler_spec_max_replicas{job=\"kube-state-metrics\", namespace=~\".*\"})\n  and\nchanges(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}[15m]) == 0",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       },
       {
@@ -206,7 +223,8 @@
         "expr": "kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}\n  ==\nkube_horizontalpodautoscaler_spec_max_replicas{job=\"kube-state-metrics\", namespace=~\".*\"}",
         "for": "15m",
         "labels": {
-          "severity": "warning"
+          "severity": "warning",
+          "category": categroy,
         }
       }
     ]
