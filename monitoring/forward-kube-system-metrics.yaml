@@ -17,26 +17,46 @@ spec:
         - name: forward-kube-proxy
           image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
           imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           args:
-          - TCP-LISTEN:10249,fork,reuseaddr
+          - TCP-LISTEN:10249,fork,reuseaddr,bind=$NODE_IP
           - TCP:127.0.0.1:10249
         - name: forward-kube-controller-manager
           image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
           imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           args:
-          - TCP-LISTEN:10257,fork,reuseaddr
+          - TCP-LISTEN:10257,fork,reuseaddr,bind=$NODE_IP
           - TCP:127.0.0.1:10257
         - name: forward-kube-scheduler
           image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
           imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           args:
-          - TCP-LISTEN:10259,fork,reuseaddr
+          - TCP-LISTEN:10259,fork,reuseaddr,bind=$NODE_IP
           - TCP:127.0.0.1:10259
         - name: forward-kube-etcd
           image: harbor.idc.roywong.work/docker.io/alpine/socat:1.8.0.1
           imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           args:
-          - TCP-LISTEN:2381,fork,reuseaddr
+          - TCP-LISTEN:2381,fork,reuseaddr,bind=$NODE_IP
           - TCP:127.0.0.1:2381
       restartPolicy: Always
       dnsPolicy: ClusterFirstWithHostNet
