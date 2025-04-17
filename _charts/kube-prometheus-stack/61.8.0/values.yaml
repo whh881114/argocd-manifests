@@ -45,7 +45,7 @@ customRules: {}
 ## Create default rules for monitoring the cluster
 ##
 defaultRules:
-  create: false
+  create: true
   rules:
     alertmanager: true
     etcd: true
