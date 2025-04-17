@@ -23,7 +23,12 @@ local allAlerting = [
 ];
 
 local allRecording = [
-  import 'recording/container.libsonnet',
+  import 'recording/container_cpu_usage_seconds_total.libsonnet',
+  import 'recording/container_memory_cache.libsonnet',
+  import 'recording/container_memory_rss.libsonnet',
+  import 'recording/container_memory_swap.libsonnet',
+  import 'recording/container_memory_working_set_bytes.libsonnet',
+  import 'recording/container_resource.libsonnet',
   import 'recording/kubeApiserverAvailability.libsonnet',
   import 'recording/kubeApiserverBurnrate.libsonnet',
   import 'recording/kubeApiserverHistogram.libsonnet',
