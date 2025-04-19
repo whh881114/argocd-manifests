@@ -505,7 +505,7 @@ loki:
       working_directory: /var/loki/data/bloomshipper
     hedging:
       at: "250ms"
-      max_per_second: 20
+      max_per_second: 200   # 最大并发查询。
       up_to: 3
   # --  Optional compactor configuration
   compactor: {}
@@ -520,7 +520,7 @@ loki:
     enabled: false
     gateway:
       # enable gateway proxying to UI under /ui
-      enabled: true
+      enabled: false
   # --  Optional querier configuration
   query_range: {}
   # --  Optional querier configuration
