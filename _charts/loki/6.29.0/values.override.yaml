@@ -1969,7 +1969,7 @@ ruler:
 memcached:
   image:
     # -- Memcached Docker image repository
-    repository: memcached
+    repository: docker.io/library/memcached
     # -- Memcached Docker image tag
     tag: 1.6.38-alpine
     # -- Memcached Docker image pull policy
@@ -1992,7 +1992,7 @@ memcachedExporter:
   # -- Whether memcached metrics should be exported
   enabled: true
   image:
-    repository: prom/memcached-exporter
+    repository: docker.io/prom/memcached-exporter
     tag: v0.15.2
     pullPolicy: IfNotPresent
   resources:
