@@ -565,19 +565,6 @@ lokiCanary:
 
 ######################################################################################################################
 #
-# Global memberlist configuration
-#
-######################################################################################################################
-
-# Configuration for the memberlist service
-memberlist:
-  service:
-    publishNotReadyAddresses: false
-    annotations: {}
-
-
-######################################################################################################################
-#
 # Gateway and Ingress
 #
 # By default this chart will deploy a Nginx container to act as a gateway which handles routing of traffic
