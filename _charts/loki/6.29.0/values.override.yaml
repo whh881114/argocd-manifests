@@ -549,18 +549,7 @@ loki:
     client:
       addresses: '{{ include "loki.bloomGatewayAddresses" . }}'
 
-# -- kubetclImage is used in the enterprise provisioner and tokengen jobs
-kubectlImage:
-  # -- The Docker registry
-  registry: docker.io
-  # -- Docker image repository
-  repository: bitnami/kubectl
-  # -- Overrides the image tag whose default is the chart's appVersion
-  tag: null
-  # -- Overrides the image tag with an image digest
-  digest: null
-  # -- Docker image pull policy
-  pullPolicy: IfNotPresent
+
 ######################################################################################################################
 #
 # Chart Testing
