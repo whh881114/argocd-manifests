@@ -772,20 +772,20 @@ ingester:
     #   partition: 0
   persistence:
     # -- Enable creating PVCs which is required when using boltdb-shipper
-    enabled: false
+    enabled: true
     # -- Use emptyDir with ramdisk for storage. **Please note that all data in ingester will be lost on pod restart**
     inMemory: false
     # -- List of the ingester PVCs
     # @notationType -- list
     claims:
       - name: data
-        size: 10Gi
+        size: 200Gi
         #   -- Storage class to be used.
         #   If defined, storageClassName: <storageClass>.
         #   If set to "-", storageClassName: "", which disables dynamic provisioning.
         #   If empty or set to null, no storageClassName spec is
         #   set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: null
+        storageClass: infra
         # - name: wal
         #   size: 150Gi
     # -- Enable StatefulSetAutoDeletePVC feature
@@ -805,7 +805,7 @@ ingester:
   # extremely quickly. Even with zone awareness enabled, it is recommended to run Loki in a single availability zone.
   zoneAwareReplication:
     # -- Enable zone awareness.
-    enabled: true
+    enabled: false
     # -- The percent of replicas in each zone that will be restarted at once. In a value of 0-100
     maxUnavailablePct: 33
     # -- zoneA configuration
@@ -1966,6 +1966,7 @@ ruler:
 
 
 
+# 配置缓存。
 memcached:
   image:
     # -- Memcached Docker image repository
@@ -2216,7 +2217,7 @@ chunksCache:
     mountPath: /data
 
 
-
+# 配置sidecar，用于监测配置文件变更，然后reload服务。
 sidecar:
   image:
     # -- The Docker registry and image for the k8s sidecar
