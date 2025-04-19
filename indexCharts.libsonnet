@@ -19,4 +19,6 @@
 		{name: 'thanos',     version: '15.7.19', path:'_charts/' + self.name + '/' + self.version,     namespace: 'monitoring', valueFiles: ['values.yaml'], project: 'monitoring'},
 
 		{name: 'jenkins',     version: '5.8.33', path:'_charts/' + self.name + '/' + self.version,     namespace: 'jenkins', valueFiles: ['values.yaml'], project: 'middleware'},
+
+		{name: 'loki',     version: '6.29.0', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.override.yaml'], project: 'logging'},
 ]
