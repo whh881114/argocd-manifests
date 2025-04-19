@@ -1514,11 +1514,11 @@ compactor:
 # Configuration for the ruler
 ruler:
   # -- Specifies whether the ruler should be enabled
-  enabled: false
+  enabled: true
   # -- Kind of deployment [StatefulSet/Deployment]
   kind: Deployment
   # -- Number of replicas for the ruler
-  replicas: 1
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -1576,9 +1576,9 @@ ruler:
                 {{- include "loki.rulerSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for ruler pods
   nodeSelector: {}
   # -- Tolerations for ruler pods
@@ -1587,7 +1587,7 @@ ruler:
   dnsConfig: {}
   persistence:
     # -- Enable creating PVCs which is required when using recording rules
-    enabled: false
+    enabled: true
     # -- Size of persistent disk
     size: 10Gi
     # -- Storage class to be used.
@@ -1595,7 +1595,7 @@ ruler:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
     # -- Annotations for ruler PVCs
     annotations: {}
   # -- Set the optional grpc service protocol. Ex: "grpc", "http2" or "https"
@@ -1668,6 +1668,8 @@ ruler:
     #           expr: sum by(container) (rate({job=~"loki-dev/.*"}[1m])) > 1000
     #           for: 2m
 
+
+# indexGateway 是专门为 boltdb-shipper 模式设计的组件，loki 3.0版本之后就使用了tsdb，所以这个组件禁用即可。
 # Configuration for the index-gateway
 indexGateway:
   # -- Specifies whether the index-gateway should be enabled
@@ -1775,7 +1777,7 @@ memcached:
     # -- The Docker registry for the memcached
     registry: docker.io
     # -- Memcached Docker image repository
-    repository: memcached
+    repository: docker.io/library/memcached
     # -- Memcached Docker image tag
     tag: 1.6.21-alpine
     # -- Memcached Docker image pull policy
@@ -1802,12 +1804,12 @@ memcached:
 
 memcachedExporter:
   # -- Specifies whether the Memcached Exporter should be enabled
-  enabled: false
+  enabled: true
   image:
     # -- The Docker registry for the Memcached Exporter
     registry: docker.io
     # -- Memcached Exporter Docker image repository
-    repository: prom/memcached-exporter
+    repository: docker.io/prom/memcached-exporter
     # -- Memcached Exporter Docker image tag
     tag: v0.13.0
     # -- Memcached Exporter Docker image pull policy
