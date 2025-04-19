@@ -1837,7 +1837,7 @@ ruler:
   # -- The ruler component is optional and can be disabled if desired.
   enabled: true
   # -- Number of replicas for the ruler
-  replicas: 0
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -1873,7 +1873,13 @@ ruler:
   # -- Volumes to add to the ruler pods
   extraVolumes: []
   # -- Resource requests and limits for the ruler
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the ruler pods
   extraContainers: []
   # -- Init containers to add to the ruler pods
@@ -1890,7 +1896,7 @@ ruler:
               app.kubernetes.io/component: ruler
           topologyKey: kubernetes.io/hostname
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Node selector for ruler pods
   nodeSelector: {}
   # -- Topology Spread Constraints for ruler pods
@@ -1901,15 +1907,15 @@ ruler:
   dnsConfig: {}
   persistence:
     # -- Enable creating PVCs which is required when using recording rules
-    enabled: false
+    enabled: true
     # -- Size of persistent disk
-    size: 10Gi
+    size: 20Gi
     # -- Storage class to be used.
     # If defined, storageClassName: <storageClass>.
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
     # -- Annotations for ruler PVCs
     annotations: {}
   # -- Set the optional grpc service protocol. Ex: "grpc", "http2" or "https"
