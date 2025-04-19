@@ -644,7 +644,7 @@ distributor:
 # Configuration for the querier
 querier:
   # -- Number of replicas for the querier
-  replicas: 1
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -705,7 +705,13 @@ querier:
   # -- Volumes to add to the querier pods
   extraVolumes: []
   # -- Resource requests and limits for the querier
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the querier pods
   extraContainers: []
   # -- Init containers to add to the querier pods
@@ -751,7 +757,7 @@ querier:
   dnsConfig: {}
   persistence:
     # -- Enable creating PVCs for the querier cache
-    enabled: false
+    enabled: true
     # -- Size of persistent disk
     size: 10Gi
     # -- Storage class to be used.
@@ -759,7 +765,7 @@ querier:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
     # -- Annotations for querier PVCs
     annotations: {}
   # -- Adds the appProtocol field to the querier service. This allows querier to work with istio protocol selection.
