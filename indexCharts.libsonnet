@@ -20,5 +20,5 @@
 
 		{name: 'jenkins',     version: '5.8.33', path:'_charts/' + self.name + '/' + self.version,     namespace: 'jenkins', valueFiles: ['values.yaml'], project: 'middleware'},
 
-		{name: 'loki',     version: '6.29.0', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.override.yaml'], project: 'logging'},
+		{name: 'loki',     version: '0.80.3', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
 ]
