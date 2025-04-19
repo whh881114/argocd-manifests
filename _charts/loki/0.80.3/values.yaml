@@ -1397,6 +1397,7 @@ compactor:
   # -- Kind of deployment [StatefulSet/Deployment]
   kind: StatefulSet
   # -- Number of replicas for the compactor
+  # 官方说明：The compactor must run as a singleton. Do not scale it horizontally.
   replicas: 1
   # -- Specifies whether compactor should be enabled
   enabled: false
@@ -1469,15 +1470,15 @@ compactor:
     grpc: ""
   persistence:
     # -- Enable creating PVCs for the compactor
-    enabled: false
+    enabled: true
     # -- Size of persistent disk
-    size: 10Gi
+    size: 100Gi
     # -- Storage class to be used.
     # If defined, storageClassName: <storageClass>.
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
     # -- Annotations for compactor PVCs
     annotations: {}
     # -- List of the compactor PVCs
