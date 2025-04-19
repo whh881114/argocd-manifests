@@ -955,6 +955,7 @@ queryScheduler:
   appProtocol:
     grpc: ""
 
+# table-manager 是早期 boltdb-shipper 或 chunks 模式下管理表结构（index/chunks）的组件。
 # Configuration for the table-manager
 tableManager:
   # -- Specifies whether the table-manager should be enabled
@@ -1061,7 +1062,7 @@ gateway:
   #    hostnames:
   #      - domain.tld
   # -- Number of replicas for the gateway
-  replicas: 1
+  replicas: 3
   # -- Enable logging of 2xx and 3xx HTTP requests
   verboseLogging: true
   autoscaling:
@@ -1103,7 +1104,7 @@ gateway:
     # -- The Docker registry for the gateway image
     registry: docker.io
     # -- The gateway image repository
-    repository: nginxinc/nginx-unprivileged
+    repository: docker.io/nginxinc/nginx-unprivileged
     # -- The gateway image tag
     tag: 1.27.3-alpine
     # -- The gateway image pull policy
@@ -1138,7 +1139,13 @@ gateway:
         - ALL
     allowPrivilegeEscalation: false
   # -- Resource requests and limits for the gateway
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the gateway pods
   extraContainers: []
   # -- Grace period to allow the gateway to shutdown before it is killed
@@ -1192,22 +1199,28 @@ gateway:
   # Gateway ingress configuration
   ingress:
     # -- Specifies whether an ingress for the gateway should be created
-    enabled: false
+    enabled: true
     # -- Ingress Class Name. MAY be required for Kubernetes versions >= 1.18
     # For example: `ingressClassName: nginx`
-    ingressClassName: ''
+    ingressClassName: 'ingress-nginx-lan'
 
     # -- Annotations for the gateway ingress
-    annotations: {}
+    annotations:
+      cert-manager.io/cluster-issuer: roywong-work-tls-cluster-issuer
+      nginx.ingress.kubernetes.io/rewrite-target: /
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
     # -- Hosts configuration for the gateway ingress
     hosts:
-      - host: gateway.loki.example.com
+      - host: loki.idc-ingress-nginx-lan.roywong.work
         paths:
           - path: /
             # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.) might also be required by some Ingress Controllers
             # pathType: Prefix
     # -- TLS configuration for the gateway ingress
-    tls: []
+    tls:
+      - hosts:
+         - loki.example.com
+        secretName: tls-certificate-secret-loki
     # tls:
     #   - secretName: loki-gateway-tls
     #     hosts:
