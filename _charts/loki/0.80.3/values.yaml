@@ -1899,14 +1899,14 @@ memcachedChunks:
 
 memcachedFrontend:
   # -- Specifies whether the Memcached frontend cache should be enabled
-  enabled: false
+  enabled: true
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
   #    hostnames:
   #      - domain.tld
   # -- Number of replicas for memcached-frontend
-  replicas: 1
+  replicas: 3
   # -- The name of the PriorityClass for memcached-frontend pods
   priorityClassName: null
   # -- Labels for memcached-frontend pods
@@ -1954,7 +1954,7 @@ memcachedFrontend:
   tolerations: []
   persistence:
     # -- Enable creating PVCs which will persist cached data through restarts
-    enabled: false
+    enabled: true
     # -- Size of persistent or memory disk
     size: 10Gi
     # -- Storage class to be used.
@@ -1962,7 +1962,7 @@ memcachedFrontend:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
 
 memcachedIndexQueries:
   # -- Specifies whether the Memcached index queries cache should be enabled
