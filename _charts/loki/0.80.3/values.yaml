@@ -453,7 +453,13 @@ ingester:
   # -- Volumes to add to the ingester pods
   extraVolumes: []
   # -- Resource requests and limits for the ingester
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the ingester pods
   extraContainers: []
   # -- Init containers to add to the ingester pods
@@ -505,19 +511,19 @@ ingester:
   livenessProbe: {}
   persistence:
     # -- Enable creating PVCs which is required when using boltdb-shipper
-    enabled: false
+    enabled: true
     # -- Use emptyDir with ramdisk for storage. **Please note that all data in ingester will be lost on pod restart**
     inMemory: false
     # -- List of the ingester PVCs
     claims:
       - name: data
-        size: 10Gi
+        size: 200Gi
         #   -- Storage class to be used.
         #   If defined, storageClassName: <storageClass>.
         #   If set to "-", storageClassName: "", which disables dynamic provisioning.
         #   If empty or set to null, no storageClassName spec is
         #   set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-        storageClass: null
+        storageClass: infra
       # - name: wal
       #   size: 150Gi
     # -- Enable StatefulSetAutoDeletePVC feature
