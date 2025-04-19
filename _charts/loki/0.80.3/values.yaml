@@ -627,9 +627,9 @@ distributor:
                 {{- include "loki.distributorSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Max Surge for distributor pods
   maxSurge: 0
   # -- Node selector for distributor pods
