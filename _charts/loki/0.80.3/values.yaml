@@ -1945,9 +1945,9 @@ memcachedFrontend:
                 {{- include "loki.memcachedFrontendSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: 1
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for memcached-frontend pods
   nodeSelector: {}
   # -- Tolerations for memcached-frontend pods
@@ -2012,9 +2012,9 @@ memcachedIndexQueries:
                 {{- include "loki.memcachedIndexQueriesSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for memcached-index-queries pods
   nodeSelector: {}
   # -- Tolerations for memcached-index-queries pods
@@ -2033,9 +2033,9 @@ memcachedIndexQueries:
 
 memcachedIndexWrites:
   # -- Specifies whether the Memcached index writes cache should be enabled
-  enabled: false
+  enabled: true
   # -- Number of replicas for memcached-index-writes
-  replicas: 1
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -2079,16 +2079,16 @@ memcachedIndexWrites:
                 {{- include "loki.memcachedIndexWritesSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for memcached-index-writes pods
   nodeSelector: {}
   # -- Tolerations for memcached-index-writes pods
   tolerations: []
   persistence:
     # -- Enable creating PVCs which will persist cached data through restarts
-    enabled: false
+    enabled: true
     # -- Size of persistent or memory disk
     size: 10Gi
     # -- Storage class to be used.
@@ -2096,7 +2096,7 @@ memcachedIndexWrites:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
 
 networkPolicy:
   # -- Specifies whether Network Policies should be created
