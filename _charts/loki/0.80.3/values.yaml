@@ -880,11 +880,11 @@ queryFrontend:
 # Configuration for the query-scheduler
 queryScheduler:
   # -- Specifies whether the query-scheduler should be decoupled from the query-frontend
-  enabled: false
+  enabled: true
   # -- Number of replicas for the query-scheduler.
   # It should be lower than `-querier.max-concurrent` to avoid generating back-pressure in queriers;
   # it's also recommended that this value evenly divides the latter
-  replicas: 2
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -916,7 +916,13 @@ queryScheduler:
   # -- Volumes to add to the query-scheduler pods
   extraVolumes: []
   # -- Resource requests and limits for the query-scheduler
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the query-scheduler pods
   extraContainers: []
   # -- Grace period to allow the query-scheduler to shutdown before it is killed
@@ -938,9 +944,9 @@ queryScheduler:
                 {{- include "loki.querySchedulerSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: 1
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for query-scheduler pods
   nodeSelector: {}
   # -- Tolerations for query-scheduler pods
