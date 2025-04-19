@@ -1,7 +1,7 @@
 global:
   image:
     # -- Overrides the Docker registry globally for all images
-    registry: null
+    registry: harbor.idc.roywong.work
   # -- Overrides the priorityClassName for all pods
   priorityClassName: null
   # -- configures cluster domain ("cluster.local" by default)
@@ -48,9 +48,9 @@ loki:
     # -- The Docker registry
     registry: docker.io
     # -- Docker image repository
-    repository: grafana/loki
+    repository: docker.io/grafana/loki
     # -- Overrides the image tag whose default is the chart's appVersion
-    tag: null
+    tag: 3.4.2
     # -- Docker image pull policy
     pullPolicy: IfNotPresent
   # -- Common labels for all pods
@@ -232,7 +232,7 @@ loki:
     configs:
     - from: "2020-09-07"
       store: boltdb-shipper
-      object_store: filesystem
+      object_store: s3
       schema: v11
       index:
         prefix: loki_index_
@@ -241,12 +241,17 @@ loki:
   # -- Check https://grafana.com/docs/loki/latest/configuration/#storage_config for more info on how to configure storages
   storageConfig:
     boltdb_shipper:
-      shared_store: filesystem
       active_index_directory: /var/loki/index
       cache_location: /var/loki/cache
-      cache_ttl: 168h
-    filesystem:
-      directory: /var/loki/chunks
+      shared_store: s3
+    s3:
+      endpoint: minio-s3.idc.roywong.work
+      bucketnames: loki
+      access_key_id: 0ysv9fyuySvGScdwUoqP
+      secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
+      region: us-east-1
+      insecure: false
+      s3forcepathstyle: true
 # -- Uncomment to configure each storage individually
 #   azure: {}
 #   gcs: {}
