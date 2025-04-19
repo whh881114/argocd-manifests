@@ -538,7 +538,7 @@ ingester:
 # Configuration for the distributor
 distributor:
   # -- Number of replicas for the distributor
-  replicas: 1
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -599,7 +599,13 @@ distributor:
   # -- Volumes to add to the distributor pods
   extraVolumes: []
   # -- Resource requests and limits for the distributor
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the distributor pods
   extraContainers: []
   # -- Grace period to allow the distributor to shutdown before it is killed
