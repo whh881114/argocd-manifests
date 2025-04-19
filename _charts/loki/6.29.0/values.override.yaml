@@ -326,7 +326,7 @@ loki:
       {{- tpl (. | toYaml) $ | nindent 4 }}
     {{- end }}
   # Should authentication be enabled
-  auth_enabled: true
+  auth_enabled: false
   # -- memberlist configuration (overrides embedded default)
   memberlistConfig: {}
   # -- Extra memberlist configuration
@@ -359,19 +359,19 @@ loki:
   storage:
     # Loki requires a bucket for chunks and the ruler. GEL requires a third bucket for the admin API.
     # Please provide these values if you are using object storage.
-    # bucketNames:
-    #   chunks: FIXME
-    #   ruler: FIXME
-    #   admin: FIXME
+    bucketNames:
+      chunks: kubernetes-loki-chunks
+      ruler: kubernetes-loki-ruler
+    #   admin: FIXME    # GEL是"Grafana Enterprise Logs"的缩写，目前使用的是开源版本，不需要定义这个。
     type: s3
     s3:
       s3: null
-      endpoint: null
+      endpoint: https://minio-s3.idc.roywong.work
       region: null
-      secretAccessKey: null
-      accessKeyId: null
-      signatureVersion: null
-      s3ForcePathStyle: false
+      secretAccessKey: 0ysv9fyuySvGScdwUoqP
+      accessKeyId: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
+      signatureVersion: v4
+      s3ForcePathStyle: true
       insecure: false
       http_config: {}
       # -- Check https://grafana.com/docs/loki/latest/configure/#s3_storage_config for more info on how to provide a backoff_config
