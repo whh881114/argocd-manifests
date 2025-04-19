@@ -3418,108 +3418,13 @@ chunksCache:
     storageClass: null
     # -- Volume mount path
     mountPath: /data
-######################################################################################################################
-#
-# Subchart configurations
-#
-######################################################################################################################
-# -- Setting for the Grafana Rollout Operator https://github.com/grafana/helm-charts/tree/main/charts/rollout-operator
-rollout_operator:
-  enabled: false
-  # -- podSecurityContext is the pod security context for the rollout operator.
-  # When installing on OpenShift, override podSecurityContext settings with
-  #
-  # rollout_operator:
-  #   podSecurityContext:
-  #     fsGroup: null
-  #     runAsGroup: null
-  #     runAsUser: null
-  podSecurityContext:
-    fsGroup: 10001
-    runAsGroup: 10001
-    runAsNonRoot: true
-    runAsUser: 10001
-    seccompProfile:
-      type: RuntimeDefault
-  # Set the container security context
-  securityContext:
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop: [ALL]
-    allowPrivilegeEscalation: false
-# -- Configuration for the minio subchart
-minio:
-  enabled: false
-  replicas: 1
-  # Minio requires 2 to 16 drives for erasure code (drivesPerNode * replicas)
-  # https://docs.min.io/docs/minio-erasure-code-quickstart-guide
-  # Since we only have 1 replica, that means 2 drives must be used.
-  drivesPerNode: 2
-  # root user; not used for GEL authentication
-  rootUser: root-user
-  rootPassword: supersecretpassword
-  # The first user in the list below is used for Loki/GEL authentication.
-  # You can add additional users if desired; they will not impact Loki/GEL.
-  # `accessKey` = username, `secretKey` = password
-  users:
-    - accessKey: logs-user
-      secretKey: supersecretpassword
-      policy: readwrite
-  buckets:
-    - name: chunks
-      policy: none
-      purge: false
-    - name: ruler
-      policy: none
-      purge: false
-    - name: admin
-      policy: none
-      purge: false
-  persistence:
-    size: 5Gi
-    annotations: {}
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-  # Allow the address used by Loki to refer to Minio to be overridden
-  address: null
-# Create extra manifests via values. Would be passed through `tpl` for templating
-# objects can also be provided as multiline strings, useful for templating field names
-extraObjects: []
-# - apiVersion: v1
-#   kind: ConfigMap
-#   metadata:
-#     name: loki-alerting-rules
-#   data:
-#     loki-alerting-rules.yaml: |-
-#       groups:
-#         - name: example
-#           rules:
-#           - alert: example
-#             expr: |
-#               sum(count_over_time({app="loki"} |~ "error")) > 0
-#             for: 3m
-#             labels:
-#               severity: warning
-#               category: logs
-#             annotations:
-#               message: "loki has encountered errors"
-# - |
-#     apiVersion: v1
-#     kind: Secret
-#     type: Opaque
-#     metadata:
-#       name: loki-distributed-basic-auth
-#     data:
-#       {{- range .Values.loki.tenants }}
-#       {{ .name }}: {{ b64enc .password | quote }}
-#       {{- end }}
+
+
 
 sidecar:
   image:
     # -- The Docker registry and image for the k8s sidecar
-    repository: kiwigrid/k8s-sidecar
+    repository: docker.io/kiwigrid/k8s-sidecar
     # -- Docker image tag
     tag: 1.30.2
     # -- Docker image sha. If empty, no sha will be used
