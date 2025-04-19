@@ -1167,9 +1167,9 @@ gateway:
                 {{- include "loki.gatewaySelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for gateway pods
   nodeSelector: {}
   # -- Tolerations for gateway pods
