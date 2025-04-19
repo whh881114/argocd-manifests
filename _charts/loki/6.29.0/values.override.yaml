@@ -1323,21 +1323,7 @@ ingress:
 #       - loki.example.com
 #      secretName: loki-distributed-tls
 
-######################################################################################################################
-#
-# Migration
-#
-######################################################################################################################
 
-# -- Options that may be necessary when performing a migration from another helm chart
-migrate:
-  # -- When migrating from a distributed chart like loki-distributed or enterprise-logs
-  fromDistributed:
-    # -- Set to true if migrating from a distributed helm chart
-    enabled: false
-    # -- If migrating from a distributed service, provide the distributed deployment's
-    # memberlist service DNS so the new deployment can join its ring.
-    memberlistService: ""
 ######################################################################################################################
 #
 # Microservices Mode
