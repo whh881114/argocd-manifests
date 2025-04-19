@@ -676,292 +676,20 @@ memberlist:
 
 # Configuration for the gateway
 gateway:
-  # -- Specifies whether the gateway should be enabled
-  enabled: true
-  # -- Number of replicas for the gateway
-  replicas: 1
-  # -- Default container port
-  containerPort: 8080
-  # -- Enable logging of 2xx and 3xx HTTP requests
-  verboseLogging: true
-  autoscaling:
-    # -- Enable autoscaling for the gateway
-    enabled: false
-    # -- Minimum autoscaling replicas for the gateway
-    minReplicas: 1
-    # -- Maximum autoscaling replicas for the gateway
-    maxReplicas: 3
-    # -- Target CPU utilisation percentage for the gateway
-    targetCPUUtilizationPercentage: 60
-    # -- Target memory utilisation percentage for the gateway
-    targetMemoryUtilizationPercentage:
-    # -- See `kubectl explain deployment.spec.strategy` for more
-    # -- ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
-    # -- Behavior policies while scaling.
-    behavior: {}
-    #    scaleUp:
-    #     stabilizationWindowSeconds: 300
-    #     policies:
-    #     - type: Pods
-    #       value: 1
-    #       periodSeconds: 60
-    #    scaleDown:
-    #     stabilizationWindowSeconds: 300
-    #     policies:
-    #     - type: Pods
-    #       value: 1
-    #       periodSeconds: 180
-  deploymentStrategy:
-    type: RollingUpdate
-  image:
-    # -- The Docker registry for the gateway image
-    registry: docker.io
-    # -- The gateway image repository
-    repository: nginxinc/nginx-unprivileged
-    # -- The gateway image tag
-    tag: 1.27-alpine
-    # -- Overrides the gateway image tag with an image digest
-    digest: null
-    # -- The gateway image pull policy
-    pullPolicy: IfNotPresent
-  # -- The name of the PriorityClass for gateway pods
-  priorityClassName: null
-  # -- Annotations for gateway deployment
-  annotations: {}
-  # -- Annotations for gateway pods
-  podAnnotations: {}
-  # -- Additional labels for gateway pods
-  podLabels: {}
-  # -- Additional CLI args for the gateway
-  extraArgs: []
-  # -- Environment variables to add to the gateway pods
-  extraEnv: []
-  # -- Environment variables from secrets or configmaps to add to the gateway pods
-  extraEnvFrom: []
-  # -- Lifecycle for the gateway container
-  lifecycle: {}
-  # -- Volumes to add to the gateway pods
-  extraVolumes: []
-  # -- Volume mounts to add to the gateway pods
-  extraVolumeMounts: []
-  # -- The SecurityContext for gateway containers
-  podSecurityContext:
-    fsGroup: 101
-    runAsGroup: 101
-    runAsNonRoot: true
-    runAsUser: 101
-  # -- The SecurityContext for gateway containers
-  containerSecurityContext:
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop:
-        - ALL
-    allowPrivilegeEscalation: false
-  # -- Resource requests and limits for the gateway
-  resources: {}
-  # -- Containers to add to the gateway pods
-  extraContainers: []
-  # -- Grace period to allow the gateway to shutdown before it is killed
-  terminationGracePeriodSeconds: 30
-  # -- Affinity for gateway pods.
-  # @default -- Hard node anti-affinity
-  affinity:
-    podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: gateway
-          topologyKey: kubernetes.io/hostname
-  # -- DNS config for gateway pods
-  dnsConfig: {}
-  # -- Node selector for gateway pods
-  nodeSelector: {}
-  # -- Topology Spread Constraints for gateway pods
-  topologySpreadConstraints: []
-  # -- Tolerations for gateway pods
-  tolerations: []
-  # Gateway service configuration
-  service:
-    # -- Port of the gateway service
-    port: 80
-    # -- Type of the gateway service
-    type: ClusterIP
-    # -- ClusterIP of the gateway service
-    clusterIP: null
-    # -- (int) Node port if service type is NodePort
-    nodePort: null
-    # -- Load balancer IPO address if service type is LoadBalancer
-    loadBalancerIP: null
-    # -- Annotations for the gateway service
-    annotations: {}
-    # -- Labels for gateway service
-    labels: {}
-  # Gateway ingress configuration
-  ingress:
-    # -- Specifies whether an ingress for the gateway should be created
-    enabled: false
-    # -- Ingress Class Name. MAY be required for Kubernetes versions >= 1.18
-    ingressClassName: ""
-    # -- Annotations for the gateway ingress
-    annotations: {}
-    # -- Labels for the gateway ingress
-    labels: {}
-    # -- Hosts configuration for the gateway ingress, passed through the `tpl` function to allow templating
-    hosts:
-      - host: gateway.loki.example.com
-        paths:
-          - path: /
-            # -- pathType (e.g. ImplementationSpecific, Prefix, .. etc.) might also be required by some Ingress Controllers
-            # pathType: Prefix
-    # -- TLS configuration for the gateway ingress. Hosts passed through the `tpl` function to allow templating
-    tls:
-      - secretName: loki-gateway-tls
-        hosts:
-          - gateway.loki.example.com
-  # Basic auth configuration
-  basicAuth:
-    # -- Enables basic authentication for the gateway
-    enabled: false
-    # -- The basic auth username for the gateway
-    username: null
-    # -- The basic auth password for the gateway
-    password: null
-    # -- Uses the specified users from the `loki.tenants` list to create the htpasswd file.
-    # if `loki.tenants` is not set, the `gateway.basicAuth.username` and `gateway.basicAuth.password` are used.
-    # The value is templated using `tpl`. Override this to use a custom htpasswd, e.g. in case the default causes
-    # high CPU load.
-    # @default -- Either `loki.tenants` or `gateway.basicAuth.username` and `gateway.basicAuth.password`.
-    htpasswd: >-
-      {{ if .Values.loki.tenants }}
+  enabled: false
 
-
-        {{- range $t := .Values.loki.tenants }}
-      {{ htpasswd (required "All tenants must have a 'name' set" $t.name) (required "All tenants must have a 'password' set" $t.password) }}
-
-
-        {{- end }}
-      {{ else }} {{ htpasswd (required "'gateway.basicAuth.username' is required" .Values.gateway.basicAuth.username) (required "'gateway.basicAuth.password' is required" .Values.gateway.basicAuth.password) }} {{ end }}
-    # -- Existing basic auth secret to use. Must contain '.htpasswd'
-    existingSecret: null
-  # Configures the readiness probe for the gateway
-  readinessProbe:
-    httpGet:
-      path: /
-      port: http-metrics
-    initialDelaySeconds: 15
-    timeoutSeconds: 1
-  nginxConfig:
-    # -- Which schema to be used when building URLs. Can be 'http' or 'https'.
-    schema: http
-    # -- Enable listener for IPv6, disable on IPv4-only systems
-    enableIPv6: true
-    # -- NGINX log format
-    logFormat: |-
-      main '$remote_addr - $remote_user [$time_local]  $status '
-              '"$request" $body_bytes_sent "$http_referer" '
-              '"$http_user_agent" "$http_x_forwarded_for"';
-    # -- Allows appending custom configuration to the server block
-    serverSnippet: ""
-    # -- Allows appending custom configuration to the http block, passed through the `tpl` function to allow templating
-    httpSnippet: >-
-      {{ if .Values.loki.tenants }}proxy_set_header X-Scope-OrgID $remote_user;{{ end }}
-    # -- Allows customizing the `client_max_body_size` directive
-    clientMaxBodySize: 4M
-    # -- Whether ssl should be appended to the listen directive of the server block or not.
-    ssl: false
-    # -- Override Read URL
-    customReadUrl: null
-    # -- Override Write URL
-    customWriteUrl: null
-    # -- Override Backend URL
-    customBackendUrl: null
-    # -- Allows overriding the DNS resolver address nginx will use.
-    resolver: ""
-    # -- Config file contents for Nginx. Passed through the `tpl` function to allow templating
-    # @default -- See values.yaml
-    file: |
-      {{- include "loki.nginxFile" . | indent 2 -}}
-# -- If running enterprise and using the default enterprise gateway, configs go here.
-enterpriseGateway:
-  # -- Define the amount of instances
-  replicas: 1
-  # -- hostAliases to add
-  hostAliases: []
-  #  - ip: 1.2.3.4
-  #    hostnames:
-  #      - domain.tld
-  # -- Additional CLI arguments for the `gateway` target
-  extraArgs: {}
-  # -- Environment variables from secrets or configmaps to add to the enterprise gateway pods
-  extraEnvFrom: []
-  # -- Additional labels for the `gateway` Pod
-  labels: {}
-  # -- Additional annotations for the `gateway` Pod
-  annotations: {}
-  # -- Additional labels and annotations for the `gateway` Service
-  # -- Service overriding service type
-  service:
-    type: ClusterIP
-    labels: {}
-    annotations: {}
-  # -- Run container as user `enterprise-logs(uid=10001)`
-  podSecurityContext:
-    runAsNonRoot: true
-    runAsGroup: 10001
-    runAsUser: 10001
-    fsGroup: 10001
-  containerSecurityContext:
-    readOnlyRootFilesystem: true
-    capabilities:
-      drop:
-        - ALL
-    allowPrivilegeEscalation: false
-  # -- If you want to use your own proxy URLs, set this to false.
-  useDefaultProxyURLs: true
-  # -- update strategy
-  strategy:
-    type: RollingUpdate
-  # -- Readiness probe
-  readinessProbe:
-    httpGet:
-      path: /ready
-      port: http-metrics
-    initialDelaySeconds: 45
-  # -- Request and limit Kubernetes resources
-  # -- Values are defined in small.yaml and large.yaml
-  resources: {}
-  # -- Configure optional environment variables
-  env: []
-  # -- Configure optional initContainers
-  initContainers: []
-  # -- Conifgure optional extraContainers
-  extraContainers: []
-  # -- Additional volumes for Pods
-  extraVolumes: []
-  # -- Additional volume mounts for Pods
-  extraVolumeMounts: []
-  # -- Affinity for gateway Pods
-  affinity: {}
-  # -- Node selector for gateway Pods
-  nodeSelector: {}
-  # -- Topology Spread Constraints for enterprise-gateway pods
-  topologySpreadConstraints: []
-  # -- Tolerations for gateway Pods
-  tolerations: []
-  # -- Grace period to allow the gateway to shutdown before it is killed
-  terminationGracePeriodSeconds: 60
 # -- Ingress configuration Use either this ingress or the gateway, but not both at once.
 # If you enable this, make sure to disable the gateway.
 # You'll need to supply authn configuration for your ingress controller.
 ingress:
-  enabled: false
-  ingressClassName: ""
-  annotations: {}
-  #    nginx.ingress.kubernetes.io/auth-type: basic
-  #    nginx.ingress.kubernetes.io/auth-secret: loki-distributed-basic-auth
-  #    nginx.ingress.kubernetes.io/auth-secret-type: auth-map
-  #    nginx.ingress.kubernetes.io/configuration-snippet: |
-  #      proxy_set_header X-Scope-OrgID $remote_user;
+  enabled: true
+  ingressClassName: "ingress-nginx-lan"
+  annotations:
+    cert-manager.io/cluster-issuer: roywong-work-tls-cluster-issuer
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Scope-OrgID $remote_user;
   labels: {}
   #    blackbox.monitoring.exclude: "true"
   paths:
@@ -1012,12 +740,12 @@ ingress:
       - /prometheus/api/v1/alerts
   # -- Hosts configuration for the ingress, passed through the `tpl` function to allow templating
   hosts:
-    - loki.example.com
+    - loki.idc-ingress-nginx-lan.roywong.work
   # -- TLS configuration for the ingress. Hosts passed through the `tpl` function to allow templating
-  tls: []
-#    - hosts:
-#       - loki.example.com
-#      secretName: loki-distributed-tls
+  tls:
+    - hosts:
+       - loki.example.com
+      secretName: tls-certificate-secret-loki
 
 
 ######################################################################################################################
