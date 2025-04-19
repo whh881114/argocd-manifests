@@ -1828,14 +1828,14 @@ memcachedExporter:
 
 memcachedChunks:
   # -- Specifies whether the Memcached chunks cache should be enabled
-  enabled: false
+  enabled: true
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
   #    hostnames:
   #      - domain.tld
   # -- Number of replicas for memcached-chunks
-  replicas: 1
+  replicas: 3
   # -- The name of the PriorityClass for memcached-chunks pods
   priorityClassName: null
   # -- Labels for memcached-chunks pods
@@ -1883,7 +1883,7 @@ memcachedChunks:
   tolerations: []
   persistence:
     # -- Enable creating PVCs which will persist cached data through restarts
-    enabled: false
+    enabled: true
     # -- Size of persistent or memory disk
     size: 10Gi
     # -- Storage class to be used.
@@ -1891,7 +1891,7 @@ memcachedChunks:
     # If set to "-", storageClassName: "", which disables dynamic provisioning.
     # If empty or set to null, no storageClassName spec is
     # set, choosing the default provisioner (gp2 on AWS, standard on GKE, AWS, and OpenStack).
-    storageClass: null
+    storageClass: infra
   # -- List of additional PVCs to be created for the memcached-chunks statefulset
   volumeClaimTemplates: []
   # -- List of additional volumes to be mounted for the memcached-chunks statefulset
