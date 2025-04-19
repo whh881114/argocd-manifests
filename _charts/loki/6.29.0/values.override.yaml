@@ -460,14 +460,14 @@ loki:
   # must enable and specify a host for each cache you would like to use.
   memcached:
     chunk_cache:
-      enabled: false
-      host: ""
+      enabled: true
+      host: "memcached-server:11211"
       service: "memcached-client"
       batch_size: 256
       parallelism: 10
     results_cache:
-      enabled: false
-      host: ""
+      enabled: true
+      host: "memcached-server:11211"
       service: "memcached-client"
       timeout: "500ms"
       default_validity: "12h"
