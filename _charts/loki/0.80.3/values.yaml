@@ -744,9 +744,9 @@ querier:
                 {{- include "loki.querierSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Max Surge for querier pods
   maxSurge: 0
   # -- Node selector for querier pods
@@ -776,7 +776,7 @@ querier:
 # Configuration for the query-frontend
 queryFrontend:
   # -- Number of replicas for the query-frontend
-  replicas: 1
+  replicas: 3
   # -- hostAliases to add
   hostAliases: []
   #  - ip: 1.2.3.4
@@ -837,7 +837,13 @@ queryFrontend:
   # -- Volumes to add to the query-frontend pods
   extraVolumes: []
   # -- Resource requests and limits for the query-frontend
-  resources: {}
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
   # -- Containers to add to the query-frontend pods
   extraContainers: []
   # -- Grace period to allow the query-frontend to shutdown before it is killed
@@ -859,9 +865,9 @@ queryFrontend:
                 {{- include "loki.queryFrontendSelectorLabels" . | nindent 12 }}
             topologyKey: failure-domain.beta.kubernetes.io/zone
   # -- Pod Disruption Budget maxUnavailable
-  maxUnavailable: null
+  maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: null
+  minAvailable: 1
   # -- Node selector for query-frontend pods
   nodeSelector: {}
   # -- Tolerations for query-frontend pods
