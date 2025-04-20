@@ -435,7 +435,8 @@ ingester:
   # -- Labels for ingester service
   serviceLabels: {}
   # -- Additional CLI args for the ingester
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the ingester pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the ingester pods
@@ -581,7 +582,8 @@ distributor:
   # -- Labels for distributor service
   serviceLabels: {}
   # -- Additional CLI args for the distributor
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the distributor pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the distributor pods
@@ -687,7 +689,8 @@ querier:
   # -- Labels for querier service
   serviceLabels: {}
   # -- Additional CLI args for the querier
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the querier pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the querier pods
@@ -819,7 +822,8 @@ queryFrontend:
   # -- Labels for query-frontend service
   serviceLabels: {}
   # -- Additional CLI args for the query-frontend
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the query-frontend pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the query-frontend pods
@@ -898,7 +902,8 @@ queryScheduler:
   # -- Labels for query-scheduler service
   serviceLabels: {}
   # -- Additional CLI args for the query-scheduler
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the query-scheduler pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the query-scheduler pods
@@ -975,7 +980,8 @@ tableManager:
   # -- Labels for table-manager service
   serviceLabels: {}
   # -- Additional CLI args for the table-manager
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the table-manager pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the table-manager pods
@@ -1108,7 +1114,8 @@ gateway:
   # -- Annotations for gateway pods
   podAnnotations: {}
   # -- Additional CLI args for the gateway
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the gateway pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the gateway pods
@@ -1432,7 +1439,8 @@ compactor:
   # -- Labels for compactor service
   serviceLabels: {}
   # -- Additional CLI args for the compactor
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the compactor pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the compactor pods
@@ -1534,7 +1542,8 @@ ruler:
   # -- Labels for ruler service
   serviceLabels: {}
   # -- Additional CLI args for the ruler
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the ruler pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the ruler pods
@@ -1691,7 +1700,8 @@ indexGateway:
   # -- Labels for index-gateway service
   serviceLabels: {}
   # -- Additional CLI args for the index-gateway
-  extraArgs: []
+  extraArgs:
+    - -config.expand-env=true
   # -- Environment variables to add to the index-gateway pods
   extraEnv: []
   # -- Environment variables from secrets or configmaps to add to the index-gateway pods
