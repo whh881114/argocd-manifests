@@ -20,5 +20,6 @@
 
 		{name: 'jenkins',     version: '5.8.33', path:'_charts/' + self.name + '/' + self.version,     namespace: 'jenkins', valueFiles: ['values.yaml'], project: 'middleware'},
 
-		{name: 'loki',     version: '0.80.3', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
+		{name: 'loki',         version: '0.80.3', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
+		{name: 'promtail',     version: '6.16.6', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
 ]
