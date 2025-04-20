@@ -1219,7 +1219,7 @@ gateway:
     # -- TLS configuration for the gateway ingress
     tls:
       - hosts:
-         - loki.example.com
+         - loki.idc-ingress-nginx-lan.roywong.work
         secretName: tls-certificate-secret-loki
     # tls:
     #   - secretName: loki-gateway-tls
