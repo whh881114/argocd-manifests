@@ -236,6 +236,9 @@ loki:
 
   # -- Check https://grafana.com/docs/loki/latest/configuration/#storage_config for more info on how to configure storages
   storageConfig:
+    tsdb_shipper:
+      active_index_directory: /var/loki/index
+      cache_location: /var/loki/cache
     s3:
       endpoint: minio-s3.idc.roywong.work
       bucketnames: loki
