@@ -498,7 +498,7 @@ ingester:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Max Surge for ingester pods
   maxSurge: 0
   # -- Node selector for ingester pods
@@ -629,7 +629,7 @@ distributor:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Max Surge for distributor pods
   maxSurge: 0
   # -- Node selector for distributor pods
@@ -746,7 +746,7 @@ querier:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Max Surge for querier pods
   maxSurge: 0
   # -- Node selector for querier pods
@@ -867,7 +867,7 @@ queryFrontend:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for query-frontend pods
   nodeSelector: {}
   # -- Tolerations for query-frontend pods
@@ -946,7 +946,7 @@ queryScheduler:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for query-scheduler pods
   nodeSelector: {}
   # -- Tolerations for query-scheduler pods
@@ -1169,7 +1169,7 @@ gateway:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for gateway pods
   nodeSelector: {}
   # -- Tolerations for gateway pods
@@ -1578,7 +1578,7 @@ ruler:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for ruler pods
   nodeSelector: {}
   # -- Tolerations for ruler pods
@@ -1876,7 +1876,7 @@ memcachedChunks:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for memcached-chunks pods
   nodeSelector: {}
   # -- Tolerations for memcached-chunks pods
@@ -1947,7 +1947,7 @@ memcachedFrontend:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for memcached-frontend pods
   nodeSelector: {}
   # -- Tolerations for memcached-frontend pods
@@ -2014,7 +2014,7 @@ memcachedIndexQueries:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for memcached-index-queries pods
   nodeSelector: {}
   # -- Tolerations for memcached-index-queries pods
@@ -2081,7 +2081,7 @@ memcachedIndexWrites:
   # -- Pod Disruption Budget maxUnavailable
   maxUnavailable: 2
   # -- Pod Disruption Budget minAvailable
-  minAvailable: 1
+  minAvailable: null
   # -- Node selector for memcached-index-writes pods
   nodeSelector: {}
   # -- Tolerations for memcached-index-writes pods
