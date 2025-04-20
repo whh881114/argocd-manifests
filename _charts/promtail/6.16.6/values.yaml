@@ -6,7 +6,7 @@ fullnameOverride: null
 
 global:
   # -- Allow parent charts to override registry hostname
-  imageRegistry: ""
+  imageRegistry: "harbor.idc.roywong.work"
   # -- Allow parent charts to override registry credentials
   imagePullSecrets: []
 
@@ -98,9 +98,9 @@ image:
   # -- The Docker registry
   registry: docker.io
   # -- Docker image repository
-  repository: grafana/promtail
+  repository: docker.io/grafana/promtail
   # -- Overrides the image tag whose default is the chart's appVersion
-  tag: ""
+  tag: "3.4.2"
   # -- Docker image pull policy
   pullPolicy: IfNotPresent
 
