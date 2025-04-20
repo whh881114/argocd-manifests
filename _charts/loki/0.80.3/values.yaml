@@ -237,14 +237,12 @@ loki:
   # -- Check https://grafana.com/docs/loki/latest/configuration/#storage_config for more info on how to configure storages
   storageConfig:
     aws:
-      s3:
-        endpoint: minio-s3.idc.roywong.work
-        bucketnames: loki
-        access_key_id: 0ysv9fyuySvGScdwUoqP
-        secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
-        region: us-east-1
-        insecure: false
-        s3forcepathstyle: true
+      s3: minio-s3.idc.roywong.work
+      bucketnames: kubernetes-loki
+      access_key_id: 0ysv9fyuySvGScdwUoqP
+      secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
+      insecure: false
+      s3forcepathstyle: true
 # -- Uncomment to configure each storage individually
 #   azure: {}
 #   gcs: {}
