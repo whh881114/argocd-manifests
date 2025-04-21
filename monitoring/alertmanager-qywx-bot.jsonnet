@@ -9,12 +9,12 @@ local app = {
   servicePort: 80,
   resources: {
     requests: {
-      cpu: '100m',
-      memory: '128Mi',
+      cpu: '10m',
+      memory: '16Mi',
     },
     limits: {
-      cpu: '1000m',
-      memory: '1Gi',
+      cpu: '100m',
+      memory: '128Mi',
     }
   },
 };
