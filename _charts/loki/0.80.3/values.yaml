@@ -245,7 +245,7 @@ loki:
       access_key_id: 0ysv9fyuySvGScdwUoqP
       secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
       insecure: false
-      region: us-east-1
+      region: dummy
       s3forcepathstyle: true
 # -- Uncomment to configure each storage individually
 #   azure: {}
