@@ -39,8 +39,7 @@ local categroy = "kubernetes-system-kubelet";
         "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods",
         "summary": "Kubelet is running at capacity."
       },
-      "expr": |
-        # 统计各节点上的 Running Pods 数量，按 UID 去重避免多副本重复统计
+      "expr": '
         count by (cluster, node) (
           max by (cluster, namespace, uid) (
             kube_pod_status_phase{job="kube-state-metrics", phase="Running"} == 1
@@ -50,13 +49,10 @@ local categroy = "kubernetes-system-kubelet";
             kube_pod_info{job="kube-state-metrics"}
           )
         )
-        /
-        # 每个节点的最大可分配 Pods 数量
-        on(cluster, node)
+        / on(cluster, node)
         max by (cluster, node) (
           kube_node_status_capacity{job="kube-state-metrics", resource="pods"}
-        )
-        > 0.95,
+        ) > 0.95',
       "for": "15m",
       "labels": {
         "severity": "info",
