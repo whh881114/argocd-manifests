@@ -240,7 +240,7 @@ loki:
       active_index_directory: /var/loki/index
       cache_location: /var/loki/cache
     aws:
-      s3: minio-s3.idc.roywong.work
+      endpoint: https://minio-s3.idc.roywong.work
       bucketnames: kubernetes-loki
       access_key_id: 0ysv9fyuySvGScdwUoqP
       secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
