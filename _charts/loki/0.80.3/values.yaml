@@ -239,14 +239,12 @@ loki:
     tsdb_shipper:
       active_index_directory: /var/loki/index
       cache_location: /var/loki/cache
-    aws:
+    s3:
       endpoint: https://minio-s3.idc.roywong.work
-      bucketnames: kubernetes-loki
+      bucket_name: kubernetes-loki
       access_key_id: 0ysv9fyuySvGScdwUoqP
       secret_access_key: MgRf4sJcqDp4qftjfZ2BT3MCmyn6bvpywSVDvEvT
       insecure: false
-      region: dummy
-      s3forcepathstyle: true
 # -- Uncomment to configure each storage individually
 #   azure: {}
 #   gcs: {}
