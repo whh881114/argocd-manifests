@@ -7,7 +7,7 @@ local categroy = "minio";
   rules: [
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}<0.2
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}>0.8
       |||,
       'for': '5m',
       labels: {
@@ -22,7 +22,7 @@ local categroy = "minio";
     },
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}<0.1
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}>0.9
       |||,
       'for': '5m',
       labels: {
@@ -37,7 +37,7 @@ local categroy = "minio";
     },
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}<0.05
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-prometheus"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-prometheus"}>0.95
       |||,
       'for': '5m',
       labels: {
@@ -52,7 +52,7 @@ local categroy = "minio";
     },
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}<0.2
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}>0.8
       |||,
       'for': '5m',
       labels: {
@@ -67,7 +67,7 @@ local categroy = "minio";
     },
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}<0.1
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}>0.9
       |||,
       'for': '5m',
       labels: {
@@ -82,7 +82,7 @@ local categroy = "minio";
     },
     {
       expr: |||
-        1-minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}<0.05
+        minio_cluster_usage_buckets_total_bytes{bucket="kubernetes-loki"}/minio_cluster_usage_buckets_quota_total_bytes{bucket="kubernetes-loki"}>0.95
       |||,
       'for': '5m',
       labels: {
