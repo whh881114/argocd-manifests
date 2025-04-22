@@ -3,7 +3,7 @@ local dockerCredential = import '../_templates/_docker_credentials/index.libsonn
 
 local app = {
   name: 'alertmanager-qywx-bot',
-  replicas: 3,
+  replicas: 1,
   image: 'harbor.idc.roywong.work/library/alertmanager-qywx-bot:latest',
   containerPort: 8080,
   servicePort: 80,
