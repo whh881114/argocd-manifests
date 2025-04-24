@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: zabbix-agent
+  namespace: kube-system
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: zabbix-agent-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods", "nodes", "namespaces", "services", "endpoints"]
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets", "daemonsets", "replicasets"]
+    verbs: ["get", "list", "watch"]
+
+  - apiGroups: ["batch"]
+    resources: ["jobs", "cronjobs"]
+    verbs: ["get", "list", "watch"]
+
+  - nonResourceURLs: ["/livez", "/readyz", "/healthz", "/version", "/metrics"]
+    verbs: ["get"]
+
+  # 给 /proxy/metrics 以及 /proxy/stats/summary 的权限
+  - apiGroups: [""]
+    resources: ["nodes/proxy"]
+    verbs: ["get"]
+
+  # 允许访问 /api/v1/nodes/<node>/metrics
+  - apiGroups: [""]
+    resources: ["nodes/metrics"]
+    verbs: ["get"]
+
+  # 如果你的模板也使用 metrics.k8s.io 聚合 API（GET /apis/metrics.k8s.io/v1beta1/nodes）
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["nodes"]
+    verbs: ["get", "list"]
+
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: zabbix-agent-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: zabbix-agent-role
+subjects:
+  - kind: ServiceAccount
+    name: zabbix-agent
+    namespace: kube-system
+
+
+---
+# 可选：为该 SA 创建一个长期有效的 Token Secret（适合 Zabbix）
+apiVersion: v1
+kind: Secret
+metadata:
+  name: zabbix-agent-token
+  namespace: kube-system
+  annotations:
+    kubernetes.io/service-account.name: zabbix-agent
+type: kubernetes.io/service-account-token
+
+
+# 获取token
+# kubectl -n kube-system get secret zabbix-agent-token -o jsonpath="{.data.token}" | base64 -d; echo
+
+# 配置zabbix模板宏变量，适用于zabbix所有默认的Kubernetes模板。
+# {$KUBE.API.TOKEN} = <zabbix-agent-token>
+# {$KUBE.API.URL} = https://apiserver.k8s.freedom.org:6443
