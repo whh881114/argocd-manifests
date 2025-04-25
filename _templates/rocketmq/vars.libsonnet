@@ -11,6 +11,14 @@ local clusterParams = import '../../clusterParams.libsonnet';
   dataStorageClassCapacity: '100Gi',
   logsStorageClassCapacity: '20Gi',
 
+  schedulers: [
+    {
+      weight: 100, expressions: [
+              {key: 'pool', operator: 'In', values: ['middleware']}
+            ]
+    },
+  ],
+
 	nameSrv: {
 		env: [
 			{name: 'NODE_ROLE', value: 'nameserver'},

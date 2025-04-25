@@ -26,6 +26,22 @@ function(app)
 	            labels: {app: app.name + '-namesrv-' + i},
 	          },
 	          spec: {
+              affinity: {
+                nodeAffinity: {
+                  preferredDuringSchedulingIgnoredDuringExecution: [
+                    {
+                      weight: scheduler.weight,
+                      preference: {
+                        matchExpressions: [
+                          {key: expression.key, operator: expression.operator, values: expression.values},
+                          for expression in scheduler.expressions
+                        ],
+                      },
+                    },
+                    for scheduler in app.schedulers
+                  ],
+                },
+              },
 	            imagePullSecrets: clusterParams.imagePullSecrets,
 	            containers: [
 	              {
@@ -68,6 +84,22 @@ function(app)
             labels: {app: app.name + '-' + i.name},
           },
           spec: {
+            affinity: {
+              nodeAffinity: {
+                preferredDuringSchedulingIgnoredDuringExecution: [
+                  {
+                    weight: scheduler.weight,
+                    preference: {
+                      matchExpressions: [
+                        {key: expression.key, operator: expression.operator, values: expression.values},
+                        for expression in scheduler.expressions
+                      ],
+                    },
+                  },
+                  for scheduler in app.schedulers
+                ],
+              },
+            },
             imagePullSecrets: clusterParams.imagePullSecrets,
             containers: [
               {
