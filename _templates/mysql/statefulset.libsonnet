@@ -48,6 +48,16 @@ function(app)
                 },
               },
             },
+            tolerations: [
+              if std.type(scheduler.values) == 'array' then
+                [
+                  {key: scheduler.key, operator: scheduler.operator, values: value},
+                  for value in scheduler.values
+                ]
+              else
+                {key: scheduler.key, operator: scheduler.operator, values: scheduler.values},
+              for scheduler in app.schedulers
+            ],
             imagePullSecrets: clusterParams.imagePullSecrets,
             containers: [
               {
