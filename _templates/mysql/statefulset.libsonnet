@@ -38,13 +38,14 @@ function(app)
             affinity: {
               nodeAffinity: {
                 requiredDuringSchedulingIgnoredDuringExecution: {
-                  nodeSelectorTerms: [
+                  nodeSelectorTerms: [{
                     matchExpressions: [
                       {key: scheduler.key, operator: scheduler.operator, values: scheduler.values},
-                      for scheduler in scheduler.schedulers
-                    ],
-                  ]
-                }
+                      for scheduler in app.schedulers
+                      ],
+                    }
+                  ],
+                },
               },
             },
             imagePullSecrets: clusterParams.imagePullSecrets,
