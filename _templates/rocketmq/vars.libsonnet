@@ -27,8 +27,8 @@ local clusterParams = import '../../clusterParams.libsonnet';
 		replicas: 2,
 	  resources: {
 	    requests: {
-	      cpu: '1000m',
-	      memory: '2Gi',
+	      cpu: '100m',
+	      memory: '128Mi',
 	    },
 	    limits: {
 	      cpu: '2000m',
@@ -43,8 +43,8 @@ local clusterParams = import '../../clusterParams.libsonnet';
 		],
 	  resources: {
 	    requests: {
-	      cpu: '2000m',
-	      memory: '4Gi',
+	      cpu: '100m',
+	      memory: '128Mi',
 	    },
 	    limits: {
 	      cpu: '8000m',
@@ -80,7 +80,7 @@ local clusterParams = import '../../clusterParams.libsonnet';
 	  resources: {
 	    requests: {
 	      cpu: '100m',
-	      memory: '256Mi',
+	      memory: '128Mi',
 	    },
 	    limits: {
 	      cpu: '1000m',
