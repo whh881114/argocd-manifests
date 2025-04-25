@@ -22,11 +22,12 @@ local clusterParams = import '../../clusterParams.libsonnet';
 
   configFile: 'default',
 
+  // requiredDuringSchedulingIgnoredDuringExecution.matchExpressions
   schedulers: [
-    {
-      weight: 100, expressions: [
-              {key: 'pool', operator: 'In', values: ['middleware']}
-            ]
-    },
+      {key: 'pool', operator: 'In', values: ['middleware']},
+  ],
+
+  tolerations: [
+    {key: 'pool', operator: 'Equal', value: 'middleware', effect: 'NoSchedule'}
   ],
 }

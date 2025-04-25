@@ -21,22 +21,20 @@ function(app)
           labels: {app: app.name},
         },
         spec: {
-          affinity: {
-            nodeAffinity: {
-              preferredDuringSchedulingIgnoredDuringExecution: [
-                {
-                  weight: scheduler.weight,
-                  preference: {
-                    matchExpressions: [
-                      {key: expression.key, operator: expression.operator, values: expression.values},
-                      for expression in scheduler.expressions
-                    ],
-                  },
-                },
-                for scheduler in app.schedulers
-              ],
-            },
-          },
+//          affinity: {
+//            nodeAffinity: {
+//              requiredDuringSchedulingIgnoredDuringExecution: {
+//                nodeSelectorTerms: [{
+//                  matchExpressions: [
+//                    {key: scheduler.key, operator: scheduler.operator, values: scheduler.values},
+//                    for scheduler in app.schedulers
+//                    ],
+//                  }
+//                ],
+//              },
+//            },
+//          },
+//          tolerations: app.tolerations,
           imagePullSecrets: clusterParams.imagePullSecrets,
           containers: [
             {
