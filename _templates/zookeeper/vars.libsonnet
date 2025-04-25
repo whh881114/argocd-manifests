@@ -21,4 +21,12 @@ local clusterParams = import '../../clusterParams.libsonnet';
   storageClassCapacity: '10Gi',
 
   configFile: 'default',
+
+  schedulers: [
+    {
+      weight: 100, expressions: [
+              {key: 'pool', operator: 'In', values: ['middleware']}
+            ]
+    },
+  ],
 }
