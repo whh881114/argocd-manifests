@@ -9,6 +9,14 @@ local clusterParams = import '../../clusterParams.libsonnet';
   storageClassName: 'infra',
   storageClassCapacity: '100Gi',
 
+  schedulers: [
+    {
+      weight: 100, expressions: [
+              {key: 'pool', operator: 'In', values: ['middleware']}
+            ]
+    },
+  ],
+
 	// 日志目录，其实就是kafka的数据目录，所以将kafkaLogDirs变量修改为kafkaDataDir，同时指定默认值。
   // kafkaLogDirs: '/tmp/kraft-combined-logs',
   kafkaDataDir: '/var/lib/kafka/data',
