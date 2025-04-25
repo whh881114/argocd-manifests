@@ -15,8 +15,8 @@ local clusterParams = import '../../clusterParams.libsonnet';
 
   resources: {
     requests: {
-      cpu: '1000m',
-      memory: '1Gi',
+      cpu: '100m',
+      memory: '128Mi',
     },
     limits: {
       cpu: '4000m',
