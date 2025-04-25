@@ -28,4 +28,12 @@ local clusterParams = import '../../clusterParams.libsonnet';
     username: 'exporter',
     password: 'pJwtdho13jLipiyquxldnqialgrpkvl~',
   },
+
+  schedulers: [
+    {
+      weight: 100, expressions: [
+              {key: 'pool', operator: 'In', values: ['database']}
+            ]
+    },
+  ]
 }
