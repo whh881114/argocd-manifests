@@ -11,12 +11,13 @@ local clusterParams = import '../../clusterParams.libsonnet';
   dataStorageClassCapacity: '100Gi',
   logsStorageClassCapacity: '20Gi',
 
+  // requiredDuringSchedulingIgnoredDuringExecution.matchExpressions
   schedulers: [
-    {
-      weight: 100, expressions: [
-              {key: 'pool', operator: 'In', values: ['middleware']}
-            ]
-    },
+      {key: 'pool', operator: 'In', values: ['database']},
+  ],
+
+  tolerations: [
+    {key: 'pool', operator: 'Equal', value: 'database', effect: 'NoSchedule'}
   ],
 
 	nameSrv: {
