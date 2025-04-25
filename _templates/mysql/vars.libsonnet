@@ -29,11 +29,8 @@ local clusterParams = import '../../clusterParams.libsonnet';
     password: 'pJwtdho13jLipiyquxldnqialgrpkvl~',
   },
 
+  // requiredDuringSchedulingIgnoredDuringExecution
   schedulers: [
-    {
-      weight: 100, expressions: [
-              {key: 'pool', operator: 'In', values: ['database']}
-            ]
-    },
+      {key: 'pool', operator: 'In', values: ['database']},
   ]
 }
