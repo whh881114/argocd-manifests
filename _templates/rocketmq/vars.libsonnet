@@ -13,11 +13,11 @@ local clusterParams = import '../../clusterParams.libsonnet';
 
   // requiredDuringSchedulingIgnoredDuringExecution.matchExpressions
   schedulers: [
-      {key: 'pool', operator: 'In', values: ['database']},
+      {key: 'pool', operator: 'In', values: ['middleware']},
   ],
 
   tolerations: [
-    {key: 'pool', operator: 'Equal', value: 'database', effect: 'NoSchedule'}
+    {key: 'pool', operator: 'Equal', value: 'middleware', effect: 'NoSchedule'}
   ],
 
 	nameSrv: {
