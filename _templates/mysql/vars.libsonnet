@@ -36,5 +36,5 @@ local clusterParams = import '../../clusterParams.libsonnet';
 
   tolerations: [
     {key: 'pool', operator: 'Equal', value: 'database', effect: 'NoSchedule'}
-  ]
+  ],
 }
