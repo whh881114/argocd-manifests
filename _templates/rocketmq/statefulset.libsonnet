@@ -82,20 +82,20 @@ function(app)
             labels: {app: app.name + '-' + i.name},
           },
           spec: {
-            affinity: {
-              nodeAffinity: {
-                requiredDuringSchedulingIgnoredDuringExecution: {
-                  nodeSelectorTerms: [{
-                    matchExpressions: [
-                      {key: scheduler.key, operator: scheduler.operator, values: scheduler.values},
-                      for scheduler in app.schedulers
-                      ],
-                    }
-                  ],
-                },
-              },
-            },
-            tolerations: app.tolerations,
+//            affinity: {
+//              nodeAffinity: {
+//                requiredDuringSchedulingIgnoredDuringExecution: {
+//                  nodeSelectorTerms: [{
+//                    matchExpressions: [
+//                      {key: scheduler.key, operator: scheduler.operator, values: scheduler.values},
+//                      for scheduler in app.schedulers
+//                      ],
+//                    }
+//                  ],
+//                },
+//              },
+//            },
+//            tolerations: app.tolerations,
             imagePullSecrets: clusterParams.imagePullSecrets,
             containers: [
               {
