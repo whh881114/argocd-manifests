@@ -23,4 +23,12 @@ local clusterParams = import '../../clusterParams.libsonnet';
       memory: '1Gi',
     }
   },
+
+  schedulers: [
+    {
+      weight: 100, expressions: [
+              {key: 'pool', operator: 'In', values: ['database']}
+            ]
+    },
+  ]
 }
