@@ -69,6 +69,7 @@ controller:
 
   hostNetworking: false
 
+  # admin的密码不配置，打开界面时，直接登录，然后再配置admin密码。
   # When enabling LDAP or another non-Jenkins identity source, the built-in admin account will no longer exist.
   # If you disable the non-Jenkins identity store and instead use the Jenkins internal one,
   # you should revert controller.admin.username to your preferred admin user:
@@ -81,9 +82,9 @@ controller:
     password:
 
     # -- The key in the existing admin secret containing the username
-    userKey: jenkins-admin-user
+    userKey:
     # -- The key in the existing admin secret containing the password
-    passwordKey: jenkins-admin-password
+    passwordKey:
 
     # The default configuration uses this secret to configure an admin user
     # If you don't need that user or use a different security realm, then you can disable it
