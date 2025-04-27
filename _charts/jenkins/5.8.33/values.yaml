@@ -1200,7 +1200,20 @@ agent:
 
 # Inherits all values from `agent` so you only need to specify values which differ
 # -- Configure additional
-additionalAgents: {}
+additionalAgents:
+  go:
+    podName: go
+    customJenkinsLabels: go
+    image:
+      repository: harbor.idc.roywong.work/docker.io/jenkins/jnlp-agent-golang
+      tag: latest
+    resources:
+      requests:
+        cpu: '500m'
+        memory: '1Gi'
+      limits:
+        cpu: '1'
+        memory: '2Gi'
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
