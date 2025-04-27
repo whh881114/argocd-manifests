@@ -1205,8 +1205,8 @@ additionalAgents:
     podName: go
     customJenkinsLabels: go
     image:
-      repository: harbor.idc.roywong.work/docker.io/jenkins/jnlp-agent-golang
-      tag: latest
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-go
+      tag: 1.24.2
     resources:
       requests:
         cpu: '500m'
@@ -1214,6 +1214,7 @@ additionalAgents:
       limits:
         cpu: '1'
         memory: '2Gi'
+    imagePullSecretName: docker-credential-harbor-idc-roywong-work
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
