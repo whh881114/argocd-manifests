@@ -326,7 +326,7 @@ controller:
     maxUnavailable: "0"
 
   # -- Create Agent listener service
-  agentListenerEnabled: false
+  agentListenerEnabled: true
   # -- Listening port for agents
   agentListenerPort: 50000
   # -- Host port to listen for agents
