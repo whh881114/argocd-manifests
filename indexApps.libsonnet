@@ -15,4 +15,6 @@
     {name: 'monitoring',           namespace: self.name,      path: self.name, project: 'monitoring'},
 
     {name: 'jenkins-pvcs',   namespace: 'jenkins',   path: self.name, project: 'middleware'},
+
+    {name: 'devops-tools',   namespace: 'default',   path: self.name, project: 'default'},
 ]
