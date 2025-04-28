@@ -1214,7 +1214,7 @@ additionalAgents:
       limits:
         cpu: '1'
         memory: '2Gi'
-    imagePullSecretName: docker-credential-harbor-idc-roywong-work
+    imagePullSecretName: registry-idc-library
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
