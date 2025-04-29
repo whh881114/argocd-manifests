@@ -1356,6 +1356,7 @@ additionalAgents:
         image:
           repository: docker.io/library/docker
           tag: 28.1.1-dind
+        args: "--host=unix:///var/run/docker.sock"
         privileged: true
         resources:
           requests:
