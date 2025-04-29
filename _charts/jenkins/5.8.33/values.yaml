@@ -1215,6 +1215,20 @@ additionalAgents:
         cpu: '1'
         memory: '2Gi'
     imagePullSecretName: registry-idc-library
+  maven:
+    podName: maven
+    customJenkinsLabels: 3.9.9-jdk8
+    image:
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
+      tag: 3.9.9-jdk8
+    resources:
+      requests:
+        cpu: '500m'
+        memory: '1Gi'
+      limits:
+        cpu: '4'
+        memory: '8Gi'
+    imagePullSecretName: registry-idc-library
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
