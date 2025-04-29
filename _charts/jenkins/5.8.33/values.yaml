@@ -1275,7 +1275,7 @@ additionalAgents:
         subPath: settings.xml
     workspaceVolume:
       type: PVC
-      claimName: data-maven-jdk11-workspace
+      claimName: data-jenkins-workspace
   maven-jdk17:
     podName: maven-jdk17
     customJenkinsLabels: maven-jdk17
@@ -1305,7 +1305,7 @@ additionalAgents:
         subPath: settings.xml
     workspaceVolume:
       type: PVC
-      claimName: data-maven-jdk17-workspace
+      claimName: data-jenkins-workspace
   maven-jdk21:
     podName: maven-jdk21
     customJenkinsLabels: maven-jdk21
@@ -1321,6 +1321,21 @@ additionalAgents:
         memory: '8Gi'
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
+    envVars:
+      - name: HTTP_PROXY
+        value: http://10.255.2.162:8001
+      - name: HTTPS_PROXY
+        value: http://10.255.2.162:8001
+    volumes:
+      - type: EmptyDir
+        mountPath: /home/jenkins/.m2
+      - type: ConfigMap
+        configMapName: maven-settings
+        mountPath: /home/jenkins/.m2/settings.xml
+        subPath: settings.xml
+    workspaceVolume:
+      type: PVC
+      claimName: data-jenkins-workspace
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
