@@ -1374,24 +1374,26 @@ additionalAgents:
         volumeMounts:
           - name: docker-graph-storage
             mountPath: /var/lib/docker
-#      - sideContainerName: cli
-#        image:
-#          repository: docker.io/library/docker
-#          tag: 28.1.1-cli
-#        privileged: true
-#        resources:
-#          requests:
-#            cpu: 500m
-#            memory: 1Gi
-#          limits:
-#            cpu: 1
-#            memory: 2Gi
-#        env:
-#          - name: DOCKER_HOST
-#            value: tcp://localhost:2375
-#        volumeMounts:
-#          - name: docker-graph-storage
-#            mountPath: /var/lib/docker
+      - sideContainerName: cli
+        image:
+          repository: docker.io/library/docker
+          tag: 28.1.1-cli
+        command: ["sleep"]
+        args: "infinity"                              # ← also STRING
+        privileged: true
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1
+            memory: 2Gi
+        env:
+          - name: DOCKER_HOST
+            value: "tcp://localhost:2375"
+        volumeMounts:
+          - name: docker-graph-storage
+            mountPath: /var/lib/docker
 
 #  maven:
 #    podName: maven
