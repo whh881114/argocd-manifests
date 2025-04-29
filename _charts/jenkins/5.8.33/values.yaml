@@ -1351,6 +1351,9 @@ additionalAgents:
         memory: '2Gi'
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
+    volumes:
+      - name: docker-graph-storage
+        emptyDir: {}
     additionalContainers:
       - sideContainerName: dind
         image:
@@ -1365,9 +1368,12 @@ additionalAgents:
           limits:
             cpu: 1
             memory: 2Gi
-#        volumeMounts:
-#          - name: docker-graph-storage
-#            mountPath: /var/lib/docker
+        env:
+          - name: DOCKER_TLS_CERTDIR
+            value: ""                                 # disable TLS auto-cert mode
+        volumeMounts:
+          - name: docker-graph-storage
+            mountPath: /var/lib/docker
 #      - sideContainerName: cli
 #        image:
 #          repository: docker.io/library/docker
@@ -1386,9 +1392,7 @@ additionalAgents:
 #        volumeMounts:
 #          - name: docker-graph-storage
 #            mountPath: /var/lib/docker
-#    volumes:
-#      - name: docker-graph-storage
-#        emptyDir: {}
+
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
