@@ -1336,62 +1336,62 @@ additionalAgents:
     workspaceVolume:
       type: PVC
       claimName: data-jenkins-workspace
-#  docker:
-#    podName: docker
-#    customJenkinsLabels: docker
-#    image:
-#      repository: jenkins/inbound-agent
-#      tag: 3301.v4363ddcca_4e7-3
-#    resources:
-#      requests:
-#        cpu: '100m'
-#        memory: '128Mi'
-#      limits:
-#        cpu: '1'
-#        memory: '2Gi'
-#    imagePullSecretName: registry-idc-library
-#    alwaysPullImage: true
-#    additionalContainers:
-#      - sideContainerName: dind
-#        image:
-#          repository: docker.io/library/docker
-#          tag: 28.1.1-dind
-#        command: dockerd-entrypoint.sh
-#        args: ""
-#        privileged: true
-#        resources:
-#          requests:
-#            cpu: 500m
-#            memory: 1Gi
-#          limits:
-#            cpu: 1
-#            memory: 2Gi
-#        volumeMounts:
-#          - name: docker-graph-storage
-#            mountPath: /var/lib/docker
-#      - sideContainerName: cli
-#        image:
-#          repository: docker.io/library/docker
-#          tag: 28.1.1-cli
-#        command: dockerd-entrypoint.sh
-#        args: ""
-#        privileged: true
-#        resources:
-#          requests:
-#            cpu: 500m
-#            memory: 1Gi
-#          limits:
-#            cpu: 1
-#            memory: 2Gi
-#        env:
-#          - name: DOCKER_HOST
-#            value: tcp://localhost:2375
-#        volumeMounts:
-#          - name: docker-graph-storage
-#            mountPath: /var/lib/docker
-#    volumes:
-#      - name: docker-graph-storage
-#        emptyDir: {}
+  docker:
+    podName: docker
+    customJenkinsLabels: docker
+    image:
+      repository: jenkins/inbound-agent
+      tag: 3301.v4363ddcca_4e7-3
+    resources:
+      requests:
+        cpu: '100m'
+        memory: '128Mi'
+      limits:
+        cpu: '1'
+        memory: '2Gi'
+    imagePullSecretName: registry-idc-library
+    alwaysPullImage: true
+    additionalContainers:
+      - sideContainerName: dind
+        image:
+          repository: docker.io/library/docker
+          tag: 28.1.1-dind
+        command: dockerd-entrypoint.sh
+        args: ""
+        privileged: true
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1
+            memory: 2Gi
+        volumeMounts:
+          - name: docker-graph-storage
+            mountPath: /var/lib/docker
+      - sideContainerName: cli
+        image:
+          repository: docker.io/library/docker
+          tag: 28.1.1-cli
+        command: ["sleep"]
+        args: ["infinity"]
+        privileged: true
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 1
+            memory: 2Gi
+        env:
+          - name: DOCKER_HOST
+            value: tcp://localhost:2375
+        volumeMounts:
+          - name: docker-graph-storage
+            mountPath: /var/lib/docker
+    volumes:
+      - name: docker-graph-storage
+        emptyDir: {}
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
