@@ -1218,7 +1218,7 @@ additionalAgents:
     alwaysPullImage: true
   maven:
     podName: maven-3.9.9-jdk8
-    customJenkinsLabels: 3.9.9-jdk8
+    customJenkinsLabels: maven-3.9.9-jdk8
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
       tag: 3.9.9-jdk8
