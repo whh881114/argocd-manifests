@@ -8,7 +8,7 @@ metadata:
     app: data-maven-jdk8-workspace
 spec:
   accessModes:
-    - ReadWriteOnce
+    - ReadWriteMany
   resources:
     requests:
       storage: 100Gi
