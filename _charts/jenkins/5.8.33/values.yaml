@@ -1352,13 +1352,14 @@ additionalAgents:
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
     volumes:
-      - name: docker-graph-storage
-        emptyDir: {}
+      - type: EmptyDir
+        name: docker-graph-storage
     additionalContainers:
       - sideContainerName: dind
         image:
           repository: docker.io/library/docker
           tag: 28.1.1-dind
+        command: ["dockerd-entrypoint.sh"]
         args: "--host=unix:///var/run/docker.sock"
         privileged: true
         resources:
@@ -1372,8 +1373,7 @@ additionalAgents:
           - name: DOCKER_TLS_CERTDIR
             value: ""                                 # disable TLS auto-cert mode
         volumeMounts:
-          - name: docker-graph-storage
-            mountPath: /var/lib/docker
+          - mountPath: /var/lib/docker
       - sideContainerName: cli
         image:
           repository: docker.io/library/docker
@@ -1392,8 +1392,7 @@ additionalAgents:
           - name: DOCKER_HOST
             value: "tcp://localhost:2375"
         volumeMounts:
-          - name: docker-graph-storage
-            mountPath: /var/lib/docker
+          - mountPath: /var/lib/docker
 
 #  maven:
 #    podName: maven
