@@ -1202,7 +1202,7 @@ agent:
 # -- Configure additional
 additionalAgents:
   go:
-    podName: go-1.24.2
+    podName: go
     customJenkinsLabels: go
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-go
@@ -1216,12 +1216,57 @@ additionalAgents:
         memory: '2Gi'
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
-  maven:
-    podName: maven-3.9.9
-    customJenkinsLabels: maven
+  maven-jdk8:
+    podName: maven-jdk8
+    customJenkinsLabels: maven-jdk8
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
-      tag: 3.9.9
+      tag: jdk8
+    resources:
+      requests:
+        cpu: '500m'
+        memory: '1Gi'
+      limits:
+        cpu: '4'
+        memory: '8Gi'
+    imagePullSecretName: registry-idc-library
+    alwaysPullImage: true
+  maven-jdk11:
+    podName: maven-jdk11
+    customJenkinsLabels: maven-jdk11
+    image:
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
+      tag: jdk11
+    resources:
+      requests:
+        cpu: '500m'
+        memory: '1Gi'
+      limits:
+        cpu: '4'
+        memory: '8Gi'
+    imagePullSecretName: registry-idc-library
+    alwaysPullImage: true
+  maven-jdk17:
+    podName: maven-jdk17
+    customJenkinsLabels: maven-jdk17
+    image:
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
+      tag: jdk17
+    resources:
+      requests:
+        cpu: '500m'
+        memory: '1Gi'
+      limits:
+        cpu: '4'
+        memory: '8Gi'
+    imagePullSecretName: registry-idc-library
+    alwaysPullImage: true
+  maven-jdk21:
+    podName: maven-jdk21
+    customJenkinsLabels: maven-jdk21
+    image:
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
+      tag: jdk21
     resources:
       requests:
         cpu: '500m'
