@@ -2,10 +2,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: data-maven-jdk21-workspace
+  name: data-jenkins-workspace
   namespace: jenkins
   labels:
-    app: data-maven-jdk21-workspace
+    app: data-jenkins-workspace
 spec:
   accessModes:
     - ReadWriteMany
