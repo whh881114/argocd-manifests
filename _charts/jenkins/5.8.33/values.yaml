@@ -1237,7 +1237,7 @@ additionalAgents:
       - name: HTTPS_PROXY
         value: http://10.255.2.162:8001
     workspaceVolume:
-      type: EphemeralVolume
+      type: DynamicPVC
       accessModes: ReadWriteOnce
       requestsSize: 10Gi
       storageClassName: infra
