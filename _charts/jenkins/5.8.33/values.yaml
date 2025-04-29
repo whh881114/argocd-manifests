@@ -1236,6 +1236,11 @@ additionalAgents:
         value: http://10.255.2.162:8001
       - name: HTTPS_PROXY
         value: http://10.255.2.162:8001
+    workspaceVolume:
+      - type: EphemeralVolume
+        accessModes: ReadWriteOnce
+        requestsSize: 10Gi
+        storageClassName: infra
   maven-jdk11:
     podName: maven-jdk11
     customJenkinsLabels: maven-jdk11
