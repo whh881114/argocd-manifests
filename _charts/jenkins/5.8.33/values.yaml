@@ -1202,8 +1202,8 @@ agent:
 # -- Configure additional
 additionalAgents:
   go:
-    podName: go
-    customJenkinsLabels: go
+    podName: go-1.24.2
+    customJenkinsLabels: go-1.24.2
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-go
       tag: 1.24.2
@@ -1216,7 +1216,7 @@ additionalAgents:
         memory: '2Gi'
     imagePullSecretName: registry-idc-library
   maven:
-    podName: maven
+    podName: maven-3.9.9-jdk8
     customJenkinsLabels: 3.9.9-jdk8
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-maven
