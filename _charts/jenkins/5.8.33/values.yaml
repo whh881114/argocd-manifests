@@ -1353,7 +1353,8 @@ additionalAgents:
     alwaysPullImage: true
     volumes:
       - type: EmptyDir
-        name: docker-graph-storage
+        mountPath: docker-graph-storage
+        memory: false
     additionalContainers:
       - sideContainerName: dind
         image:
