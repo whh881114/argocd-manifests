@@ -1360,7 +1360,7 @@ additionalAgents:
         image:
           repository: docker.io/library/docker
           tag: 28.1.1-dind
-        command: ["dockerd-entrypoint.sh"]
+        command: "dockerd-entrypoint.sh"
         args: "--host=unix:///var/run/docker.sock"
         privileged: true
         resources:
@@ -1379,7 +1379,7 @@ additionalAgents:
         image:
           repository: docker.io/library/docker
           tag: 28.1.1-cli
-        command: ["sleep"]
+        command: "sleep"
         args: "infinity"                              # ← also STRING
         privileged: true
         resources:
