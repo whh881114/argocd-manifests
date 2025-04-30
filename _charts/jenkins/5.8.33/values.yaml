@@ -1355,7 +1355,7 @@ additionalAgents:
       - name: DOCKER_TLS_VERIFY
         value: "1"
       - name: DOCKER_CERT_PATH
-        value: "/certs/client"            # wherever you mount the client certs
+        value: "/certs"            # wherever you mount the client certs
     additionalContainers:
       - sideContainerName: dind
         image:
