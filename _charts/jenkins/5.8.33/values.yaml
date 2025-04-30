@@ -1355,7 +1355,7 @@ additionalAgents:
           repository: harbor.idc.roywong.work/docker.io/library/docker
           tag: 28.1.1-dind
         command: "dockerd-entrypoint.sh"
-        args: "--host=unix:///var/run/docker.sock"
+        args: "--host=tcp://0.0.0.0:2375 --host=unix:///var/run/docker.sock"
         privileged: true
         resources:
           requests:
