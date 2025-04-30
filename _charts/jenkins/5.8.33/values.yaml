@@ -1330,8 +1330,8 @@ additionalAgents:
   docker:
     podName: docker
     customJenkinsLabels: docker
-    podSecurityContext:
-      fsGroup: 1000      # fsGroup 会被赋给所有卷里的文件，包括 /var/run/docker.sock
+    runAsUser: 1000
+    runAsGroup: 1000
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-docker-cli
       tag: 28.1.1
