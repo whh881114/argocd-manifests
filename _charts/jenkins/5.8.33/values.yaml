@@ -1346,9 +1346,16 @@ additionalAgents:
       - type: EmptyDir
         mountPath: /var/lib/docker
         memory: false
+      - type: Secret
+        secretName: docker-certs-secret
+        mountPath: /certs
     envVars:
       - name: DOCKER_HOST
         value: "tcp://localhost:2375"
+      - name: DOCKER_TLS_VERIFY
+        value: "1"
+      - name: DOCKER_CERT_PATH
+        value: "/certs/client"            # wherever you mount the client certs
     additionalContainers:
       - sideContainerName: dind
         image:
@@ -1369,6 +1376,7 @@ additionalAgents:
             value: ""                                 # disable TLS auto-cert mode
         volumeMounts:
           - mountPath: /var/lib/docker
+          - mountPath: /certs
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
