@@ -1341,7 +1341,7 @@ additionalAgents:
     podName: docker
     customJenkinsLabels: docker
     image:
-      repository: jenkins/inbound-agent
+      repository: harbor.idc.roywong.work/docker.io/library/jenkins/inbound-agent
       tag: 3301.v4363ddcca_4e7-3
     resources:
       requests:
@@ -1359,7 +1359,7 @@ additionalAgents:
     additionalContainers:
       - sideContainerName: dind
         image:
-          repository: docker.io/library/docker
+          repository: harbor.idc.roywong.work/docker.io/library/docker
           tag: 28.1.1-dind
         command: "dockerd-entrypoint.sh"
         args: "--host=unix:///var/run/docker.sock"
@@ -1378,7 +1378,7 @@ additionalAgents:
           - mountPath: /var/lib/docker
       - sideContainerName: cli
         image:
-          repository: docker.io/library/docker
+          repository: harbor.idc.roywong.work/docker.io/library/docker
           tag: 28.1.1-cli
         command: "sleep"
         args: "infinity"                              # ← also STRING
