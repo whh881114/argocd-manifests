@@ -1342,6 +1342,8 @@ additionalAgents:
         memory: '2Gi'
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
+    runAsUser: '0'
+    runAsGroup: '0'
     volumes:
       - type: EmptyDir
         mountPath: /var/lib/docker
