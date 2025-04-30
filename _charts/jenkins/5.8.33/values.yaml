@@ -1055,7 +1055,9 @@ agent:
   # Configure the attributes as they appear in the corresponding Java class for that type
   # https://github.com/jenkinsci/kubernetes-plugin/tree/master/src/main/java/org/csanchez/jenkins/plugins/kubernetes/volumes/workspace
   # -- Workspace volume (defaults to EmptyDir)
-  workspaceVolume: {}
+  workspaceVolume:
+    type: PVC
+    claimName: data-jenkins-workspace
   ## DynamicPVC example
   # - type: DynamicPVC
   #   configMapName: myconfigmap
@@ -1244,9 +1246,6 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
-    workspaceVolume:
-      type: PVC
-      claimName: data-jenkins-workspace
   maven-jdk11:
     podName: maven-jdk11
     customJenkinsLabels: maven-jdk11
@@ -1274,9 +1273,6 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
-    workspaceVolume:
-      type: PVC
-      claimName: data-jenkins-workspace
   maven-jdk17:
     podName: maven-jdk17
     customJenkinsLabels: maven-jdk17
@@ -1304,9 +1300,6 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
-    workspaceVolume:
-      type: PVC
-      claimName: data-jenkins-workspace
   maven-jdk21:
     podName: maven-jdk21
     customJenkinsLabels: maven-jdk21
@@ -1334,9 +1327,6 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
-    workspaceVolume:
-      type: PVC
-      claimName: data-jenkins-workspace
   docker:
     podName: docker
     customJenkinsLabels: docker
