@@ -975,9 +975,9 @@ agent:
   # -- Agent privileged container
   privileged: false
   # -- Configure container user
-  runAsUser: 0
+  runAsUser:
   # -- Configure container group
-  runAsGroup: 0
+  runAsGroup:
   # -- Enables the agent to use the host network
   hostNetworking: false
   # -- Resources allocation (Requests and Limits)
