@@ -1346,9 +1346,11 @@ additionalAgents:
       - type: EmptyDir
         mountPath: /var/lib/docker
         memory: false
+      - type: EmptyDir
+        mountPath: /var/run
     envVars:
       - name: DOCKER_HOST
-        value: "tcp://localhost:2375"
+        value: "unix:///var/run/docker.sock"
     additionalContainers:
       - sideContainerName: dind
         image:
@@ -1369,6 +1371,7 @@ additionalAgents:
             value: ""                                 # disable TLS auto-cert mode
         volumeMounts:
           - mountPath: /var/lib/docker
+          - mountPath: /var/run
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
