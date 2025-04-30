@@ -1331,8 +1331,8 @@ additionalAgents:
     podName: docker
     customJenkinsLabels: docker
     image:
-      repository: harbor.idc.roywong.work/docker.io/jenkins/inbound-agent
-      tag: 3301.v4363ddcca_4e7-3
+      repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-docker-cli
+      tag: 28.1.1
     resources:
       requests:
         cpu: '100m'
@@ -1366,26 +1366,6 @@ additionalAgents:
             value: ""                                 # disable TLS auto-cert mode
         volumeMounts:
           - mountPath: /var/lib/docker
-      - sideContainerName: cli
-        image:
-          repository: harbor.idc.roywong.work/docker.io/library/docker
-          tag: 28.1.1-cli
-        command: "sleep"
-        args: "infinity"                              # ← also STRING
-        privileged: true
-        resources:
-          requests:
-            cpu: 500m
-            memory: 1Gi
-          limits:
-            cpu: 1
-            memory: 2Gi
-        env:
-          - name: DOCKER_HOST
-            value: "tcp://localhost:2375"
-        volumeMounts:
-          - mountPath: /var/lib/docker
-
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
