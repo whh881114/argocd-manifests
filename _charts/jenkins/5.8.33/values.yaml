@@ -1330,8 +1330,8 @@ additionalAgents:
   docker:
     podName: docker
     customJenkinsLabels: docker
-    runAsUser: 1000
-    runAsGroup: 1000
+    runAsUser: 0
+    runAsGroup: 0
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-docker-cli
       tag: 28.1.1
