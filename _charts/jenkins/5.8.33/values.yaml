@@ -1346,6 +1346,9 @@ additionalAgents:
       - type: EmptyDir
         mountPath: /var/lib/docker
         memory: false
+    envVars:
+      - name: DOCKER_HOST
+        value: "tcp://localhost:2375"
     additionalContainers:
       - sideContainerName: dind
         image:
