@@ -1348,9 +1348,9 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
-      - type: Secret
-        mountPath: /root/.docker/
-        secretName: docker-credential-harbor-idc-roywong-work
+      - type: ConfigMap
+        configMapName: docker-config
+        mountPath: /root/.docker
     envVars:
       - name: DOCKER_HOST
         value: "unix:///var/run/docker.sock"
