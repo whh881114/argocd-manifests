@@ -1216,11 +1216,11 @@ additionalAgents:
       tag: 1.24.2
     resources:
       requests:
-        cpu: '500m'
-        memory: '1Gi'
+        cpu: '100m'
+        memory: '128Mi'
       limits:
-        cpu: '1'
-        memory: '2Gi'
+        cpu: '4'
+        memory: '8Gi'
     imagePullSecretName: registry-idc-library
     alwaysPullImage: true
   maven-jdk8:
