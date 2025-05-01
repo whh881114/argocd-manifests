@@ -1348,10 +1348,12 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
+      - type: EmptyDir
+        mountPath: /root/.docker
       - type: Secret
         defaultMode: "600"
         mountPath: /root/.docker/config.json
-        subPath: config.json
+        subPath: .dockerconfigjson
         secretName: registry-idc-library
     envVars:
       - name: DOCKER_HOST
