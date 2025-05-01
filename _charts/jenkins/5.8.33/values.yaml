@@ -1349,7 +1349,6 @@ additionalAgents:
       - type: EmptyDir
         mountPath: /var/run
       - type: Secret
-        defaultMode: "0700"
         mountPath: /root/.docker/
         secretName: registry-idc-library
     envVars:
