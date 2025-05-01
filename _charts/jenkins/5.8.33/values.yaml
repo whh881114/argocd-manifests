@@ -1371,9 +1371,6 @@ additionalAgents:
           limits:
             cpu: 1
             memory: 2Gi
-        env:
-          - name: DOCKER_TLS_CERTDIR
-            value: ""                                 # disable TLS auto-cert mode
         volumeMounts:
           - mountPath: /var/lib/docker
           - mountPath: /var/run
