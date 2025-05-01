@@ -1349,9 +1349,6 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
-      - name: regcred
-        type: Secret
-        secretName: registry-idc-library
     envVars:
       - name: DOCKER_HOST
         value: "unix:///var/run/docker.sock"
@@ -1376,9 +1373,6 @@ additionalAgents:
         volumeMounts:
           - mountPath: /var/lib/docker
           - mountPath: /var/run
-          - name: regcred
-            mountPath: /home/jenkins/.docker/config.json
-            subPath: .dockerconfigjson
 #  maven:
 #    podName: maven
 #    customJenkinsLabels: maven
