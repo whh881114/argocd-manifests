@@ -967,7 +967,7 @@ agent:
   # -- Append Jenkins labels to the agent
   customJenkinsLabels: []
   # -- Name of the secret to be used to pull the image
-  imagePullSecretName:
+  imagePullSecretName: registry-idc-library
   componentName: "jenkins-agent"
   # -- Enables agent communication via websockets
   websocket: false
@@ -1339,7 +1339,6 @@ additionalAgents:
       limits:
         cpu: '1'
         memory: '2Gi'
-    imagePullSecretName: registry-idc-library
     alwaysPullImage: true
     runAsUser: '0'
     runAsGroup: '0'
@@ -1349,6 +1348,11 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
+      - type: Secret
+        defaultMode: "600"
+        mountPath: /root/.docker/config.json
+        subPath: config.json
+        secretName: registry-idc-library
     envVars:
       - name: DOCKER_HOST
         value: "unix:///var/run/docker.sock"
