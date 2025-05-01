@@ -1337,8 +1337,8 @@ additionalAgents:
         cpu: '100m'
         memory: '128Mi'
       limits:
-        cpu: '1'
-        memory: '2Gi'
+        cpu: '4'
+        memory: '8Gi'
     alwaysPullImage: true
     runAsUser: '0'
     runAsGroup: '0'
@@ -1364,11 +1364,11 @@ additionalAgents:
         privileged: true
         resources:
           requests:
-            cpu: 500m
-            memory: 1Gi
+            cpu: '100m'
+            memory: '128Mi'
           limits:
-            cpu: 1
-            memory: 2Gi
+            cpu: '4'
+            memory: '8Gi'
         volumeMounts:
           - mountPath: /var/lib/docker
           - mountPath: /var/run
