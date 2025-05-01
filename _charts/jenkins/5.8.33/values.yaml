@@ -1352,8 +1352,7 @@ additionalAgents:
         mountPath: /root/.docker
       - type: Secret
         defaultMode: "600"
-        mountPath: /root/.docker/config.json
-        subPath: .dockerconfigjson
+        mountPath: /root/.docker
         secretName: registry-idc-library
     envVars:
       - name: DOCKER_HOST
