@@ -1350,7 +1350,7 @@ additionalAgents:
         mountPath: /var/run
       - type: Secret
         mountPath: /root/.docker/
-        secretName: registry-idc-library
+        secretName: docker-credential-harbor-idc-roywong-work
     envVars:
       - name: DOCKER_HOST
         value: "unix:///var/run/docker.sock"
