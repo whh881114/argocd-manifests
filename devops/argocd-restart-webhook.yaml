@@ -19,7 +19,7 @@ spec:
         - name: registry-idc-library
       containers:
         - name: argocd-restart-webhook
-          image: harbor.idc.roywong.work/private/argocd-restart-webhook:latest
+          image: harbor.idc.roywong.work/library/argocd-restart-webhook:latest
           resources:
             requests:
               cpu: 100m
