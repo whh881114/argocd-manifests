@@ -16,5 +16,5 @@
 
     {name: 'jenkins-manifests',   namespace: 'jenkins',   path: 'jenkins', project: 'middleware'},
 
-    {name: 'devops-tools',   namespace: 'default',   path: self.name, project: 'default'},
+    {name: 'devops',   namespace: 'devops',   path: self.name, project: 'default'},
 ]

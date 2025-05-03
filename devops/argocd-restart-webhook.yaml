@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-restart-webhook
+  labels:
+    app: argocd-restart-webhook
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: argocd-restart-webhook
+  template:
+    metadata:
+      labels:
+        app: argocd-restart-webhook
+    spec:
+      imagePullSecrets:
+        - name: registry-idc-library
+      containers:
+        - name: argocd-restart-webhook
+          image: harbor.idc.roywong.work/private/argocd-restart-webhook:latest
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
