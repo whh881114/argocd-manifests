@@ -39,20 +39,7 @@ local categroy = "kubernetes-system-kubelet";
         "runbook_url": "https://runbooks.prometheus-operator.dev/runbooks/kubernetes/kubelettoomanypods",
         "summary": "Kubelet is running at capacity."
       },
-      "expr": '
-        count by (cluster, node) (
-          max by (cluster, namespace, uid) (
-            kube_pod_status_phase{job="kube-state-metrics", phase="Running"} == 1
-          )
-          * on (cluster, namespace, uid) group_left(node)
-          max by (cluster, namespace, uid, node) (
-            kube_pod_info{job="kube-state-metrics"}
-          )
-        )
-        / on(cluster, node)
-        max by (cluster, node) (
-          kube_node_status_capacity{job="kube-state-metrics", resource="pods"}
-        ) > 0.95',
+      "expr": "count by (cluster, node) (\n  (kube_pod_status_phase{job=\"kube-state-metrics\",phase=\"Running\"} == 1) * on (instance,pod,namespace,cluster) group_left(node) topk by (instance,pod,namespace,cluster) (1, kube_pod_info{job=\"kube-state-metrics\"})\n)\n/\nmax by (cluster, node) (\n  kube_node_status_capacity{job=\"kube-state-metrics\",resource=\"pods\"} != 1\n) > 0.95",
       "for": "15m",
       "labels": {
         "severity": "info",
