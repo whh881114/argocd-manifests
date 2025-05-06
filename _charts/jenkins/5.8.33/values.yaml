@@ -1243,6 +1243,10 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
+      - type: PVC
+        claimName: data-maven-repository
+        mountPath: /home/jenkins/.m2/repository
+        readOnly: false
   maven-jdk11:
     podName: maven-jdk11
     customJenkinsLabels: maven-jdk11
