@@ -1274,6 +1274,10 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
+      - type: PVC
+        claimName: data-maven-repository
+        mountPath: /home/jenkins/.m2/repository
+        readOnly: false
   maven-jdk17:
     podName: maven-jdk17
     customJenkinsLabels: maven-jdk17
@@ -1301,6 +1305,10 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
+      - type: PVC
+        claimName: data-maven-repository
+        mountPath: /home/jenkins/.m2/repository
+        readOnly: false
   maven-jdk21:
     podName: maven-jdk21
     customJenkinsLabels: maven-jdk21
@@ -1328,6 +1336,10 @@ additionalAgents:
         configMapName: maven-settings
         mountPath: /home/jenkins/.m2/settings.xml
         subPath: settings.xml
+      - type: PVC
+        claimName: data-maven-repository
+        mountPath: /home/jenkins/.m2/repository
+        readOnly: false
   docker:
     podName: docker
     customJenkinsLabels: docker
