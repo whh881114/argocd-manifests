@@ -21,10 +21,10 @@ local jobs = [
     metrics_path: '/minio/metrics/v3/' + metric,
     scheme: 'http',
     static_configs: staticConfigs,
-    metrics_relabel_configs: [
+    relabel_configs: [
       {
         action: 'labeldrop',
-        regex: 'instance',
+        regex: '__address__',
       },
     ],
   }
