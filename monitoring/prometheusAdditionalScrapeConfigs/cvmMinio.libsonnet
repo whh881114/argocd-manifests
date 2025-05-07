@@ -20,7 +20,13 @@ local jobs = [
     job_name: 'cvm/minio/' + metric,
     metrics_path: '/minio/metrics/v3/' + metric,
     scheme: 'http',
-    static_configs: staticConfigs
+    static_configs: staticConfigs,
+    relabel_configs: [
+      {
+        action: 'labeldrop',
+        regex: 'instance',
+      },
+    ],
   }
   for metric in metrics
 ];
