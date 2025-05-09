@@ -8,7 +8,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.18.0  # 替换成 app-1 所需的版本
+          image: harbor.idc.roywong.work/docker.io/nginx@sha256:596c783ac62b9a43c60edb876fe807376cd5022a4e25e89b9a9ae06c374299d4  # 替换成 app-1 所需的版本
           env:
             - name: ENV
               value: "production"
