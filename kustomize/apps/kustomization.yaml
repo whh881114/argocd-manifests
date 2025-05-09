@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - deployment.yaml
+  - service.yaml
+
+# 可以在此处定义 commonLabels/commonAnnotations 等全局设置
+commonLabels:
+  project: demo
