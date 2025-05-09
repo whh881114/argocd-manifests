@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# 引用上一级的 base
+resources:
+  - ../../base
+
+# 只对 Deployment 应用 patchesStrategicMerge
+patchesStrategicMerge:
+  - patch.yaml
+
+# 如果同时有 Service patch，就在这里列出：
+# patchesStrategicMerge:
+#   - patch.yaml
+#   - service-patch.yaml
+
+# 可以针对 app-1 再加一些 label、annotation、configMapGenerator 等
+namePrefix: app1-      # 部署出来的资源名会变成 app1-nginx
+commonLabels:
+  app: app-1
