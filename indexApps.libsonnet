@@ -18,5 +18,5 @@
 
     {name: 'devops',   namespace: 'devops',   path: self.name, project: 'default'},
 
-    {name: 'kustomize-apps',   namespace: 'kustomize',   path: 'kustomize/apps', project: 'default'},
+    // {name: 'kustomize-apps',   namespace: 'kustomize',   path: 'kustomize/apps', project: 'default'},
 ]
