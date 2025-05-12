@@ -1,0 +1,15 @@
+- op: replace
+  path: /metadata/name
+  value: app-1-www
+- op: replace
+  path: /spec/ingressClassName
+  value: ingress-nginx-wan
+- op: replace
+  path: /spec/rules/0/host
+  value: app-1-www.idc-ingress-nginx-wan.roywong.work
+- op: replace
+  path: /spec/tls/0/hosts/0
+  value: app-1-www.idc-ingress-nginx-wan.roywong.work
+- op: replace
+  path: /spec/tls/0/secretName
+  value: app-1-www-roywong-work-tls-cert
