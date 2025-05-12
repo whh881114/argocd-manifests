@@ -9,7 +9,7 @@ metadata:
 spec:
   ingressClassName: ingress-nginx-lan
   rules:
-    - hosts: www.idc-ingress-nginx-lan.roywong.work
+    - host: www.idc-ingress-nginx-lan.roywong.work
       http:
         paths:
           - backend:
