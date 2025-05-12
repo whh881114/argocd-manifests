@@ -15,8 +15,8 @@ spec:
           - backend:
               service:
                 name: nginx
-              port:
-                number: 80
+                port:
+                  number: 80
             path: /
             pathType: Prefix
   tls:
