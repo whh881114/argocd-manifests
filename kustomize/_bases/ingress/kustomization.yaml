@@ -3,3 +3,11 @@ kind: Kustomization
 
 resources:
   - ingress.yaml
+
+buildMetadata:
+  - managedByLabel
+
+commonAnnotations:
+  cert-manager.io/cluster-issuer: roywong-work-tls-cluster-issuer
+  nginx.ingress.kubernetes.io/rewrite-target: /
+  nginx.ingress.kubernetes.io/ssl-redirector: "true"

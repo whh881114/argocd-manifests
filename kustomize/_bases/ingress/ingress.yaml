@@ -1,10 +1,6 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    cert-manager.io/cluster-issuer: roywong-work-tls-cluster-issuer
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirector: "true"
   name: www
 spec:
   ingressClassName: ingress-nginx-lan
