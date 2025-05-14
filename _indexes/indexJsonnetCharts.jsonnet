@@ -1,6 +1,6 @@
 # https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
 
-local indexCharts = import '../indexJsonnetCharts.libsonnet';
+local indexJsonnetCharts = import '../indexJsonnetCharts.libsonnet';
 local clusterParams = import '../clusterParams.libsonnet';
 
 [
@@ -21,16 +21,15 @@ local clusterParams = import '../clusterParams.libsonnet';
         repoURL: clusterParams.repo.app.url,
         targetRevision: clusterParams.repo.app.branch,
         path: chart.path,
-        plugin:
-          {
-            name: 'jsonnet',
-            parameters: [
-              {
-                name: 'jsonnet-file',   # pluging中定义了jsonnet-file参数，所以此处是固定值
-                string: chart.valueFiles
-              }
-            ]
-          }
+        plugin: {
+          name: 'jsonnet',
+          parameters: [
+            {
+              name: 'jsonnet-file',   # pluging中定义了jsonnet-file参数，所以此处是固定值
+              string: chart.valueFiles
+            },
+          ]
+        },
       },
       syncPolicy: {
         syncOptions: [
@@ -44,5 +43,5 @@ local clusterParams = import '../clusterParams.libsonnet';
     },
   }
 
-  for chart in indexCharts
+  for chart in indexJsonnetCharts
 ]
