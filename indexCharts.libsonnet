@@ -22,4 +22,6 @@
 
 		{name: 'loki',         version: '0.80.3', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
 		{name: 'promtail',     version: '6.16.6', path:'_charts/' + self.name + '/' + self.version,     namespace: 'loki', valueFiles: ['values.yaml'], project: 'logging'},
+
+		{name: 'jsonnet-nginx-1',     version: '20.0.2', path:'_charts/nginx/' + self.version,     namespace: 'nginx', valueFiles: ['jsonnet-nginx-1.jsonnet'], project: 'default'},
 ]
