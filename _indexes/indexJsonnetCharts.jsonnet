@@ -22,7 +22,7 @@ local clusterParams = import '../clusterParams.libsonnet';
         targetRevision: clusterParams.repo.app.branch,
         path: chart.path,
         plugin: {
-          name: 'jsonnet',
+          name: 'jsonnet-0.21.0',
           parameters: [
             {
               name: 'jsonnet-file',   # pluging中定义了jsonnet-file参数，所以此处是固定值
