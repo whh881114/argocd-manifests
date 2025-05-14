@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
         - name: busybox
-          image: harbor.idc.roywong.work/docker.io/library/busybox:1.37.0-glibc
+          # image: harbor.idc.roywong.work/docker.io/library/busybox:1.37.0-glibc
+          image: harbor.idc.roywong.work/library/argocd-cmp-jsonnet:1.0
           command: ["sleep", "infinity"]
           imagePullPolicy: Always
