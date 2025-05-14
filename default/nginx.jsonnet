@@ -66,7 +66,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       name: 'www-lan',
       annotations: {
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
-        'cert-manager.io/cluster-issuer': clusterParams.tls.clusterIssuerName,
+        'cert-manager.io/cluster-issuer': clusterParams.tls.cloudflare.clusterIssuer,
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
       }
     },
@@ -95,7 +95,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       ],
       tls: [
         {
-          hosts: clusterParams.tls.dnsZones,
+          hosts: clusterParams.tls.cloudflare.dnsZones,
           secretName: 'tls-certificate-secret-www-lan'
         }
       ]
@@ -108,7 +108,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       name: 'www-wan',
       annotations: {
         'nginx.ingress.kubernetes.io/rewrite-target': '/',
-        'cert-manager.io/cluster-issuer': clusterParams.tls.clusterIssuerName,
+        'cert-manager.io/cluster-issuer': clusterParams.tls.cloudflare.clusterIssuer,
         'nginx.ingress.kubernetes.io/ssl-redirect': 'true',
       }
     },
@@ -137,7 +137,7 @@ local clusterParams = import '../clusterParams.libsonnet';
       ],
       tls: [
         {
-          hosts: clusterParams.tls.dnsZones,
+          hosts: clusterParams.tls.cloudflare.dnsZones,
           secretName: 'tls-certificate-secret-www-wan'
         }
       ]
