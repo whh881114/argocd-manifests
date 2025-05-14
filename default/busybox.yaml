@@ -15,6 +15,8 @@ spec:
       labels:
         app: busybox
     spec:
+      imagePullSecrets:
+        - name: registry-idc-library
       containers:
         - name: busybox
           # image: harbor.idc.roywong.work/docker.io/library/busybox:1.37.0-glibc
