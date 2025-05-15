@@ -7,6 +7,8 @@ local clusterParams = import '../../../clusterParams.libsonnet';
       allowInsecureImages: true,
     }
   },
+  nameOverride: 'jsonnet-nginx-2',
+  fullnameOverride: 'jsonnet-nginx-2',
   namespaceOverride: 'nginx',
   image: {
     repository: 'docker.io/nginx',
