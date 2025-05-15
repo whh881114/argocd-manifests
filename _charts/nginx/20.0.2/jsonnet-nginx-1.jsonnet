@@ -11,12 +11,13 @@ local clusterParams = import '../../../clusterParams.libsonnet';
   fullnameOverride: 'jsonnet-nginx-1',
   namespaceOverride: 'nginx',
   image: {
-    repository: 'docker.io/nginx',
-    tag: '1.27.1',
+    repository: 'docker.io/bitnami/nginx',
+    tag: '1.28.0-debian-12-r0',
   },
   replicaCount: 1,
   containerPorts: {
     http: 80,
+    https: 443,
   },
   service: {
     type: 'ClusterIP',
