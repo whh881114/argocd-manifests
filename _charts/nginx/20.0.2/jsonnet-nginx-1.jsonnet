@@ -3,6 +3,9 @@ local clusterParams = import '../../../clusterParams.libsonnet';
 {
   global: {
     imageRegistry: clusterParams.registry,
+    security: {
+      allowInsecureImages: false,
+    }
   },
   namespaceOverride: 'nginx',
   image: {
