@@ -15,10 +15,6 @@ local clusterParams = import '../../../clusterParams.libsonnet';
     tag: '1.28.0-debian-12-r0',
   },
   replicaCount: 1,
-  containerPorts: {
-    http: 80,
-    https: 443,
-  },
   service: {
     type: 'ClusterIP',
   }
