@@ -10,6 +10,9 @@ local clusterParams = import '../clusterParams.libsonnet';
     metadata: {
       name: chart.name,
       namespace: clusterParams.argocdNamespace,
+      annotations: {
+        'argocd.argoproj.io/refresh': 'hard',
+      },
     },
     spec: {
       destination: {
