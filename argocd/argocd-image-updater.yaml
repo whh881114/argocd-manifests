@@ -101,6 +101,8 @@ metadata:
     app.kubernetes.io/name: argocd-image-updater-config
     app.kubernetes.io/part-of: argocd-image-updater
   name: argocd-image-updater-config
+
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -109,6 +111,8 @@ metadata:
     app.kubernetes.io/name: argocd-image-updater-ssh-config
     app.kubernetes.io/part-of: argocd-image-updater
   name: argocd-image-updater-ssh-config
+
+
 ---
 apiVersion: v1
 kind: Secret
@@ -117,6 +121,8 @@ metadata:
     app.kubernetes.io/name: argocd-image-updater-secret
     app.kubernetes.io/part-of: argocd-image-updater
   name: argocd-image-updater-secret
+
+
 ---
 apiVersion: apps/v1
 kind: Deployment
