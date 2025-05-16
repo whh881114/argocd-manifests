@@ -231,7 +231,7 @@ spec:
                   key: log.level
                   name: argocd-image-updater-config
                   optional: true
-          image: quay.io/argoprojlabs/argocd-image-updater:v0.16.0
+          image: harbor.idc.roywong.work/quay.io/argoprojlabs/argocd-image-updater:v0.16.0
           imagePullPolicy: Always
           livenessProbe:
             httpGet:
