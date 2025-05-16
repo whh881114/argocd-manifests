@@ -10,7 +10,7 @@
     {name: 'zookeeper',  namespace: self.name, path: self.name, project: 'middleware'},
 
     {name: 'cert-manager-issuers', namespace: 'cert-manager',           path: self.name, project: 'system'},
-    {name: 'argocd-ingress',       namespace: 'argocd',                 path: 'argocd',  project: 'system'},
+    {name: 'argocd',       namespace: 'argocd',                 path: 'argocd',  project: 'system'},
 
     {name: 'monitoring',           namespace: self.name,      path: self.name, project: 'monitoring'},
 
