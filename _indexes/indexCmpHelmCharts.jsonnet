@@ -1,6 +1,6 @@
 # https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
 
-local indexJsonnetCharts = import '../indexCmpHelmCharts.libsonnet';
+local indexCmpHelmCharts = import '../indexCmpHelmCharts.libsonnet';
 local clusterParams = import '../clusterParams.libsonnet';
 
 [
@@ -25,7 +25,7 @@ local clusterParams = import '../clusterParams.libsonnet';
         targetRevision: clusterParams.repo.app.branch,
         path: chart.path,
         plugin: {
-          name: 'argocd-cmp-jsonnet',
+          name: 'argocd-cmp-helm',
           parameters: [
             {
               name: 'jsonnet-file',   # pluging中定义了jsonnet-file参数，所以此处是固定值
@@ -46,5 +46,5 @@ local clusterParams = import '../clusterParams.libsonnet';
     },
   }
 
-  for chart in indexJsonnetCharts
+  for chart in indexCmpHelmCharts
 ]
