@@ -1,5 +1,8 @@
 local clusterParams = import '../../../clusterParams.libsonnet';
 
+local fileName = std.thisFile;
+local appName = std.strReplace(fileName, ".jsonnet", "");
+
 {
   global: {
     imageRegistry: clusterParams.registry,
@@ -7,8 +10,8 @@ local clusterParams = import '../../../clusterParams.libsonnet';
       allowInsecureImages: true,
     }
   },
-  nameOverride: 'jsonnet-nginx-2',
-  fullnameOverride: 'jsonnet-nginx-2',
+  nameOverride: appName,
+  fullnameOverride: appName,
   namespaceOverride: 'nginx',
   image: {
     repository: 'docker.io/bitnami/nginx',
