@@ -19,6 +19,8 @@ spec:
       containers:
         - name: docker-image-tag
           image: harbor.idc.roywong.work/public/docker-image-tag:latest
+          ports:
+            - containerPort: 8080
           env:
             - name: HARBOR_URL
               value: "https://harbor.idc.roywong.work"
@@ -39,3 +41,26 @@ spec:
             limits:
               cpu: 200m
               memory: 256Mi
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: docker-image-tag
+  name: docker-image-tag
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    - name: http8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: docker-image-tag
