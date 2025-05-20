@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-image-tag
+  namespace: devops
+  labels:
+    app: docker-image-tag
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: docker-image-tag
+  template:
+    metadata:
+      labels:
+        app: docker-image-tag
+    spec:
+      containers:
+        - name: docker-image-tag
+          image: harbor.idc.roywong.work/public/docker-image-tag:latest
+          env:
+            - name: HARBOR_URL
+              value: "https://harbor.idc.roywong.work"
+            - name: HARBOR_USER
+              valueFrom:
+                secretKeyRef:
+                  name: docker-image-tag-secret
+                  key: user
+            - name: HARBOR_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: docker-image-tag-secret
+                  key: token
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
