@@ -43,7 +43,9 @@ local objects = [
   }
 ];
 
-std.join('\n---\n', std.map(std.manifestYamlDoc, objects))
+objects
+
+//std.join('\n---\n', std.map(std.manifestYamlDoc, objects))
 
 
 //{
