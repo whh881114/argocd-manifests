@@ -1,6 +1,6 @@
 # https://argo-cd.readthedocs.io/en/stable/user-guide/application-specification/
 
-local indexCmpHelmCharts = import '../indexCmpHelmCharts.libsonnet';
+local indexCmpHelmCharts = import '../indexCmpHelm.libsonnet';
 local clusterParams = import '../clusterParams.libsonnet';
 
 [
