@@ -14,6 +14,7 @@ local appName = std.strReplace(fileName, ".jsonnet", "");
   fullnameOverride: appName,
   namespaceOverride: 'nginx',
   image: {
+    registry: clusterParams.registry,
     repository: 'docker.io/bitnami/nginx',
     tag: '1.28.0-debian-12-r0',
   },
