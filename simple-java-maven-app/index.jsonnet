@@ -29,7 +29,7 @@ local objects = [
         spec: {
           containers: [
             {
-              name: app.name,
+              name: name,
               image: image + ':' + tag,
               ports: [
                 {
