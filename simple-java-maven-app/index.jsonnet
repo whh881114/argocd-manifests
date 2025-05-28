@@ -27,6 +27,9 @@ local objects = [
           }
         },
         spec: {
+          imagePullSecrets: [
+            {name: 'registry-idc-library'}
+          ],
           containers: [
             {
               name: name,
