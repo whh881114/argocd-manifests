@@ -154,11 +154,11 @@ controller:
   containerEnvFrom: []
 
   # -- Environment variables for Jenkins Container
-  containerEnv:
-    - name: HTTP_PROXY
-      value: http://10.255.2.162:8001
-    - name: HTTPS_PROXY
-      value: http://10.255.2.162:8001
+  containerEnv: []
+  #  - name: HTTP_PROXY
+  #    value: http://10.255.2.162:8001
+  #  - name: HTTPS_PROXY
+  #    value: http://10.255.2.162:8001
   #   - name: http_proxy
   #     value: "http://192.168.64.1:3128"
 
