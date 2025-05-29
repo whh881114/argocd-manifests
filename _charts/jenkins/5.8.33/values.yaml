@@ -115,8 +115,8 @@ controller:
   # -- Resource allocation (Requests and Limits)
   resources:
     requests:
-      cpu: "200m"
-      memory: "256Mi"
+      cpu: "4000m"
+      memory: "8192Mi"
     limits:
       cpu: "4000m"
       memory: "8192Mi"
