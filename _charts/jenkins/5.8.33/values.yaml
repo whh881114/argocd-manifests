@@ -1292,6 +1292,13 @@ additionalAgents:
     image:
       repository: harbor.idc.roywong.work/library/jenkins/inbound-agent-docker-cli
       tag: 28.1.1
+    resources:
+      requests:
+        cpu: '2'
+        memory: '4Gi'
+      limits:
+        cpu: '4'
+        memory: '8Gi'
     runAsUser: '0'
     runAsGroup: '0'
     volumes:
