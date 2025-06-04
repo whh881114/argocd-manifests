@@ -4,3 +4,6 @@ metadata:
   name: {{ .Release.Name }}-configmap
 data:
   myvalue: "Hello World"
+
+
+# helm template clunky-serval ./java
