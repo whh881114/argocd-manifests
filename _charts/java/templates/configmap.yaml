@@ -4,11 +4,18 @@ metadata:
   name: {{ .Release.Name }}-configmap
 data:
   myvalue: "Hello World"
+
   {{- with .Values.favourite }}
   drink: "{{ .drink | default "tea" }}"
   food: "{{ .food | upper }}"
   release: "{{ $.Release.Name }}"
   {{- end }}
+
+  toppings: |-
+    {{- range .Values.pizzaToppings }}
+    - {{ . | title | quote }}
+    {{- end }}
+
 
 
 
