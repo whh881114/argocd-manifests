@@ -12,6 +12,11 @@ data:
   release: "{{ $relname }}"
   {{- end }}
 
+  toppings: |-
+    {{- range $index, $topping := .Values.pizzaToppings }}
+    {{ $index }}: {{ $topping }}
+    {{- end }}
+
 
 
 # helm template clunky-serval ./java
