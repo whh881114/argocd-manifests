@@ -5,21 +5,12 @@ metadata:
 data:
   myvalue: "Hello World"
 
+  {{- $relname := .Release.Name -}}
   {{- with .Values.favourite }}
   drink: "{{ .drink | default "tea" }}"
   food: "{{ .food | upper }}"
-  release: "{{ $.Release.Name }}"
+  release: "{{ $relname }}"
   {{- end }}
-
-  toppings: |-
-    {{- range .Values.pizzaToppings }}
-    - {{ . | title | quote }}
-    {{- end }}
-
-  size: |-
-    {{- range tuple "small" "medium" "large" }}
-    - {{ . | quote }}
-    {{- end }}
 
 
 
