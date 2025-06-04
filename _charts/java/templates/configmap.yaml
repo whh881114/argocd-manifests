@@ -7,8 +7,9 @@ data:
   {{- with .Values.favourite }}
   drink: "{{ .drink | default "tea" }}"
   food: "{{ .food | upper }}"
+  release: "{{ $.Release.Name }}"
   {{- end }}
-  release: "{{ .Release.Name }}"
+
 
 
 # helm template clunky-serval ./java
