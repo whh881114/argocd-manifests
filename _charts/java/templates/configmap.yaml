@@ -4,11 +4,10 @@ metadata:
   name: {{ .Release.Name }}-configmap
 data:
   myvalue: "Hello World"
-  drink: "{{ .Values.favourite.drink | default "tea" }}"
-  food: "{{ .Values.favourite.food | upper }}"
-{{- if eq .Values.favourite.drink "coffee" }}
-{{ indent 2 "mug: true" }}
-{{- end }}
+  {{- with .Values.favourite }}
+  drink: "{{ .drink | default "tea" }}"
+  food: "{{ .food | upper }}"
+  {{- end }}
 
 
 # helm template clunky-serval ./java
