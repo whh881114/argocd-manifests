@@ -4,7 +4,8 @@ metadata:
   name: {{ .Release.Name }}-configmap
 data:
   myvalue: "Hello World"
-  drink: "{{ .Values.favouriteDrink }}"
+  drink: "{{ .Values.favourite.drink }}"
+  food: "{{ .Values.favourite.food }}"
 
 
 # helm template clunky-serval ./java
