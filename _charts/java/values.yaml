@@ -8,3 +8,8 @@ pizzaToppings:
   - peppers
   - onions
   - pineapple
+
+tlsSecrets:
+  - name: tls-roywong-work
+    certificate: certificate
+    key: key
