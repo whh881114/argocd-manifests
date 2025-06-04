@@ -6,7 +6,7 @@ data:
   myvalue: "Hello World"
   drink: "{{ .Values.favourite.drink | default "tea" }}"
   food: "{{ .Values.favourite.food | upper }}"
-  {{- if eq .Values.favourite.drink "coffee"}}
+  {{- if eq .Values.favourite.drink "coffee" }}
   mug: "true"
   {{- end }}
 
