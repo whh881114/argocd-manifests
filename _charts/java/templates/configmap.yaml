@@ -5,7 +5,7 @@ metadata:
 data:
   myvalue: "Hello World"
   drink: {{ .Values.favourite.drink | quote }}
-  food: {{ .Values.favourite.food | quote }}
+  food: {{ .Values.favourite.food | upper | quote }}
 
 
 # helm template clunky-serval ./java
