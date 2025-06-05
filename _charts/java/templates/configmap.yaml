@@ -6,3 +6,5 @@ type: Opaque
 data:
   token: |-
     {{ .Files.Get "config1.toml" | b64enc }}
+  some-file.txt: {{ range .Files.Lines "foo/bar.txt" }}
+    {{ . }}{{end}}
