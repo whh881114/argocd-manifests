@@ -13,3 +13,6 @@ tlsSecrets:
   - name: tls-roywong-work
     certificate: certificate
     key: key
+
+mysubchart:
+  dessert: ice cream
