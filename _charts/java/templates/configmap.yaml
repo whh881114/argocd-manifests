@@ -4,7 +4,4 @@ metadata:
   name: {{ .Release.Name }}-secret
 type: Opaque
 data:
-  token: |-
-    {{ .Files.Get "config1.toml" | b64enc }}
-  some-file.txt: {{ range .Files.Lines "foo/bar.txt" }}
-    {{ . }}{{end}}
+  salad: {{ .Values.global.salad }}

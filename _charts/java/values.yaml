@@ -16,3 +16,7 @@ tlsSecrets:
 
 mysubchart:
   dessert: ice cream
+
+
+global:
+  salad: caeser
