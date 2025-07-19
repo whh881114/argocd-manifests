@@ -662,8 +662,8 @@ controller:
 
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
   # -- Node labels for pod assignment
-  nodeSelector:
-    'kubernetes.io/hostname': 'worker-1.k8s.freedom.org'
+  nodeSelector: ""
+    # 'kubernetes.io/hostname': 'worker-1.k8s.freedom.org'
 
   # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#taints-and-tolerations-beta-feature
   # -- Toleration labels for pod assignment
@@ -1313,7 +1313,13 @@ additionalAgents:
         mountPath: /root/.docker
     envVars:
       - name: DOCKER_HOST
-        value: "unix:///var/run/docker.sock"
+        value: "tcp://localhost:2375"
+      - name: DOCKER_TLS_VERIFY
+        value: "0"
+      - name: DOCKER_CLI_EXPERIMENTAL
+        value: "enabled"
+      # - name: DOCKER_HOST
+      #   value: "unix:///var/run/docker.sock"
     additionalContainers:
       - sideContainerName: dind
         image:
