@@ -1301,24 +1301,17 @@ additionalAgents:
       limits:
         cpu: '4'
         memory: '8Gi'
-    # runAsUser: '0'
-    # runAsGroup: '0'
+    runAsUser: '0'
+    runAsGroup: '0'
     volumes:
       - type: EmptyDir
         mountPath: /var/lib/docker
         memory: false
       - type: EmptyDir
         mountPath: /var/run
-      # - type: ConfigMap
-      #   configMapName: docker-config
-      #   mountPath: /root/.docker
     envVars:
       - name: DOCKER_HOST
-        value: "tcp://localhost:2375"
-      - name: DOCKER_TLS_VERIFY
-        value: "0"
-      # - name: DOCKER_HOST
-      #   value: "unix:///var/run/docker.sock"
+        value: "unix:///var/run/docker.sock"
     additionalContainers:
       - sideContainerName: dind
         image:
