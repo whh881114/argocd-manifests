@@ -1309,6 +1309,10 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
+      # helm外部的配置文件，用于docker认证。
+      - type: ConfigMap
+        configMapName: docker-config
+        mountPath: /root/.docker
     envVars:
       - name: DOCKER_HOST
         value: "unix:///var/run/docker.sock"
