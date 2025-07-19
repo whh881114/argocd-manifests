@@ -1301,8 +1301,8 @@ additionalAgents:
       limits:
         cpu: '4'
         memory: '8Gi'
-    runAsUser: '0'
-    runAsGroup: '0'
+    # runAsUser: '0'
+    # runAsGroup: '0'
     volumes:
       - type: EmptyDir
         mountPath: /var/lib/docker
