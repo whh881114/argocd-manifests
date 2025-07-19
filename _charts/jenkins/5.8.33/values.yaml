@@ -1295,8 +1295,8 @@ additionalAgents:
       tag: 28.1.1
     resources:
       requests:
-        cpu: '2'
-        memory: '4Gi'
+        cpu: '4'
+        memory: '8Gi'
       limits:
         cpu: '4'
         memory: '8Gi'
@@ -1324,8 +1324,8 @@ additionalAgents:
         privileged: true
         resources:
           requests:
-            cpu: '2'
-            memory: '4Gi'
+            cpu: '4'
+            memory: '8Gi'
           limits:
             cpu: '4'
             memory: '8Gi'
