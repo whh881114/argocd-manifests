@@ -1309,9 +1309,9 @@ additionalAgents:
         memory: false
       - type: EmptyDir
         mountPath: /var/run
-      - type: ConfigMap
-        configMapName: docker-config
-        mountPath: /root/.docker
+      # - type: ConfigMap
+      #   configMapName: docker-config
+      #   mountPath: /root/.docker
     envVars:
       - name: DOCKER_HOST
         value: "tcp://localhost:2375"
